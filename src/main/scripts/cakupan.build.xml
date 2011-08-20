@@ -1,0 +1,36 @@
+<project>
+	<taskdef classpath="cakupan-1.3.jar" resource="cakupantasks.properties" />
+
+	<target name="hello">
+		<echo>Hello, World</echo>
+		<echo>outputdir: ${instrument.outputDirectory}</echo>
+	</target>
+
+	<target name="instrument">
+		<cakupan-instrument destdir="${instrument.outputDirectory}">
+			<fileset dir="../Business/src" includes="**/*.xsl" />
+		</cakupan-instrument>
+	</target>
+
+	<target name="junit" description="Runs the unit tests">
+		<delete dir="${junit.out.dir.xml}" />
+		<mkdir dir="${junit.out.dir.xml}" />
+		<junit printsummary="yes" haltonfailure="no">
+			<!--sysproperty key="javax.xml.transform.TransformerFactory" value="com.cakupan.xslt.transform.XalanTransformerInstrumentFactoryImpl" 
+				/ -->
+			<sysproperty key="javax.xml.transform.TransformerFactory"
+				value="com.cakupan.xslt.transform.SaxonCakupanTransformerInstrumentFactoryImpl" />
+			<sysproperty key="cakupan.dir" value="${instrmtxslt.dir}" />
+			<classpath refid="classpath.test" />
+			<formatter type="xml" />
+			<batchtest fork="yes" todir="${junit.out.dir.xml}">
+				<fileset dir="${test.dir}" includes="**/*Test.java" />
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="report">
+		<cakupan-report destdir="report/cakupan" />
+	</target>
+
+</project>

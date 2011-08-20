@@ -1,0 +1,83 @@
+<pluginMetadata>
+	<mojos>
+		<mojo>
+			<goal>hello</goal>
+			<call>hello</call>
+			<description>
+				Say Hello, World.
+			</description>
+			<parameters>
+				<parameter>
+					<name>instrument.outputDirectory</name>
+					<property>instrument.outputDirectory</property>
+					<required>true</required>
+					<defaultValue>${project.build.directory}/cakupan-instrument</defaultValue>
+					<type>java.lang.String</type>
+					<description>
+						The directory where to put the instrumentation file.
+					</description>
+				</parameter>
+			</parameters>
+		</mojo>
+		<mojo>
+			<goal>instrument</goal>
+			<call>instrument</call>
+			<phase>process-test-classes</phase>
+			<description>
+				Instrument XSLT files.
+			</description>
+			<parameters>
+				<parameter>
+					<name>instrument.outputDirectory</name>
+					<property>instrument.outputDirectory</property>
+					<required>true</required>
+					<defaultValue>${project.build.outputDirectory}</defaultValue>
+					<type>java.lang.String</type>
+					<description>
+						The directory where to put the instrumentation file.
+					</description>
+				</parameter>
+			</parameters>
+		</mojo>
+		<mojo>
+			<goal>junit</goal>
+			<call>junit</call>
+			<phase>test</phase>
+			<description>
+				Run tests.
+			</description>
+			<parameters>
+				<parameter>
+					<name>instrument.outputDirectory</name>
+					<property>instrument.outputDirectory</property>
+					<required>true</required>
+					<defaultValue>${project.build.outputDirectory}</defaultValue>
+					<type>java.lang.String</type>
+					<description>
+						The directory where to put the instrumentation file.
+					</description>
+				</parameter>
+			</parameters>
+		</mojo>
+		<mojo>
+			<goal>report</goal>
+			<call>report</call>
+			<phase>site</phase>
+			<description>
+				Instrument XSLT files.
+			</description>
+			<parameters>
+				<parameter>
+					<name>instrument.outputDirectory</name>
+					<property>instrument.outputDirectory</property>
+					<required>true</required>
+					<defaultValue>${project.build.outputDirectory}</defaultValue>
+					<type>java.lang.String</type>
+					<description>
+						The directory where to put the instrumentation file.
+					</description>
+				</parameter>
+			</parameters>
+		</mojo>
+	</mojos>
+</pluginMetadata>
