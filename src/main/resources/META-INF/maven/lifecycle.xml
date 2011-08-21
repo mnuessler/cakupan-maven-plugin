@@ -1,0 +1,30 @@
+<lifecycles>
+	<lifecycle>
+		<id>cakupan</id>
+		<phases>
+			<phase>
+				<id>test</id>
+				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
+					<includes>
+						<include>**/xml/transformation/**/*Test.java</include>
+					</includes>
+					<!-- 
+					<forkMode>once</forkMode>
+					 -->
+					<systemPropertyVariables>
+						<javax.xml.transform.TransformerFactory>com.cakupan.xslt.transform.SaxonCakupanTransformerInstrumentFactoryImpl</javax.xml.transform.TransformerFactory>
+						<cakupan.dir>${project.build.directory}/cakupan</cakupan.dir>
+					</systemPropertyVariables>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>surefire:test</goal>
+						</goals>
+					</execution>
+				</executions>
+			</phase>
+		</phases>
+	</lifecycle>
+</lifecycles>

@@ -1,32 +1,47 @@
 <project>
 	<taskdef resource="cakupantasks.properties" />
 
-	<target name="hello">
-		<echo>Hello, World</echo>
-		<echo>outputdir: ${instrument.outputDirectory}</echo>
-		<echo>xsl.sourceDirectory: ${xsl.sourceDirectory}</echo>
-		<echo>xsl.includes: ${xsl.includes}</echo>
-	</target>
+	<property name="level" value="info" />
 
 	<target name="instrument">
+		<echo message="instrument.outputDirectory = ${instrument.outputDirectory}" level="${level}" />
+		<echo message="xsl.sourceDirectory = ${xsl.sourceDirectory}" level="${level}" />
+		<echo message="xsl.includes = ${xsl.includes}" level="${level}" />
+
 		<cakupan-instrument destdir="${instrument.outputDirectory}">
-			<fileset dir="{xsl.sourceDirectory}" includes="**/*.xsl" />
+			<fileset dir="${xsl.sourceDirectory}" includes="${xsl.includes}" />
 		</cakupan-instrument>
 	</target>
 
-	<target name="test" description="Runs the unit tests">
-		<delete dir="${junit.out.dir.xml}" />
-		<mkdir dir="${junit.out.dir.xml}" />
+	<target name="test" description="Runs the XSL transformation tests">
+		<echo message="instrument.outputDirectory = ${instrument.outputDirectory}" level="${level}" />
+		<echo message="testResultDirectory = ${testResultDirectory}" level="${level}" />
+		<echo message="testSourceDirectory = ${testSourceDirectory}" level="${level}" />
+		<echo message="test.includes = ${test.includes}" level="${level}" />
+
+		<property name="compile_classpath" refid="maven.compile.classpath" />
+		<property name="runtime_classpath" refid="maven.runtime.classpath" />
+		<property name="test_classpath" refid="maven.test.classpath" />
+		<property name="plugin_classpath" refid="maven.plugin.classpath" />
+
+		<echo message="compile classpath: ${compile_classpath}" />
+		<echo message="runtime classpath: ${runtime_classpath}" />
+		<echo message="test classpath:    ${test_classpath}" />
+		<echo message="plugin classpath:  ${plugin_classpath}" />
+		
+		<mkdir dir="${testResultDirectory}" />
 		<junit printsummary="yes" haltonfailure="no">
 			<!--sysproperty key="javax.xml.transform.TransformerFactory" value="com.cakupan.xslt.transform.XalanTransformerInstrumentFactoryImpl" 
 				/ -->
-			<sysproperty key="javax.xml.transform.TransformerFactory"
-				value="com.cakupan.xslt.transform.SaxonCakupanTransformerInstrumentFactoryImpl" />
-			<sysproperty key="cakupan.dir" value="${instrmtxslt.dir}" />
-			<classpath refid="classpath.test" />
+			<sysproperty key="javax.xml.transform.TransformerFactory" value="com.cakupan.xslt.transform.SaxonCakupanTransformerInstrumentFactoryImpl" />
+			<sysproperty key="cakupan.dir" value="${instrument.outputDirectory}" />
+			<!-- 
+			<classpath refid="maven.test.classpath" />
+			 -->
 			<formatter type="xml" />
-			<batchtest fork="yes" todir="${junit.out.dir.xml}">
-				<fileset dir="${test.dir}" includes="**/*Test.java" />
+			<formatter type="plain" />
+			<batchtest fork="yes" todir="${testResultDirectory}">
+				<fileset dir="${testSourceDirectory}" includes="${test.includes}" />
 			</batchtest>
 		</junit>
 	</target>

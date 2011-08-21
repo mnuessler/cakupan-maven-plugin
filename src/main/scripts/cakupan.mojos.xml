@@ -1,45 +1,6 @@
 <pluginMetadata>
 	<mojos>
 		<mojo>
-			<goal>hello</goal>
-			<call>hello</call>
-			<description>
-				Say Hello, World.
-			</description>
-			<parameters>
-				<parameter>
-					<name>instrument.outputDirectory</name>
-					<property>instrument.outputDirectory</property>
-					<required>true</required>
-					<defaultValue>${project.build.directory}/cakupan</defaultValue>
-					<type>java.lang.String</type>
-					<description>
-						The directory where to put the instrumentation file.
-					</description>
-				</parameter>
-				<parameter>
-					<name>xsl.sourceDirectory</name>
-					<property>xsl.sourceDirectory</property>
-					<required>true</required>
-					<defaultValue>${project.basedir}/src/main/resources</defaultValue>
-					<type>java.lang.String</type>
-					<description>
-						The directory that contains the XSL source files.
-					</description>
-				</parameter>
-				<parameter>
-					<name>xsl.includes</name>
-					<property>xsl.includes</property>
-					<required>true</required>
-					<defaultValue>**/*.xsl</defaultValue>
-					<type>java.lang.String</type>
-					<description>
-						The includes file pattern.
-					</description>
-				</parameter>
-			</parameters>
-		</mojo>
-		<mojo>
 			<goal>instrument</goal>
 			<call>instrument</call>
 			<phase>process-test-classes</phase>
@@ -51,7 +12,7 @@
 					<name>instrument.outputDirectory</name>
 					<property>instrument.outputDirectory</property>
 					<required>true</required>
-					<defaultValue>${project.build.outputDirectory}/cakupan</defaultValue>
+					<defaultValue>${project.build.directory}/cakupan</defaultValue>
 					<type>java.lang.String</type>
 					<description>
 						The directory where to place the instrumentation file.
@@ -79,6 +40,7 @@
 				</parameter>
 			</parameters>
 		</mojo>
+		<!--
 		<mojo>
 			<goal>test</goal>
 			<call>test</call>
@@ -91,14 +53,45 @@
 					<name>instrument.outputDirectory</name>
 					<property>instrument.outputDirectory</property>
 					<required>true</required>
-					<defaultValue>${project.build.outputDirectory}</defaultValue>
+					<defaultValue>${project.build.directory}</defaultValue>
 					<type>java.lang.String</type>
 					<description>
 						The directory where to put the instrumentation file.
 					</description>
 				</parameter>
+				<parameter>
+					<name>testResultDirectory</name>
+					<property>testResultDirectory</property>
+					<required>true</required>
+					<defaultValue>${project.build.directory}/cakupan-test</defaultValue>
+					<type>java.lang.String</type>
+					<description>
+						The directory where to find the test classes.
+					</description>
+				</parameter>
+				<parameter>
+					<name>testSourceDirectory</name>
+					<property>testSourceDirectory</property>
+					<required>true</required>
+					<defaultValue>${project.build.testSourceDirectory}</defaultValue>
+					<type>java.lang.String</type>
+					<description>
+						The directory where to find the test classes.
+					</description>
+				</parameter>
+				<parameter>
+					<name>test.includes</name>
+					<property>test.includes</property>
+					<required>true</required>
+					<defaultValue>**/xml/transformation/**/*Test.java</defaultValue>
+					<type>java.lang.String</type>
+					<description>
+						The directory where to find the test classes.
+					</description>
+				</parameter>
 			</parameters>
 		</mojo>
+		 -->
 		<mojo>
 			<goal>report</goal>
 			<call>report</call>
