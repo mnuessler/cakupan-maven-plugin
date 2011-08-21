@@ -11,10 +11,30 @@
 					<name>instrument.outputDirectory</name>
 					<property>instrument.outputDirectory</property>
 					<required>true</required>
-					<defaultValue>${project.build.directory}/cakupan-instrument</defaultValue>
+					<defaultValue>${project.build.directory}/cakupan</defaultValue>
 					<type>java.lang.String</type>
 					<description>
 						The directory where to put the instrumentation file.
+					</description>
+				</parameter>
+				<parameter>
+					<name>xsl.sourceDirectory</name>
+					<property>xsl.sourceDirectory</property>
+					<required>true</required>
+					<defaultValue>${project.basedir}/src/main/resources</defaultValue>
+					<type>java.lang.String</type>
+					<description>
+						The directory that contains the XSL source files.
+					</description>
+				</parameter>
+				<parameter>
+					<name>xsl.includes</name>
+					<property>xsl.includes</property>
+					<required>true</required>
+					<defaultValue>**/*.xsl</defaultValue>
+					<type>java.lang.String</type>
+					<description>
+						The includes file pattern.
 					</description>
 				</parameter>
 			</parameters>
@@ -31,17 +51,37 @@
 					<name>instrument.outputDirectory</name>
 					<property>instrument.outputDirectory</property>
 					<required>true</required>
-					<defaultValue>${project.build.outputDirectory}</defaultValue>
+					<defaultValue>${project.build.outputDirectory}/cakupan</defaultValue>
 					<type>java.lang.String</type>
 					<description>
-						The directory where to put the instrumentation file.
+						The directory where to place the instrumentation file.
+					</description>
+				</parameter>
+				<parameter>
+					<name>xsl.sourceDirectory</name>
+					<property>xsl.sourceDirectory</property>
+					<required>true</required>
+					<defaultValue>${project.basedir}/src/main/resources</defaultValue>
+					<type>java.lang.String</type>
+					<description>
+						The directory that contains the XSL source files.
+					</description>
+				</parameter>
+				<parameter>
+					<name>xsl.includes</name>
+					<property>xsl.includes</property>
+					<required>true</required>
+					<defaultValue>**/*.xsl</defaultValue>
+					<type>java.lang.String</type>
+					<description>
+						The includes file pattern.
 					</description>
 				</parameter>
 			</parameters>
 		</mojo>
 		<mojo>
-			<goal>junit</goal>
-			<call>junit</call>
+			<goal>test</goal>
+			<call>test</call>
 			<phase>test</phase>
 			<description>
 				Run tests.
@@ -64,12 +104,12 @@
 			<call>report</call>
 			<phase>site</phase>
 			<description>
-				Instrument XSLT files.
+				Create a HTML report with XSLT coverage results.
 			</description>
 			<parameters>
 				<parameter>
-					<name>instrument.outputDirectory</name>
-					<property>instrument.outputDirectory</property>
+					<name>report.outputDirectory</name>
+					<property>report.outputDirectory</property>
 					<required>true</required>
 					<defaultValue>${project.build.outputDirectory}</defaultValue>
 					<type>java.lang.String</type>
