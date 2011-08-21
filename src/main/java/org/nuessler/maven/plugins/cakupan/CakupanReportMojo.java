@@ -1,4 +1,4 @@
-package org.nuessle.maven.plugins.cakupan;
+package org.nuessler.maven.plugins.cakupan;
 
 import java.util.Locale;
 

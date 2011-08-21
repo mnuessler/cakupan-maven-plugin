@@ -259,8 +259,6 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
 				<version>${versions-maven-plugin.version}</version>
-				<configuration>
-				</configuration>
 			</plugin>
 		</plugins>
 	</reporting>
