@@ -12,7 +12,7 @@
 					<name>instrument.outputDirectory</name>
 					<property>instrument.outputDirectory</property>
 					<required>true</required>
-					<defaultValue>${project.build.directory}/cakupan</defaultValue>
+					<defaultValue>${project.build.directory}/cakupan-instrument</defaultValue>
 					<type>java.lang.String</type>
 					<description>
 						The directory where to place the instrumentation file.
@@ -40,7 +40,6 @@
 				</parameter>
 			</parameters>
 		</mojo>
-		<!--
 		<mojo>
 			<goal>test</goal>
 			<call>test</call>
@@ -53,7 +52,7 @@
 					<name>instrument.outputDirectory</name>
 					<property>instrument.outputDirectory</property>
 					<required>true</required>
-					<defaultValue>${project.build.directory}</defaultValue>
+					<defaultValue>${project.build.directory}/cakupan-instrument</defaultValue>
 					<type>java.lang.String</type>
 					<description>
 						The directory where to put the instrumentation file.
@@ -91,7 +90,6 @@
 				</parameter>
 			</parameters>
 		</mojo>
-		 -->
 		<mojo>
 			<goal>report</goal>
 			<call>report</call>

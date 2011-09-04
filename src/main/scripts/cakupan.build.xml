@@ -28,6 +28,7 @@
 		<echo message="runtime classpath: ${runtime_classpath}" />
 		<echo message="test classpath:    ${test_classpath}" />
 		<echo message="plugin classpath:  ${plugin_classpath}" />
+		<echo message="cakupan.maven.test.classpath: ${cakupan.maven.test.classpath}" />
 		
 		<mkdir dir="${testResultDirectory}" />
 		<junit printsummary="yes" haltonfailure="no">
@@ -35,9 +36,16 @@
 				/ -->
 			<sysproperty key="javax.xml.transform.TransformerFactory" value="com.cakupan.xslt.transform.SaxonCakupanTransformerInstrumentFactoryImpl" />
 			<sysproperty key="cakupan.dir" value="${instrument.outputDirectory}" />
-			<!-- 
-			<classpath refid="maven.test.classpath" />
-			 -->
+			<classpath>
+				<!-- 
+				    Dependency artifacts are not in the classpath for some reason.
+				    For a possible workaround see http://blog.akquinet.de/2010/05/11/using-the-maven-ant-tasks-from-within-a-ant-based-maven-plugin/
+				    Or use: mvn dependency:build-classpath -DoutputFilterFile=<file> -DincludeScope=test
+				-->
+				<path refid="maven.test.classpath" />
+				<path refid="maven.plugin.classpath" />
+				<pathelement path="${cakupan.maven.test.classpath}" />
+			</classpath>
 			<formatter type="xml" />
 			<formatter type="plain" />
 			<batchtest fork="yes" todir="${testResultDirectory}">
