@@ -41,6 +41,11 @@ public class CakupanInstrumentMojo extends AbstractMojo {
 	private File buildDirectory;
 
 	/**
+	 * @parameter default-value="${project.build.outputDirectory}"
+	 */
+	private File buildOutputDirectory;
+
+	/**
 	 * @parameter expression="${xslt.instrument.destdir}"
 	 *            default-value="${project.build.directory}/cakupan-instrument"
 	 */
@@ -70,6 +75,15 @@ public class CakupanInstrumentMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("instrumentDestDir: " + instrumentDestDir);
+		getLog().info("buildOutputDirectory: " + buildOutputDirectory);
+		if (includes == null) {
+			getLog().info("includes is null");
+		} else {
+			for (String s : includes) {
+				getLog().info(s);
+			}
+		}
+
 		if (!instrumentDestDir.exists()) {
 			instrumentDestDir.mkdirs();
 		}
@@ -83,7 +97,8 @@ public class CakupanInstrumentMojo extends AbstractMojo {
 		CoverageIOUtil.setDestDir(instrumentDestDir);
 
 		DirectoryScanner scanner = new DirectoryScanner();
-		scanner.setBasedir(buildDirectory);
+		scanner.setBasedir(buildOutputDirectory);
+		scanner.setCaseSensitive(true);
 		scanner.addDefaultExcludes();
 		if (CollectionUtils.isNotEmpty(includes)) {
 			scanner.setIncludes(includes.toArray(new String[includes.size()]));
@@ -91,6 +106,7 @@ public class CakupanInstrumentMojo extends AbstractMojo {
 		if (CollectionUtils.isNotEmpty(excludes)) {
 			scanner.setExcludes(excludes.toArray(new String[excludes.size()]));
 		}
+		scanner.scan();
 		String[] includedFiles = scanner.getIncludedFiles();
 
 		if (ArrayUtils.isEmpty(includedFiles)) {
@@ -100,8 +116,9 @@ public class CakupanInstrumentMojo extends AbstractMojo {
 
 		for (String includedFile : includedFiles) {
 			try {
-				instrumentXslt.initCoverageMap(new File(basedir, includedFile)
-						.getCanonicalPath());
+				getLog().info("Instrumenting XSLT file " + includedFile);
+				instrumentXslt.initCoverageMap(new File(buildOutputDirectory,
+						includedFile).getCanonicalPath());
 			} catch (Exception e) {
 				getLog().error(e);
 				throw new MojoExecutionException("Instrumenting file ["
@@ -116,23 +133,6 @@ public class CakupanInstrumentMojo extends AbstractMojo {
 		} finally {
 			XSLTCakupanUtil.cleanCoverageStats();
 		}
-
-		// try {
-		// XSLTCakupanUtil.dumpCoverageStats();
-		// System.out.println("Instrumented XSLTs: "
-		// + XSLTCakupanUtil.getCoverageMap().size());
-		// } catch (XSLTCoverageException e) {
-		// throw new BuildException("Dump coverage file failed!");
-		// } finally {
-		// XSLTCakupanUtil.cleanCoverageStats();
-		// }
-		// } else {
-		// getProject().log("No XSLTs found!", Project.MSG_WARN);
-		// }
-		// }
-		// } else {
-		// throw new BuildException("XSLT source directories not set!");
-		// }
-		// super.execute();
 	}
+
 }
