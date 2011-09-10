@@ -30,8 +30,11 @@
 		<echo message="plugin classpath:  ${plugin_classpath}" />
 		<echo message="cakupan.maven.test.classpath: ${cakupan.maven.test.classpath}" />
 		
+		<property name="myclasspath" value="${test_classpath}:${cakupan.maven.test.classpath}" />
+		<echo message="myclasspath: ${myclasspath}" />
+		
 		<mkdir dir="${testResultDirectory}" />
-		<junit printsummary="yes" haltonfailure="no">
+		<junit printsummary="yes" haltonfailure="no" fork="true">
 			<!--sysproperty key="javax.xml.transform.TransformerFactory" value="com.cakupan.xslt.transform.XalanTransformerInstrumentFactoryImpl" 
 				/ -->
 			<sysproperty key="javax.xml.transform.TransformerFactory" value="com.cakupan.xslt.transform.SaxonCakupanTransformerInstrumentFactoryImpl" />
@@ -42,9 +45,10 @@
 				    For a possible workaround see http://blog.akquinet.de/2010/05/11/using-the-maven-ant-tasks-from-within-a-ant-based-maven-plugin/
 				    Or use: mvn dependency:build-classpath -DoutputFilterFile=<file> -DincludeScope=test
 				-->
-				<path refid="maven.test.classpath" />
-				<path refid="maven.plugin.classpath" />
-				<pathelement path="${cakupan.maven.test.classpath}" />
+				<!--path refid="maven.test.classpath" /-->
+				<!--path refid="maven.plugin.classpath" /-->
+				<!--pathelement path="/Users/mnuessler/Documents/projects/is24/esb/apps/erpadaptor/target/test-classes:/Users/mnuessler/Documents/projects/is24/esb/apps/erpadaptor/target/classes:${cakupan.maven.test.classpath}" /-->
+				<pathelement path="${myclasspath}" />
 			</classpath>
 			<formatter type="xml" />
 			<formatter type="plain" />
