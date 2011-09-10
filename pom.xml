@@ -4,11 +4,11 @@
 	<groupId>org.nuessler.maven.plugins</groupId>
 	<artifactId>cakupan-maven-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1-SNAPSHOT</version>
 	<name>Cakupan Maven Plugin</name>
-	<url>https://github.com/mnuessler/cakupan-maven-plugin</url>
+	<url>http://sf.net/projects/cakupan-maven</url>
 	<inceptionYear>2011</inceptionYear>
-	<description></description>
+	<description>A Maven plugin for Cakupan. Cakupan is a tool to determine test coverage for XSLT transformations.</description>
 	<licenses>
 		<license>
 			<name>GNU General Public License, Version 3</name>
@@ -33,9 +33,9 @@
 	</prerequisites>
 
 	<scm>
-		<connection>scm:git:git://github.com/mnuessler/cakupan-maven-plugin.git</connection>
-		<developerConnection>scm:git:git@github.com:mnuessler/cakupan-maven-plugin.git</developerConnection>
-		<url>https://github.com/mnuessler/cakupan-maven-plugin</url>
+		<connection>scm:git:git://git.code.sf.net/p/cakupan-maven/code</connection>
+		<developerConnection>scm:git:ssh://git.code.sf.net/p/cakupan-maven/code</developerConnection>
+		<url>http://sourceforge.net/p/cakupan-maven/code/commit_browser</url>
 	</scm>
 
 	<issueManagement>
@@ -44,7 +44,7 @@
 	</issueManagement>
 
 	<properties>
-		<mojo.java.target>1.5</mojo.java.target>
+		<target.jdk>1.5</target.jdk>
 		<mavenVersion>2.2.1</mavenVersion> <!-- MNG-3062 -->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -80,7 +80,6 @@
 					<version>${maven-plugin-plugin.version}</version>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
 					<version>2.1.2</version>
 				</plugin>
@@ -89,12 +88,10 @@
 					<version>3.0</version>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>${maven-checkstyle-plugin.version}</version>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-pmd-plugin</artifactId>
 					<version>${maven-pmd-plugin.version}</version>
 				</plugin>
@@ -104,7 +101,6 @@
 					<version>${versions-maven-plugin.version}</version>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>${maven-javadoc-plugin.version}</version>
 				</plugin>
@@ -114,14 +110,45 @@
 					<version>${findbugs-maven-plugin.version}</version>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.9</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.2.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.4</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 
 		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${target.jdk}</source>
+					<target>${target.jdk}</target>
+				</configuration>
+			</plugin>
 			<plugin>
 				<artifactId>maven-plugin-plugin</artifactId>
 				<configuration>
@@ -144,7 +171,6 @@
 				</dependencies>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<executions>
 					<execution>
@@ -156,7 +182,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<executions>
 					<execution>
@@ -171,7 +196,6 @@
 				<artifactId>maven-site-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 				</configuration>
@@ -271,7 +295,7 @@
 					<requirements>
 						<!-- NOTE: Maven 2.x does not interpolate properties of the form project.*|pom.* so the Maven Plugin Plugin gets garbage 
 							when manually examining the config of the Maven Compiler Plugin. -->
-						<jdk>${mojo.java.target}</jdk>
+						<jdk>${target.jdk}</jdk>
 					</requirements>
 				</configuration>
 			</plugin>
@@ -316,6 +340,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>${maven-pmd-plugin.version}</version>
+				<configuration>
+					<targetJdk>${target.jdk}</targetJdk>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -331,6 +358,10 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
 				<version>${findbugs-maven-plugin.version}</version>
+				<configuration>
+					<effort>Max</effort>
+					<threshold>Low</threshold>
+				</configuration>
 			</plugin>
 		</plugins>
 	</reporting>
