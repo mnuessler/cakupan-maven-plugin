@@ -38,10 +38,10 @@
 		<developer>
 			<id>mnuessler</id>
 			<name>Matthias Nuessler</name>
-			<email>${email}</email>
+			<email>${email.author}</email>
 			<roles>
-				<role>Author</role>
-				<role>Developer</role>
+				<role>author</role>
+				<role>developer</role>
 			</roles>
 			<timezone>+2</timezone>
 		</developer>
@@ -67,7 +67,7 @@
 		<mavenVersion>2.2.1</mavenVersion> <!-- MNG-3062 -->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<email>m.nuessler@web.de</email>
+		<email.author>m.nuessler@web.de</email.author>
 
 		<maven-plugin-plugin.version>2.8</maven-plugin-plugin.version>
 		<maven-checkstyle-plugin.version>2.7</maven-checkstyle-plugin.version>
@@ -288,7 +288,7 @@
 					<quiet>false</quiet>
 					<properties>
 						<year>${project.inceptionYear}</year>
-						<email>${email}</email>
+						<email>${email.author}</email>
 					</properties>
 					<includes>
 						<include>pom.xml</include>

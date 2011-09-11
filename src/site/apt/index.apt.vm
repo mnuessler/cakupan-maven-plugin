@@ -24,6 +24,6 @@
 
 Cakupan Maven Plugin
 
-  This plugin provides the features of the
-  {{{http://code.google.com/p/cakupan/}Cakupan XSLT coverage tool}} within the Maven 2
-  environment.
+  This plugin integrates the
+  {{{http://code.google.com/p/cakupan/}Cakupan XSLT coverage tool}} into the Maven 2
+  environment.  
