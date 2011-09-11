@@ -45,10 +45,10 @@
 		<echo message="test classpath:    ${test_classpath}" />
 		<echo message="plugin classpath:  ${plugin_classpath}" />
 		<echo message="cakupan.maven.test.classpath: ${cakupan.maven.test.classpath}" />
-		
+
 		<property name="myclasspath" value="${test_classpath}:${cakupan.maven.test.classpath}" />
 		<echo message="myclasspath: ${myclasspath}" />
-		
+
 		<mkdir dir="${testResultDirectory}" />
 		<junit printsummary="yes" haltonfailure="no" fork="true">
 			<!--sysproperty key="javax.xml.transform.TransformerFactory" value="com.cakupan.xslt.transform.XalanTransformerInstrumentFactoryImpl" 
