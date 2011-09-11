@@ -1,0 +1,14 @@
+ ------
+ Introduction
+ ------
+ Matthias Nuessler
+ ------
+ 2011-09-10
+ ------
+
+
+Cakupan Maven Plugin
+
+  This plugin provides the features of the
+  {{{http://code.google.com/p/cakupan/}Cakupan}} XSLT covarage tool within the Maven 2
+  environment.

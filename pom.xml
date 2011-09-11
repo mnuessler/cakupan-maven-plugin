@@ -8,11 +8,11 @@
 	<name>Cakupan Maven Plugin</name>
 	<url>http://sf.net/projects/cakupan-maven</url>
 	<inceptionYear>2011</inceptionYear>
-	<description>A Maven plugin for Cakupan. Cakupan is a tool to determine test coverage for XSLT transformations.</description>
+	<description>A Maven plugin for Cakupan, a tool to measure test coverage for XSLT transformations.</description>
 	<licenses>
 		<license>
-			<name>GNU General Public License, Version 3</name>
-			<url>http://www.gnu.org/licenses/gpl-3.0-standalone.html</url>
+			<name>Apache License Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
@@ -22,6 +22,7 @@
 			<name>Matthias Nuessler</name>
 			<email>m.nuessler@web.de</email>
 			<roles>
+				<role>Author</role>
 				<role>Developer</role>
 			</roles>
 			<timezone>+2</timezone>
@@ -39,12 +40,12 @@
 	</scm>
 
 	<issueManagement>
-		<system>Github Issues</system>
-		<url>https://github.com/mnuessler/cakupan-maven-plugin/issues</url>
+		<system>SourceForge Tickets</system>
+		<url>https://sourceforge.net/p/cakupan-maven/tickets/</url>
 	</issueManagement>
 
 	<properties>
-		<target.jdk>1.5</target.jdk>
+		<jdk.version>1.5</jdk.version>
 		<mavenVersion>2.2.1</mavenVersion> <!-- MNG-3062 -->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -145,8 +146,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>${target.jdk}</source>
-					<target>${target.jdk}</target>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -238,7 +239,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<version>4.9</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -295,7 +296,7 @@
 					<requirements>
 						<!-- NOTE: Maven 2.x does not interpolate properties of the form project.*|pom.* so the Maven Plugin Plugin gets garbage 
 							when manually examining the config of the Maven Compiler Plugin. -->
-						<jdk>${target.jdk}</jdk>
+						<jdk>${jdk.version}</jdk>
 					</requirements>
 				</configuration>
 			</plugin>
@@ -341,7 +342,7 @@
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>${maven-pmd-plugin.version}</version>
 				<configuration>
-					<targetJdk>${target.jdk}</targetJdk>
+					<targetJdk>${jdk.version}</targetJdk>
 				</configuration>
 			</plugin>
 			<plugin>
