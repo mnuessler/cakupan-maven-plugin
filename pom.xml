@@ -48,7 +48,7 @@
 	</developers>
 
 	<prerequisites>
-		<maven>${mavenVersion}</maven>
+		<maven>${maven.version}</maven>
 	</prerequisites>
 
 	<scm>
@@ -64,7 +64,7 @@
 
 	<properties>
 		<jdk.version>1.5</jdk.version>
-		<mavenVersion>2.2.1</mavenVersion> <!-- MNG-3062 -->
+		<maven.version>2.2.1</maven.version> <!-- MNG-3062 -->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<email.author>m.nuessler@web.de</email.author>
@@ -313,17 +313,17 @@
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
-			<version>${mavenVersion}</version>
+			<version>${maven.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-script-ant</artifactId>
-			<version>${mavenVersion}</version>
+			<version>${maven.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.reporting</groupId>
 			<artifactId>maven-reporting-api</artifactId>
-			<version>${mavenVersion}</version>
+			<version>${maven.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.reporting</groupId>
