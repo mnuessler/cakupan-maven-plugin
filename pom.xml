@@ -24,7 +24,7 @@
 	<packaging>maven-plugin</packaging>
 	<version>0.1-SNAPSHOT</version>
 	<name>Cakupan Maven Plugin</name>
-	<url>http://sf.net/projects/cakupan-maven</url>
+	<url>http://cakupan-maven.sourceforge.net</url>
 	<inceptionYear>2011</inceptionYear>
 	<description>A Maven plugin for Cakupan, a tool to measure test coverage for XSLT transformations.</description>
 	<licenses>
@@ -38,7 +38,7 @@
 		<developer>
 			<id>mnuessler</id>
 			<name>Matthias Nuessler</name>
-			<email>${email.author}</email>
+			<email>http://www.google.com/recaptcha/mailhide/d?k=01H8VsyNbhqMEaU7iXWIIdEA==&amp;c=JEm3kAEcwiO6qt1kfxgVOxuZ3U0JZXhxD81yB-C6b7k=</email>
 			<roles>
 				<role>author</role>
 				<role>developer</role>
@@ -61,6 +61,16 @@
 		<system>SourceForge Tickets</system>
 		<url>https://sourceforge.net/p/cakupan-maven/tickets/</url>
 	</issueManagement>
+
+	<mailingLists>
+		<mailingList>
+			<name>Maven Cakupan Users</name>
+			<post>cakupan-maven-users@lists.sourceforge.net</post>
+			<subscribe>https://lists.sourceforge.net/lists/listinfo/cakupan-maven-users</subscribe>
+			<unsubscribe>https://lists.sourceforge.net/lists/listinfo/cakupan-maven-users</unsubscribe>
+			<archive>https://sourceforge.net/mailarchive/forum.php?forum_name=cakupan-maven-users</archive>
+		</mailingList>
+	</mailingLists>
 
 	<properties>
 		<jdk.version>1.5</jdk.version>
@@ -244,6 +254,27 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.wagon</groupId>
+						<artifactId>wagon-ssh</artifactId>
+						<version>1.0</version>
+					</dependency>
+					<dependency>
+						<groupId>net.ju-n.maven.doxia</groupId>
+						<artifactId>doxia-module-markdown</artifactId>
+						<version>1.0.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.maven.doxia</groupId>
+						<artifactId>doxia-module-confluence</artifactId>
+						<version>1.2</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<inputEncoding>UTF-8</inputEncoding>
+					<outputEncoding>UTF-8</outputEncoding>
+				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -290,13 +321,18 @@
 						<year>${project.inceptionYear}</year>
 						<email>${email.author}</email>
 					</properties>
-					<includes>
-						<include>pom.xml</include>
-					</includes>
 					<excludes>
 						<exclude>LICENSE.txt</exclude>
 						<exclude>.gitignore</exclude>
 					</excludes>
+					<mapping>
+						<md>XML_STYLE</md>
+						<application>XML_STYLE</application>
+					</mapping>
+					<mapping>
+						<confluence>XML_STYLE</confluence>
+						<application>XML_STYLE</application>
+					</mapping>
 				</configuration>
 				<executions>
 					<execution>
@@ -423,6 +459,25 @@
 			<plugin>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 				<version>2.4</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>summary</report>
+							<report>index</report>
+							<report>project-team</report>
+							<report>scm</report>
+							<report>issue-tracking</report>
+							<report>mailing-list</report>
+							<report>plugin-management</report>
+							<report>dependencies</report>
+							<report>dependency-management</report>
+							<report>dependency-convergence</report>
+							<!-- report>distribution-management</report-->
+							<!-- report>cim</report-->
+							<report>license</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 			<plugin>
 				<artifactId>maven-checkstyle-plugin</artifactId>
