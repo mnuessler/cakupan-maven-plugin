@@ -46,7 +46,7 @@ import com.google.common.collect.Lists;
  * @requiresDependencyResolution test
  * @author mnuessler
  */
-public class BuildClasspathMojo extends AbstractMojo {
+public class CakupanClasspathMojo extends AbstractMojo {
 
 	/**
 	 * @parameter expression="${project}"
