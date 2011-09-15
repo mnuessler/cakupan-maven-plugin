@@ -90,6 +90,16 @@
 	</properties>
 
 	<distributionManagement>
+		<repository>
+			<id>sf-releases</id>
+			<name>Sourceforge releases</name>
+			<url>scp://shell.sourceforge.net/home/project-web/cakupan-maven/htdocs/repos/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>sf-snapshots</id>
+			<name>Sourceforge snapshots</name>
+			<url>scp://shell.sourceforge.net/home/project-web/cakupan-maven/htdocs/repos/snaphots</url>			
+		</snapshotRepository>
 		<site>
 			<id>cakupan-maven.sf.net</id>
 			<name>Sourceforge Project Page</name>
@@ -124,6 +134,13 @@
 	</pluginRepositories>
 
 	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>1.0-beta-7</version>
+			</extension>
+		</extensions>
 		<pluginManagement>
 			<plugins>
 				<plugin>
