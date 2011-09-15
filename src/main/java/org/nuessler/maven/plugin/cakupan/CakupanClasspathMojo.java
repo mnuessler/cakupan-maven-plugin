@@ -131,6 +131,7 @@ public class CakupanClasspathMojo extends AbstractMojo {
 		if (!classpath.contains("cakupan")) {
 			getLog().warn("Cakupan not on classpath!");
 		}
+		// TODO use: project.getProperties().put(key, value)
 		System.setProperty("cakupan.maven.test.classpath", classpath);
 		getLog().info("buildClasspath: " + classpath);
 	}
