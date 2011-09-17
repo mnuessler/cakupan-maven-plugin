@@ -32,7 +32,7 @@ import com.cakupan.xslt.util.CoverageIOUtil;
 import com.cakupan.xslt.util.XSLTCakupanUtil;
 
 /**
- * @author mnuessler
+ * @author Matthias Nuessler
  * @goal cakupan
  * @execute phase="test" lifecycle="cakupan"
  */

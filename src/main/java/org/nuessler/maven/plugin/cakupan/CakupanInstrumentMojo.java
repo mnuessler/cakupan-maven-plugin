@@ -32,7 +32,7 @@ import com.cakupan.xslt.util.CoverageIOUtil;
 import com.cakupan.xslt.util.XSLTCakupanUtil;
 
 /**
- * @author mnuessler
+ * @author Matthias Nuessler
  * @goal instrument
  * @phase process-test-classes
  * @requiresDependencyResolution test

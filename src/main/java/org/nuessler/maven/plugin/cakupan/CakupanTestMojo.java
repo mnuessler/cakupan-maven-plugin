@@ -45,11 +45,11 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 
 /**
+ * @author Matthias Nuessler
  * @phase test
  * @goal test
  * @execute phase="test" lifecycle="cakupan"
  * @requiresDependencyResolution test
- * @author mnuessler
  */
 public class CakupanTestMojo extends AbstractMojo {
 	/**
@@ -89,16 +89,13 @@ public class CakupanTestMojo extends AbstractMojo {
 
 	/**
 	 * A list of &lt;include> elements specifying the tests (by pattern) that
-	 * should be included in testing. When not specified and when the
-	 * <code>test</code> parameter is not specified, the default includes will
-	 * be <code><br/>
+	 * should be included in testing. When not specified, the default includes
+	 * will be <code><br/>
 	 * &lt;includes><br/>
-	 * &nbsp;&lt;include>**&#47;Test*.java&lt;/include><br/>
-	 * &nbsp;&lt;include>**&#47;*Test.java&lt;/include><br/>
-	 * &nbsp;&lt;include>**&#47;*TestCase.java&lt;/include><br/>
+	 * &nbsp;&lt;include>**&#47;TransformationTest*.java&lt;/include><br/>
+	 * &nbsp;&lt;include>**&#47;*XsltTest.java&lt;/include><br/>
 	 * &lt;/includes><br/>
-	 * </code> This parameter is ignored if the TestNG
-	 * <code>suiteXmlFiles</code> parameter is specified.
+	 * </code>
 	 * 
 	 * @parameter
 	 */
@@ -113,8 +110,6 @@ public class CakupanTestMojo extends AbstractMojo {
 	 * &nbsp;&lt;exclude>**&#47;*$*&lt;/exclude><br/>
 	 * &lt;/excludes><br/>
 	 * </code> (which excludes all inner classes).<br>
-	 * This parameter is ignored if the TestNG <code>suiteXmlFiles</code>
-	 * parameter is specified.
 	 * 
 	 * @parameter
 	 */
