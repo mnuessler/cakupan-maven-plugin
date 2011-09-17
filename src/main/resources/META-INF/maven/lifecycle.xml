@@ -21,24 +21,24 @@
 		<id>cakupan</id>
 		<phases>
 			<phase>
+				<id>process-test-classes</id>
+				<executions>
+					<execution>
+						<goals>
+							<goal>instrument</goal>
+						</goals>
+					</execution>
+				</executions>
+			</phase>
+			<phase>
 				<id>test</id>
 				<configuration>
-					<testFailureIgnore>true</testFailureIgnore>
-					<includes>
-						<include>**/xml/transformation/**/*Test.java</include>
-					</includes>
-					<!-- 
-					<forkMode>once</forkMode>
-					 -->
-					<systemPropertyVariables>
-						<javax.xml.transform.TransformerFactory>com.cakupan.xslt.transform.SaxonCakupanTransformerInstrumentFactoryImpl</javax.xml.transform.TransformerFactory>
-						<cakupan.dir>${project.build.directory}/cakupan</cakupan.dir>
-					</systemPropertyVariables>
+					<skipTests>true</skipTests>
 				</configuration>
 				<executions>
 					<execution>
 						<goals>
-							<goal>surefire:test</goal>
+							<goal>test</goal>
 						</goals>
 					</execution>
 				</executions>

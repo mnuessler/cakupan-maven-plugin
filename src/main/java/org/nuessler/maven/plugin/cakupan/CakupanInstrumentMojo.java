@@ -49,7 +49,7 @@ public class CakupanInstrumentMojo extends AbstractMojo {
 
 	/**
 	 * The directory containing generated test classes of the project being
-	 * tested. This will be included at the beginning of the test classpath. *
+	 * tested. This will be included at the beginning of the test classpath.
 	 * 
 	 * @parameter default-value="${project.build.directory}"
 	 */
@@ -62,7 +62,7 @@ public class CakupanInstrumentMojo extends AbstractMojo {
 
 	/**
 	 * @parameter expression="${xslt.instrument.destdir}"
-	 *            default-value="${project.build.directory}/cakupan-instrument"
+	 *            default-value="${project.build.directory}/cakupan-report"
 	 */
 	private File instrumentDestDir;
 
@@ -95,7 +95,7 @@ public class CakupanInstrumentMojo extends AbstractMojo {
 			getLog().info("includes is null");
 		} else {
 			for (String s : includes) {
-				getLog().info(s);
+				getLog().info("include: " + s);
 			}
 		}
 
@@ -104,7 +104,7 @@ public class CakupanInstrumentMojo extends AbstractMojo {
 		}
 
 		if (CollectionUtils.isEmpty(includes)) {
-			includes = Collections.singletonList("**/*.xslt");
+			includes = Collections.singletonList("**/*.xsl");
 		}
 
 		InstrumentXSLT instrumentXslt = new InstrumentXSLT();

@@ -16,9 +16,11 @@
 package org.nuessler.maven.plugin.cakupan;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.maven.doxia.siterenderer.Renderer;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.reporting.AbstractMavenReport;
@@ -31,8 +33,8 @@ import com.cakupan.xslt.util.XSLTCakupanUtil;
 
 /**
  * @author mnuessler
- * @goal report
- * @execute phase="site"
+ * @goal cakupan
+ * @execute phase="test" lifecycle="cakupan"
  */
 public class CakupanReportMojo extends AbstractMavenReport {
 
@@ -60,8 +62,14 @@ public class CakupanReportMojo extends AbstractMavenReport {
 	 */
 	private File outputDirectory;
 
+	/**
+	 * @parameter expression="${xslt.instrument.destdir}"
+	 *            default-value="${project.build.directory}/cakupan-report"
+	 */
+	private File instrumentDestDir;
+
 	public String getOutputName() {
-		return "cakupan-index";
+		return "dummy";
 	}
 
 	public String getName(Locale locale) {
@@ -108,9 +116,19 @@ public class CakupanReportMojo extends AbstractMavenReport {
 		}
 		getLog().info("Start reporttask mojo");
 		getLog().info("output dir: " + getOutputDirectory());
+
+		try {
+			FileUtils.copyFileToDirectory(new File(instrumentDestDir,
+					"coverage.xml"), outputDirectory);
+		} catch (IOException e) {
+			throw new MavenReportException(e.getMessage());
+		}
+
 		CoverageIOUtil.setDestDir(outputDirectory);
 		try {
 			XSLTCakupanUtil.generateCoverageReport();
+			FileUtils.moveFile(new File(outputDirectory, "xslt_summary.html"),
+					new File(outputDirectory, "index.html"));
 		} catch (XSLTCoverageException e) {
 			if (e.getRefId() == XSLTCoverageException.NO_COVERAGE_FILE) {
 				getLog().error(
@@ -119,6 +137,8 @@ public class CakupanReportMojo extends AbstractMavenReport {
 			} else {
 				throw new BuildException("Failed to make a coverage report!", e);
 			}
+		} catch (IOException e) {
+			throw new MavenReportException(e.getMessage());
 		}
 		getLog().info("End reporttask mojo");
 	}
