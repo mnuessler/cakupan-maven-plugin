@@ -32,6 +32,8 @@ import com.cakupan.xslt.util.CoverageIOUtil;
 import com.cakupan.xslt.util.XSLTCakupanUtil;
 
 /**
+ * Instrument XSLT files for test coverage.
+ * 
  * @author Matthias Nuessler
  * @goal instrument
  * @phase process-test-classes
@@ -40,61 +42,49 @@ import com.cakupan.xslt.util.XSLTCakupanUtil;
 public class CakupanInstrumentMojo extends AbstractMojo {
 
 	/**
-	 * The base directory of the project being tested. This can be obtained in
-	 * your unit test via System.getProperty("basedir").
-	 * 
-	 * @parameter default-value="${basedir}"
-	 */
-	private File basedir;
-
-	/**
-	 * The directory containing generated test classes of the project being
-	 * tested. This will be included at the beginning of the test classpath.
-	 * 
-	 * @parameter default-value="${project.build.directory}"
-	 */
-	private File buildDirectory;
-
-	/**
 	 * @parameter default-value="${project.build.outputDirectory}"
 	 */
 	private File buildOutputDirectory;
 
 	/**
 	 * @parameter expression="${xslt.instrument.destdir}"
-	 *            default-value="${project.build.directory}/cakupan-report"
+	 *            default-value="${project.build.directory}/cakupan-instrument"
 	 */
 	private File instrumentDestDir;
 
 	/**
-	 * A list of &lt;include> elements specifying the tests (by pattern) that
-	 * should be included in testing. When not specified and when the
-	 * <code>test</code> parameter is not specified, the default includes will
-	 * be <code><br/>
-	 * &lt;includes><br/>
-	 * &nbsp;&lt;include>**&#47;Test*.java&lt;/include><br/>
-	 * &nbsp;&lt;include>**&#47;*Test.java&lt;/include><br/>
-	 * &nbsp;&lt;include>**&#47;*TestCase.java&lt;/include><br/>
-	 * &lt;/includes><br/>
-	 * </code> This parameter is ignored if the TestNG
-	 * <code>suiteXmlFiles</code> parameter is specified.
+	 * A list of &lt;include> elements specifying the XSLT files (by pattern)
+	 * that should be included in instrumenting. When not specified, the default
+	 * includes will be <code><br/>
+	 * &lt;xsltIncludes><br/>
+	 * &nbsp;&lt;include>**&#47;*.xsl&lt;/include><br/>
+	 * &lt;/xsltIncludes><br/>
+	 * </code>
 	 * 
 	 * @parameter
 	 */
-	private List<String> includes;
+	private List<String> xsltIncludes;
 
 	/**
+	 * A list of &lt;exclude> elements specifying the XSLT files (by pattern)
+	 * that should be included in instrumenting. When not specified, the default
+	 * includes will be <code><br/>
+	 * &lt;xsltExcludes><br/>
+	 * &nbsp;&lt;exclude>**&#47;*.xsl&lt;/exclude><br/>
+	 * &lt;/xsltExcludes><br/>
+	 * </code>
+	 * 
 	 * @parameter
 	 */
-	private List<String> excludes;
+	private List<String> xsltExcludes;
 
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("instrumentDestDir: " + instrumentDestDir);
 		getLog().info("buildOutputDirectory: " + buildOutputDirectory);
-		if (includes == null) {
+		if (xsltIncludes == null) {
 			getLog().info("includes is null");
 		} else {
-			for (String s : includes) {
+			for (String s : xsltIncludes) {
 				getLog().info("include: " + s);
 			}
 		}
@@ -103,8 +93,8 @@ public class CakupanInstrumentMojo extends AbstractMojo {
 			instrumentDestDir.mkdirs();
 		}
 
-		if (CollectionUtils.isEmpty(includes)) {
-			includes = Collections.singletonList("**/*.xsl");
+		if (CollectionUtils.isEmpty(xsltIncludes)) {
+			xsltIncludes = Collections.singletonList("**/*.xsl");
 		}
 
 		InstrumentXSLT instrumentXslt = new InstrumentXSLT();
@@ -115,11 +105,13 @@ public class CakupanInstrumentMojo extends AbstractMojo {
 		scanner.setBasedir(buildOutputDirectory);
 		scanner.setCaseSensitive(true);
 		scanner.addDefaultExcludes();
-		if (CollectionUtils.isNotEmpty(includes)) {
-			scanner.setIncludes(includes.toArray(new String[includes.size()]));
+		if (CollectionUtils.isNotEmpty(xsltIncludes)) {
+			scanner.setIncludes(xsltIncludes.toArray(new String[xsltIncludes
+					.size()]));
 		}
-		if (CollectionUtils.isNotEmpty(excludes)) {
-			scanner.setExcludes(excludes.toArray(new String[excludes.size()]));
+		if (CollectionUtils.isNotEmpty(xsltExcludes)) {
+			scanner.setExcludes(xsltExcludes.toArray(new String[xsltExcludes
+					.size()]));
 		}
 		scanner.scan();
 		String[] includedFiles = scanner.getIncludedFiles();

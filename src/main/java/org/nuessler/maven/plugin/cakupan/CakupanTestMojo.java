@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
@@ -39,12 +40,15 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.PluginManager;
 import org.apache.maven.project.MavenProject;
+import org.twdata.maven.mojoexecutor.MojoExecutor.Element;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 
 /**
+ * Run transformation tests using Surefire.
+ * 
  * @author Matthias Nuessler
  * @phase test
  * @goal test
@@ -89,39 +93,41 @@ public class CakupanTestMojo extends AbstractMojo {
 
 	/**
 	 * A list of &lt;include> elements specifying the tests (by pattern) that
-	 * should be included in testing. When not specified, the default includes
-	 * will be <code><br/>
-	 * &lt;includes><br/>
-	 * &nbsp;&lt;include>**&#47;TransformationTest*.java&lt;/include><br/>
+	 * should be included in testing. When not specified, the default
+	 * testIncludes will be <code><br/>
+	 * &lt;testIncludes><br/>
+	 * &nbsp;&lt;include>**&#47;*TransformationTest.java&lt;/include><br/>
 	 * &nbsp;&lt;include>**&#47;*XsltTest.java&lt;/include><br/>
-	 * &lt;/includes><br/>
+	 * &lt;/testIncludes><br/>
 	 * </code>
 	 * 
 	 * @parameter
 	 */
-	private List includes;
+	private List<String> testIncludes;
 
 	/**
 	 * A list of &lt;exclude> elements specifying the tests (by pattern) that
 	 * should be excluded in testing. When not specified and when the
-	 * <code>test</code> parameter is not specified, the default excludes will
-	 * be <code><br/>
-	 * &lt;excludes><br/>
+	 * <code>test</code> parameter is not specified, the default testExcludes
+	 * will be <code><br/>
+	 * &lt;testExcludes><br/>
 	 * &nbsp;&lt;exclude>**&#47;*$*&lt;/exclude><br/>
-	 * &lt;/excludes><br/>
+	 * &lt;/testExcludes><br/>
 	 * </code> (which excludes all inner classes).<br>
 	 * 
 	 * @parameter
 	 */
-	private List excludes;
+	private List<String> testExcludes;
 
 	/**
 	 * @parameter expression="${xslt.instrument.destdir}"
-	 *            default-value="${project.build.directory}/cakupan-report"
+	 *            default-value="${project.build.directory}/cakupan-instrument"
 	 */
 	private File instrumentDestDir;
 
 	public void execute() throws MojoExecutionException, MojoFailureException {
+		handleDefaults();
+		getLog().info("testIncludes: " + testIncludes);
 		String destDir = null;
 		try {
 			destDir = instrumentDestDir.getCanonicalPath();
@@ -129,31 +135,23 @@ public class CakupanTestMojo extends AbstractMojo {
 			throw new MojoFailureException("dest dir not found");
 		}
 
-		String[] classpathElements = getAdditionalClasspathElements();
-		getLog().info("add to classpath: " + Arrays.toString(classpathElements));
+		List<String> classpathElements = Arrays
+				.asList(getAdditionalClasspathElements());
+		getLog().info(
+				"Augmenting test classpath with cakupan and it's dependencies: "
+						+ classpathElements);
 		executeMojo(
 				plugin(groupId("org.apache.maven.plugins"),
 						artifactId("maven-surefire-plugin"), version("2.9")),
 				goal("test"),
 				configuration(
-						// element(name("reportsDirectory"), destDir),
-						element(name("includes"),
-								element(name("include"),
-										"**/*TransformationTest.java"),
-								element(name("include"), "**/*XsltTest.java")),
-						element(name("additionalClasspathElements"),
-								element(name("additionalClasspathElement"),
-										classpathElements[0]),
-								element(name("additionalClasspathElement"),
-										classpathElements[1]),
-								element(name("additionalClasspathElement"),
-										classpathElements[2]),
-								element(name("additionalClasspathElement"),
-										classpathElements[3]),
-								element(name("additionalClasspathElement"),
-										classpathElements[4]),
-								element(name("additionalClasspathElement"),
-										classpathElements[5])),
+						createElementWithChildren("includes", "include",
+								testIncludes),
+						createElementWithChildren("excludes", "exclude",
+								testExcludes),
+						createElementWithChildren(
+								"additionalClasspathElements",
+								"additionalClasspathElement", classpathElements),
 						element(name("systemPropertyVariables"),
 								element(name("javax.xml.transform.TransformerFactory"),
 										"com.cakupan.xslt.transform.SaxonCakupanTransformerInstrumentFactoryImpl"),
@@ -184,5 +182,26 @@ public class CakupanTestMojo extends AbstractMojo {
 					}
 				});
 		return classpathElements.toArray(new String[classpathElements.size()]);
+	}
+
+	private Element createElementWithChildren(final String parentName,
+			final String childName, final List<String> children) {
+		Element[] includeElements = Collections2.transform(children,
+				new Function<String, Element>() {
+					public Element apply(String input) {
+						return new Element(childName, input);
+					}
+				}).toArray(new Element[children.size()]);
+		return new Element(parentName, includeElements);
+	}
+
+	private void handleDefaults() {
+		if (CollectionUtils.isEmpty(testIncludes)) {
+			testIncludes = Arrays.asList("**/*TransformationTest.java",
+					"**/*XsltTest.java");
+		}
+		if (CollectionUtils.isEmpty(testExcludes)) {
+			testExcludes = Arrays.asList("**/*$*");
+		}
 	}
 }

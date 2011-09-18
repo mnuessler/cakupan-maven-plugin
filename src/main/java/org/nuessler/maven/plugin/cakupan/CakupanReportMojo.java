@@ -32,6 +32,8 @@ import com.cakupan.xslt.util.CoverageIOUtil;
 import com.cakupan.xslt.util.XSLTCakupanUtil;
 
 /**
+ * Generate a test coverage report for XSLT files.
+ * 
  * @author Matthias Nuessler
  * @goal cakupan
  * @execute phase="test" lifecycle="cakupan"
@@ -64,12 +66,12 @@ public class CakupanReportMojo extends AbstractMavenReport {
 
 	/**
 	 * @parameter expression="${xslt.instrument.destdir}"
-	 *            default-value="${project.build.directory}/cakupan-report"
+	 *            default-value="${project.build.directory}/cakupan-instrument"
 	 */
 	private File instrumentDestDir;
 
 	public String getOutputName() {
-		return "dummy";
+		return "cakupan/dummy";
 	}
 
 	public String getName(Locale locale) {
@@ -106,16 +108,32 @@ public class CakupanReportMojo extends AbstractMavenReport {
 
 	@Override
 	public boolean canGenerateReport() {
-		return super.canGenerateReport();
+		File instrumentationFile = new File(instrumentDestDir, "coverage.xml");
+		if (!instrumentationFile.exists()) {
+			getLog().warn(
+					"Can't generate Cakupan XSLT coverage report. Instrumentation file does not exist: "
+							+ instrumentationFile);
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	protected void executeReport(Locale locale) throws MavenReportException {
+		if (!canGenerateReport()) {
+			return;
+		}
 		if (!outputDirectory.exists()) {
 			outputDirectory.mkdirs();
 		}
-		getLog().info("Start reporttask mojo");
-		getLog().info("output dir: " + getOutputDirectory());
+		new File(outputDirectory, "cakupan").mkdirs();
+		getLog().info("Start Cakupan report mojo");
+		getLog().info("report output dir: " + getOutputDirectory());
+
+		File reportFile = new File(outputDirectory, "index.html");
+		if (reportFile.exists()) {
+			reportFile.delete();
+		}
 
 		try {
 			FileUtils.copyFileToDirectory(new File(instrumentDestDir,
@@ -127,8 +145,6 @@ public class CakupanReportMojo extends AbstractMavenReport {
 		CoverageIOUtil.setDestDir(outputDirectory);
 		try {
 			XSLTCakupanUtil.generateCoverageReport();
-			FileUtils.moveFile(new File(outputDirectory, "xslt_summary.html"),
-					new File(outputDirectory, "index.html"));
 		} catch (XSLTCoverageException e) {
 			if (e.getRefId() == XSLTCoverageException.NO_COVERAGE_FILE) {
 				getLog().error(
@@ -137,10 +153,8 @@ public class CakupanReportMojo extends AbstractMavenReport {
 			} else {
 				throw new BuildException("Failed to make a coverage report!", e);
 			}
-		} catch (IOException e) {
-			throw new MavenReportException(e.getMessage());
 		}
-		getLog().info("End reporttask mojo");
+		getLog().info("End Cakupan report mojo");
 	}
 
 }

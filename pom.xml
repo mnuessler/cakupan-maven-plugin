@@ -87,35 +87,32 @@
 		<findbugs-maven-plugin.version>2.3.2</findbugs-maven-plugin.version>
 		<findbugs-maven-plugin.effort>Max</findbugs-maven-plugin.effort>
 		<findbugs-maven-plugin.threshold>Low</findbugs-maven-plugin.threshold>
+		<cobertura-maven-plugin.version>2.5.1</cobertura-maven-plugin.version>
 	</properties>
 
 	<distributionManagement>
 		<repository>
-			<id>sf-releases</id>
-			<name>Sourceforge releases</name>
-			<url>scp://shell.sourceforge.net/home/project-web/cakupan-maven/htdocs/repos/releases</url>
+			<id>cakupan-maven-releases-sf</id>
+			<name>Cakupan Releases on Sourceforge</name>
+			<url>scp://shell.sourceforge.net/home/project-web/cakupan-maven/htdocs/mvn-repo/releases</url>
 		</repository>
 		<snapshotRepository>
-			<id>sf-snapshots</id>
-			<name>Sourceforge snapshots</name>
-			<url>scp://shell.sourceforge.net/home/project-web/cakupan-maven/htdocs/repos/snaphots</url>
+			<id>cakupan-maven-snapshots-sf</id>
+			<name>Cakupan Snapshots on Sourceforge</name>
+			<url>scp://shell.sourceforge.net/home/project-web/cakupan-maven/htdocs/mvn-repo/snaphots</url>
 		</snapshotRepository>
 		<site>
 			<id>cakupan-maven.sf.net</id>
-			<name>Sourceforge Project Page</name>
+			<name>Project Page on Sourceforge</name>
 			<url>scp://shell.sourceforge.net/home/project-web/cakupan-maven/htdocs</url>
 		</site>
 	</distributionManagement>
 
 	<repositories>
 		<repository>
-			<id>is24.public</id>
-			<name>IS24 Public Repository</name>
-			<url>http://devnex.rz.is24.loc:8081/nexus/content/groups/public/</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
+			<id>cakupan-maven-releases-sf</id>
+			<name>Cakupan Releases on Sourceforge</name>
+			<url>http://cakupan-maven.sourceforge.net/mvn-repo/releases</url>
 		</repository>
 	</repositories>
 
@@ -219,12 +216,16 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>cobertura-maven-plugin</artifactId>
-					<version>2.5.1</version>
+					<version>${cobertura-maven-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>com.mycila.maven-license-plugin</groupId>
 					<artifactId>maven-license-plugin</artifactId>
 					<version>1.9.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -369,6 +370,12 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<preparationGoals>clean verify</preparationGoals>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -567,6 +574,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>${cobertura-maven-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</reporting>
