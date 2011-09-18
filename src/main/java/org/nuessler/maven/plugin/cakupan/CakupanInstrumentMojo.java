@@ -41,105 +41,105 @@ import com.cakupan.xslt.util.XSLTCakupanUtil;
  */
 public class CakupanInstrumentMojo extends AbstractMojo {
 
-	/**
-	 * @parameter default-value="${project.build.outputDirectory}"
-	 */
-	private File buildOutputDirectory;
+    /**
+     * @parameter default-value="${project.build.outputDirectory}"
+     */
+    private File buildOutputDirectory;
 
-	/**
-	 * @parameter expression="${xslt.instrument.destdir}"
-	 *            default-value="${project.build.directory}/cakupan-instrument"
-	 */
-	private File instrumentDestDir;
+    /**
+     * @parameter expression="${xslt.instrument.destdir}"
+     *            default-value="${project.build.directory}/cakupan-instrument"
+     */
+    private File instrumentDestDir;
 
-	/**
-	 * A list of &lt;include> elements specifying the XSLT files (by pattern)
-	 * that should be included in instrumenting. When not specified, the default
-	 * includes will be <code><br/>
-	 * &lt;xsltIncludes><br/>
-	 * &nbsp;&lt;include>**&#47;*.xsl&lt;/include><br/>
-	 * &lt;/xsltIncludes><br/>
-	 * </code>
-	 * 
-	 * @parameter
-	 */
-	private List<String> xsltIncludes;
+    /**
+     * A list of &lt;include> elements specifying the XSLT files (by pattern)
+     * that should be included in instrumenting. When not specified, the default
+     * includes will be <code><br/>
+     * &lt;xsltIncludes><br/>
+     * &nbsp;&lt;include>**&#47;*.xsl&lt;/include><br/>
+     * &lt;/xsltIncludes><br/>
+     * </code>
+     * 
+     * @parameter
+     */
+    private List<String> xsltIncludes;
 
-	/**
-	 * A list of &lt;exclude> elements specifying the XSLT files (by pattern)
-	 * that should be included in instrumenting. When not specified, the default
-	 * includes will be <code><br/>
-	 * &lt;xsltExcludes><br/>
-	 * &nbsp;&lt;exclude>**&#47;*.xsl&lt;/exclude><br/>
-	 * &lt;/xsltExcludes><br/>
-	 * </code>
-	 * 
-	 * @parameter
-	 */
-	private List<String> xsltExcludes;
+    /**
+     * A list of &lt;exclude> elements specifying the XSLT files (by pattern)
+     * that should be included in instrumenting. When not specified, the default
+     * includes will be <code><br/>
+     * &lt;xsltExcludes><br/>
+     * &nbsp;&lt;exclude>**&#47;*.xsl&lt;/exclude><br/>
+     * &lt;/xsltExcludes><br/>
+     * </code>
+     * 
+     * @parameter
+     */
+    private List<String> xsltExcludes;
 
-	public void execute() throws MojoExecutionException, MojoFailureException {
-		getLog().info("instrumentDestDir: " + instrumentDestDir);
-		getLog().info("buildOutputDirectory: " + buildOutputDirectory);
-		if (xsltIncludes == null) {
-			getLog().info("includes is null");
-		} else {
-			for (String s : xsltIncludes) {
-				getLog().info("include: " + s);
-			}
-		}
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        getLog().info("instrumentDestDir: " + instrumentDestDir);
+        getLog().info("buildOutputDirectory: " + buildOutputDirectory);
+        if (xsltIncludes == null) {
+            getLog().info("includes is null");
+        } else {
+            for (String s : xsltIncludes) {
+                getLog().info("include: " + s);
+            }
+        }
 
-		if (!instrumentDestDir.exists()) {
-			instrumentDestDir.mkdirs();
-		}
+        if (!instrumentDestDir.exists()) {
+            instrumentDestDir.mkdirs();
+        }
 
-		if (CollectionUtils.isEmpty(xsltIncludes)) {
-			xsltIncludes = Collections.singletonList("**/*.xsl");
-		}
+        if (CollectionUtils.isEmpty(xsltIncludes)) {
+            xsltIncludes = Collections.singletonList("**/*.xsl");
+        }
 
-		InstrumentXSLT instrumentXslt = new InstrumentXSLT();
-		getLog().info("Start instrumenting XSLTs.");
-		CoverageIOUtil.setDestDir(instrumentDestDir);
+        InstrumentXSLT instrumentXslt = new InstrumentXSLT();
+        getLog().info("Start instrumenting XSLTs.");
+        CoverageIOUtil.setDestDir(instrumentDestDir);
 
-		DirectoryScanner scanner = new DirectoryScanner();
-		scanner.setBasedir(buildOutputDirectory);
-		scanner.setCaseSensitive(true);
-		scanner.addDefaultExcludes();
-		if (CollectionUtils.isNotEmpty(xsltIncludes)) {
-			scanner.setIncludes(xsltIncludes.toArray(new String[xsltIncludes
-					.size()]));
-		}
-		if (CollectionUtils.isNotEmpty(xsltExcludes)) {
-			scanner.setExcludes(xsltExcludes.toArray(new String[xsltExcludes
-					.size()]));
-		}
-		scanner.scan();
-		String[] includedFiles = scanner.getIncludedFiles();
+        DirectoryScanner scanner = new DirectoryScanner();
+        scanner.setBasedir(buildOutputDirectory);
+        scanner.setCaseSensitive(true);
+        scanner.addDefaultExcludes();
+        if (CollectionUtils.isNotEmpty(xsltIncludes)) {
+            scanner.setIncludes(xsltIncludes.toArray(new String[xsltIncludes
+                    .size()]));
+        }
+        if (CollectionUtils.isNotEmpty(xsltExcludes)) {
+            scanner.setExcludes(xsltExcludes.toArray(new String[xsltExcludes
+                    .size()]));
+        }
+        scanner.scan();
+        String[] includedFiles = scanner.getIncludedFiles();
 
-		if (ArrayUtils.isEmpty(includedFiles)) {
-			getLog().info("No XSLT files found");
-			return;
-		}
+        if (ArrayUtils.isEmpty(includedFiles)) {
+            getLog().info("No XSLT files found");
+            return;
+        }
 
-		for (String includedFile : includedFiles) {
-			try {
-				getLog().info("Instrumenting XSLT file " + includedFile);
-				instrumentXslt.initCoverageMap(new File(buildOutputDirectory,
-						includedFile).getCanonicalPath());
-			} catch (Exception e) {
-				getLog().error(e);
-				throw new MojoExecutionException("Instrumenting file ["
-						+ includedFile + "] failed!");
-			}
-		}
+        for (String includedFile : includedFiles) {
+            try {
+                getLog().info("Instrumenting XSLT file " + includedFile);
+                instrumentXslt.initCoverageMap(new File(buildOutputDirectory,
+                        includedFile).getCanonicalPath());
+            } catch (Exception e) {
+                getLog().error(e);
+                throw new MojoExecutionException("Instrumenting file ["
+                        + includedFile + "] failed!");
+            }
+        }
 
-		try {
-			XSLTCakupanUtil.dumpCoverageStats();
-		} catch (XSLTCoverageException e) {
-			throw new MojoExecutionException("Dump coverage file failed!");
-		} finally {
-			XSLTCakupanUtil.cleanCoverageStats();
-		}
-	}
+        try {
+            XSLTCakupanUtil.dumpCoverageStats();
+        } catch (XSLTCoverageException e) {
+            throw new MojoExecutionException("Dump coverage file failed!");
+        } finally {
+            XSLTCakupanUtil.cleanCoverageStats();
+        }
+    }
 
 }

@@ -40,121 +40,121 @@ import com.cakupan.xslt.util.XSLTCakupanUtil;
  */
 public class CakupanReportMojo extends AbstractMavenReport {
 
-	/**
-	 * <i>Maven Internal</i>: The Doxia Site Renderer.
-	 * 
-	 * @component
-	 */
-	private Renderer siteRenderer;
+    /**
+     * <i>Maven Internal</i>: The Doxia Site Renderer.
+     * 
+     * @component
+     */
+    private Renderer siteRenderer;
 
-	/**
-	 * <i>Maven Internal</i>: Project to interact with.
-	 * 
-	 * @parameter default-value="${project}"
-	 * @required
-	 * @readonly
-	 */
-	private MavenProject project;
+    /**
+     * <i>Maven Internal</i>: Project to interact with.
+     * 
+     * @parameter default-value="${project}"
+     * @required
+     * @readonly
+     */
+    private MavenProject project;
 
-	/**
-	 * The output directory for the report.
-	 * 
-	 * @parameter default-value="${project.reporting.outputDirectory}/cakupan"
-	 * @required
-	 */
-	private File outputDirectory;
+    /**
+     * The output directory for the report.
+     * 
+     * @parameter default-value="${project.reporting.outputDirectory}/cakupan"
+     * @required
+     */
+    private File outputDirectory;
 
-	/**
-	 * @parameter expression="${xslt.instrument.destdir}"
-	 *            default-value="${project.build.directory}/cakupan-instrument"
-	 */
-	private File instrumentDestDir;
+    /**
+     * @parameter expression="${xslt.instrument.destdir}"
+     *            default-value="${project.build.directory}/cakupan-instrument"
+     */
+    private File instrumentDestDir;
 
-	public String getOutputName() {
-		return "cakupan/dummy";
-	}
+    public String getOutputName() {
+        return "cakupan/dummy";
+    }
 
-	public String getName(Locale locale) {
-		return getBundle(locale).getString("report.cakupan.name");
-	}
+    public String getName(Locale locale) {
+        return getBundle(locale).getString("report.cakupan.name");
+    }
 
-	public String getDescription(Locale locale) {
-		return getBundle(locale).getString("report.cakupan.description");
-	}
+    public String getDescription(Locale locale) {
+        return getBundle(locale).getString("report.cakupan.description");
+    }
 
-	private ResourceBundle getBundle(Locale locale) {
-		return ResourceBundle.getBundle("cakupan-report", locale);
-	}
+    private ResourceBundle getBundle(Locale locale) {
+        return ResourceBundle.getBundle("cakupan-report", locale);
+    }
 
-	@Override
-	protected Renderer getSiteRenderer() {
-		return siteRenderer;
-	}
+    @Override
+    protected Renderer getSiteRenderer() {
+        return siteRenderer;
+    }
 
-	@Override
-	protected String getOutputDirectory() {
-		return outputDirectory.getAbsolutePath();
-	}
+    @Override
+    protected String getOutputDirectory() {
+        return outputDirectory.getAbsolutePath();
+    }
 
-	@Override
-	protected MavenProject getProject() {
-		return project;
-	}
+    @Override
+    protected MavenProject getProject() {
+        return project;
+    }
 
-	@Override
-	public boolean isExternalReport() {
-		return true;
-	}
+    @Override
+    public boolean isExternalReport() {
+        return true;
+    }
 
-	@Override
-	public boolean canGenerateReport() {
-		File instrumentationFile = new File(instrumentDestDir, "coverage.xml");
-		if (!instrumentationFile.exists()) {
-			getLog().warn(
-					"Can't generate Cakupan XSLT coverage report. Instrumentation file does not exist: "
-							+ instrumentationFile);
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean canGenerateReport() {
+        File instrumentationFile = new File(instrumentDestDir, "coverage.xml");
+        if (!instrumentationFile.exists()) {
+            getLog().warn(
+                    "Can't generate Cakupan XSLT coverage report. Instrumentation file does not exist: "
+                            + instrumentationFile);
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	protected void executeReport(Locale locale) throws MavenReportException {
-		if (!canGenerateReport()) {
-			return;
-		}
-		if (!outputDirectory.exists()) {
-			outputDirectory.mkdirs();
-		}
-		new File(outputDirectory, "cakupan").mkdirs();
-		getLog().info("Start Cakupan report mojo");
-		getLog().info("report output dir: " + getOutputDirectory());
+    @Override
+    protected void executeReport(Locale locale) throws MavenReportException {
+        if (!canGenerateReport()) {
+            return;
+        }
+        if (!outputDirectory.exists()) {
+            outputDirectory.mkdirs();
+        }
+        new File(outputDirectory, "cakupan").mkdirs();
+        getLog().info("Start Cakupan report mojo");
+        getLog().info("report output dir: " + getOutputDirectory());
 
-		File reportFile = new File(outputDirectory, "index.html");
-		if (reportFile.exists()) {
-			reportFile.delete();
-		}
+        File reportFile = new File(outputDirectory, "index.html");
+        if (reportFile.exists()) {
+            reportFile.delete();
+        }
 
-		try {
-			FileUtils.copyFileToDirectory(new File(instrumentDestDir,
-					"coverage.xml"), outputDirectory);
-		} catch (IOException e) {
-			throw new MavenReportException(e.getMessage());
-		}
+        try {
+            FileUtils.copyFileToDirectory(new File(instrumentDestDir,
+                    "coverage.xml"), outputDirectory);
+        } catch (IOException e) {
+            throw new MavenReportException(e.getMessage());
+        }
 
-		CoverageIOUtil.setDestDir(outputDirectory);
-		try {
-			XSLTCakupanUtil.generateCoverageReport();
-		} catch (XSLTCoverageException e) {
-			if (e.getRefId() == XSLTCoverageException.NO_COVERAGE_FILE) {
-				getLog().error(
-						"No coverage files found in ["
-								+ outputDirectory.getPath() + "]!");
-			} else {
-				throw new BuildException("Failed to make a coverage report!", e);
-			}
-		}
-		getLog().info("End Cakupan report mojo");
-	}
+        CoverageIOUtil.setDestDir(outputDirectory);
+        try {
+            XSLTCakupanUtil.generateCoverageReport();
+        } catch (XSLTCoverageException e) {
+            if (e.getRefId() == XSLTCoverageException.NO_COVERAGE_FILE) {
+                getLog().error(
+                        "No coverage files found in ["
+                                + outputDirectory.getPath() + "]!");
+            } else {
+                throw new BuildException("Failed to make a coverage report!", e);
+            }
+        }
+        getLog().info("End Cakupan report mojo");
+    }
 
 }

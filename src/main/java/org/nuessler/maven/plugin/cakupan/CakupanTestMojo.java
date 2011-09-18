@@ -56,152 +56,152 @@ import com.google.common.collect.Collections2;
  * @requiresDependencyResolution test
  */
 public class CakupanTestMojo extends AbstractMojo {
-	/**
-	 * The Maven Project Object
-	 * 
-	 * @parameter expression="${project}"
-	 * @required
-	 * @readonly
-	 */
-	private MavenProject project;
+    /**
+     * The Maven Project Object
+     * 
+     * @parameter expression="${project}"
+     * @required
+     * @readonly
+     */
+    private MavenProject project;
 
-	/**
-	 * The Maven Session Object
-	 * 
-	 * @parameter expression="${session}"
-	 * @required
-	 * @readonly
-	 */
-	private MavenSession session;
+    /**
+     * The Maven Session Object
+     * 
+     * @parameter expression="${session}"
+     * @required
+     * @readonly
+     */
+    private MavenSession session;
 
-	/**
-	 * The Maven PluginManager Object
-	 * 
-	 * @component
-	 * @required
-	 */
-	private PluginManager pluginManager;
+    /**
+     * The Maven PluginManager Object
+     * 
+     * @component
+     * @required
+     */
+    private PluginManager pluginManager;
 
-	/**
-	 * <i>Maven Internal</i>: List of artifacts for the plugin.
-	 * 
-	 * @parameter default-value="${plugin.artifacts}"
-	 * @required
-	 * @readonly
-	 */
-	protected List<Artifact> pluginArtifacs;
+    /**
+     * <i>Maven Internal</i>: List of artifacts for the plugin.
+     * 
+     * @parameter default-value="${plugin.artifacts}"
+     * @required
+     * @readonly
+     */
+    protected List<Artifact> pluginArtifacs;
 
-	/**
-	 * A list of &lt;include> elements specifying the tests (by pattern) that
-	 * should be included in testing. When not specified, the default
-	 * testIncludes will be <code><br/>
-	 * &lt;testIncludes><br/>
-	 * &nbsp;&lt;include>**&#47;*TransformationTest.java&lt;/include><br/>
-	 * &nbsp;&lt;include>**&#47;*XsltTest.java&lt;/include><br/>
-	 * &lt;/testIncludes><br/>
-	 * </code>
-	 * 
-	 * @parameter
-	 */
-	private List<String> testIncludes;
+    /**
+     * A list of &lt;include> elements specifying the tests (by pattern) that
+     * should be included in testing. When not specified, the default
+     * testIncludes will be <code><br/>
+     * &lt;testIncludes><br/>
+     * &nbsp;&lt;include>**&#47;*TransformationTest.java&lt;/include><br/>
+     * &nbsp;&lt;include>**&#47;*XsltTest.java&lt;/include><br/>
+     * &lt;/testIncludes><br/>
+     * </code>
+     * 
+     * @parameter
+     */
+    private List<String> testIncludes;
 
-	/**
-	 * A list of &lt;exclude> elements specifying the tests (by pattern) that
-	 * should be excluded in testing. When not specified and when the
-	 * <code>test</code> parameter is not specified, the default testExcludes
-	 * will be <code><br/>
-	 * &lt;testExcludes><br/>
-	 * &nbsp;&lt;exclude>**&#47;*$*&lt;/exclude><br/>
-	 * &lt;/testExcludes><br/>
-	 * </code> (which excludes all inner classes).<br>
-	 * 
-	 * @parameter
-	 */
-	private List<String> testExcludes;
+    /**
+     * A list of &lt;exclude> elements specifying the tests (by pattern) that
+     * should be excluded in testing. When not specified and when the
+     * <code>test</code> parameter is not specified, the default testExcludes
+     * will be <code><br/>
+     * &lt;testExcludes><br/>
+     * &nbsp;&lt;exclude>**&#47;*$*&lt;/exclude><br/>
+     * &lt;/testExcludes><br/>
+     * </code> (which excludes all inner classes).<br>
+     * 
+     * @parameter
+     */
+    private List<String> testExcludes;
 
-	/**
-	 * @parameter expression="${xslt.instrument.destdir}"
-	 *            default-value="${project.build.directory}/cakupan-instrument"
-	 */
-	private File instrumentDestDir;
+    /**
+     * @parameter expression="${xslt.instrument.destdir}"
+     *            default-value="${project.build.directory}/cakupan-instrument"
+     */
+    private File instrumentDestDir;
 
-	public void execute() throws MojoExecutionException, MojoFailureException {
-		handleDefaults();
-		getLog().info("testIncludes: " + testIncludes);
-		String destDir = null;
-		try {
-			destDir = instrumentDestDir.getCanonicalPath();
-		} catch (IOException e) {
-			throw new MojoFailureException("dest dir not found");
-		}
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        handleDefaults();
+        getLog().info("testIncludes: " + testIncludes);
+        String destDir = null;
+        try {
+            destDir = instrumentDestDir.getCanonicalPath();
+        } catch (IOException e) {
+            throw new MojoFailureException("dest dir not found");
+        }
 
-		List<String> classpathElements = Arrays
-				.asList(getAdditionalClasspathElements());
-		getLog().info(
-				"Augmenting test classpath with cakupan and it's dependencies: "
-						+ classpathElements);
-		executeMojo(
-				plugin(groupId("org.apache.maven.plugins"),
-						artifactId("maven-surefire-plugin"), version("2.9")),
-				goal("test"),
-				configuration(
-						createElementWithChildren("includes", "include",
-								testIncludes),
-						createElementWithChildren("excludes", "exclude",
-								testExcludes),
-						createElementWithChildren(
-								"additionalClasspathElements",
-								"additionalClasspathElement", classpathElements),
-						element(name("systemPropertyVariables"),
-								element(name("javax.xml.transform.TransformerFactory"),
-										"com.cakupan.xslt.transform.SaxonCakupanTransformerInstrumentFactoryImpl"),
-								element(name("cakupan.dir"), destDir))),
-				executionEnvironment(project, session, pluginManager));
-	}
+        List<String> classpathElements = Arrays
+                .asList(getAdditionalClasspathElements());
+        getLog().info(
+                "Augmenting test classpath with cakupan and it's dependencies: "
+                        + classpathElements);
+        executeMojo(
+                plugin(groupId("org.apache.maven.plugins"),
+                        artifactId("maven-surefire-plugin"), version("2.9")),
+                goal("test"),
+                configuration(
+                        createElementWithChildren("includes", "include",
+                                testIncludes),
+                        createElementWithChildren("excludes", "exclude",
+                                testExcludes),
+                        createElementWithChildren(
+                                "additionalClasspathElements",
+                                "additionalClasspathElement", classpathElements),
+                        element(name("systemPropertyVariables"),
+                                element(name("javax.xml.transform.TransformerFactory"),
+                                        "com.cakupan.xslt.transform.SaxonCakupanTransformerInstrumentFactoryImpl"),
+                                element(name("cakupan.dir"), destDir))),
+                executionEnvironment(project, session, pluginManager));
+    }
 
-	private String[] getAdditionalClasspathElements() {
-		final List<String> cakupanDepArtifactIds = Arrays.asList(
-				"cakupan-xslt", "xstream", "saxon", "xalan", "xpp3");
-		Collection<Artifact> cakupanArtifacts = Collections2.filter(
-				pluginArtifacs, new Predicate<Artifact>() {
-					public boolean apply(Artifact input) {
-						return cakupanDepArtifactIds.contains(input
-								.getArtifactId());
-					}
-				});
+    private String[] getAdditionalClasspathElements() {
+        final List<String> cakupanDepArtifactIds = Arrays.asList(
+                "cakupan-xslt", "xstream", "saxon", "xalan", "xpp3");
+        Collection<Artifact> cakupanArtifacts = Collections2.filter(
+                pluginArtifacs, new Predicate<Artifact>() {
+                    public boolean apply(Artifact input) {
+                        return cakupanDepArtifactIds.contains(input
+                                .getArtifactId());
+                    }
+                });
 
-		Collection<String> classpathElements = Collections2.transform(
-				cakupanArtifacts, new Function<Artifact, String>() {
-					public String apply(final Artifact input) {
-						try {
-							return input.getFile().getCanonicalPath();
-						} catch (final IOException e) {
-							getLog().error(e);
-							return "";
-						}
-					}
-				});
-		return classpathElements.toArray(new String[classpathElements.size()]);
-	}
+        Collection<String> classpathElements = Collections2.transform(
+                cakupanArtifacts, new Function<Artifact, String>() {
+                    public String apply(final Artifact input) {
+                        try {
+                            return input.getFile().getCanonicalPath();
+                        } catch (final IOException e) {
+                            getLog().error(e);
+                            return "";
+                        }
+                    }
+                });
+        return classpathElements.toArray(new String[classpathElements.size()]);
+    }
 
-	private Element createElementWithChildren(final String parentName,
-			final String childName, final List<String> children) {
-		Element[] includeElements = Collections2.transform(children,
-				new Function<String, Element>() {
-					public Element apply(String input) {
-						return new Element(childName, input);
-					}
-				}).toArray(new Element[children.size()]);
-		return new Element(parentName, includeElements);
-	}
+    private Element createElementWithChildren(final String parentName,
+            final String childName, final List<String> children) {
+        Element[] includeElements = Collections2.transform(children,
+                new Function<String, Element>() {
+                    public Element apply(String input) {
+                        return new Element(childName, input);
+                    }
+                }).toArray(new Element[children.size()]);
+        return new Element(parentName, includeElements);
+    }
 
-	private void handleDefaults() {
-		if (CollectionUtils.isEmpty(testIncludes)) {
-			testIncludes = Arrays.asList("**/*TransformationTest.java",
-					"**/*XsltTest.java");
-		}
-		if (CollectionUtils.isEmpty(testExcludes)) {
-			testExcludes = Arrays.asList("**/*$*");
-		}
-	}
+    private void handleDefaults() {
+        if (CollectionUtils.isEmpty(testIncludes)) {
+            testIncludes = Arrays.asList("**/*TransformationTest.java",
+                    "**/*XsltTest.java");
+        }
+        if (CollectionUtils.isEmpty(testExcludes)) {
+            testExcludes = Arrays.asList("**/*$*");
+        }
+    }
 }
