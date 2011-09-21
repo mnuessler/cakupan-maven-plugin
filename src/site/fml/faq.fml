@@ -1,0 +1,15 @@
+<faqs xmlns="http://maven.apache.org/FML/1.0.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+  id="FAQ" title="Frequently Asked Questions">
+ <part id="General">
+   <faq id="Maven compatibility">
+     <question>Does the plugin support Maven 3?</question>
+     <answer>
+       <p>
+         Support for Maven 3 is planned, but at the time only Maven 2.2.1 is supported.
+       </p>
+     </answer>
+   </faq>
+  </part>
+</faqs>
