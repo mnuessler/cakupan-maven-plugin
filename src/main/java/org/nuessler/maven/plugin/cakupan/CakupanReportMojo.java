@@ -119,7 +119,8 @@ public class CakupanReportMojo extends AbstractMavenReport {
     }
 
     @Override
-    protected void executeReport(Locale locale) throws MavenReportException {
+    protected void executeReport(final Locale locale)
+            throws MavenReportException {
         if (!canGenerateReport()) {
             return;
         }
