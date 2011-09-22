@@ -356,11 +356,8 @@
 					</excludes>
 					<mapping>
 						<md>XML_STYLE</md>
-						<application>XML_STYLE</application>
-					</mapping>
-					<mapping>
+						<markdown>XML_STYLE</markdown>
 						<confluence>XML_STYLE</confluence>
-						<application>XML_STYLE</application>
 					</mapping>
 				</configuration>
 				<executions>
@@ -376,6 +373,7 @@
 				<configuration>
 					<preparationGoals>clean verify</preparationGoals>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
+					<pushChanges>false</pushChanges>
 				</configuration>
 			</plugin>
 		</plugins>
