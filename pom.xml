@@ -96,6 +96,12 @@
 			<name>Cakupan Releases on Sourceforge</name>
 			<url>scp://shell.sourceforge.net/home/project-web/cakupan-maven/htdocs/mvn-repo/releases</url>
 		</repository>
+		<!--
+		<repository>
+			<id>thirdparty</id>
+			<url>http://devnex.rz.is24.loc:8081/nexus/content/repositories/thirdparty</url>
+		</repository>
+		-->
 		<snapshotRepository>
 			<id>cakupan-maven-snapshots-sf</id>
 			<name>Cakupan Snapshots on Sourceforge</name>
@@ -226,6 +232,11 @@
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.3.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>1.4</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -374,10 +385,42 @@
 					<preparationGoals>clean verify</preparationGoals>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
 					<pushChanges>false</pushChanges>
+					<!-- MGPG-9: get around a GPG plugin hanging issue -->
+					<!-- recommended on https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven -->
+					<mavenExecutorId>forked-path</mavenExecutorId>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<dependencies>
 		<dependency>
