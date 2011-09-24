@@ -25,7 +25,6 @@ import org.apache.maven.doxia.siterenderer.Renderer;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.reporting.AbstractMavenReport;
 import org.apache.maven.reporting.MavenReportException;
-import org.apache.tools.ant.BuildException;
 
 import com.cakupan.xslt.exception.XSLTCoverageException;
 import com.cakupan.xslt.util.CoverageIOUtil;
@@ -71,7 +70,7 @@ public class CakupanReportMojo extends AbstractMavenReport {
     private File instrumentDestDir;
 
     public String getOutputName() {
-        return "cakupan/dummy";
+        return "cakupan/index";
     }
 
     public String getName(Locale locale) {
@@ -109,7 +108,7 @@ public class CakupanReportMojo extends AbstractMavenReport {
     @Override
     public boolean canGenerateReport() {
         File instrumentationFile = new File(instrumentDestDir, "coverage.xml");
-        if (!instrumentationFile.exists()) {
+        if (!(instrumentationFile.exists() && instrumentationFile.isFile())) {
             getLog().warn(
                     "Can't generate Cakupan XSLT coverage report. Instrumentation file does not exist: "
                             + instrumentationFile);
@@ -127,14 +126,8 @@ public class CakupanReportMojo extends AbstractMavenReport {
         if (!outputDirectory.exists()) {
             outputDirectory.mkdirs();
         }
-        new File(outputDirectory, "cakupan").mkdirs();
         getLog().info("Start Cakupan report mojo");
         getLog().info("report output dir: " + getOutputDirectory());
-
-        File reportFile = new File(outputDirectory, "index.html");
-        if (reportFile.exists()) {
-            reportFile.delete();
-        }
 
         try {
             FileUtils.copyFileToDirectory(new File(instrumentDestDir,
@@ -146,16 +139,40 @@ public class CakupanReportMojo extends AbstractMavenReport {
         CoverageIOUtil.setDestDir(outputDirectory);
         try {
             XSLTCakupanUtil.generateCoverageReport();
+            File destFile = new File(outputDirectory, "index.html");
+            if (destFile.exists()) {
+                destFile.delete();
+            }
+            FileUtils.moveFile(new File(outputDirectory, "xslt_summary.html"),
+                    destFile);
         } catch (XSLTCoverageException e) {
             if (e.getRefId() == XSLTCoverageException.NO_COVERAGE_FILE) {
                 getLog().error(
-                        "No coverage files found in ["
-                                + outputDirectory.getPath() + "]!");
+                        "No coverage files found in "
+                                + outputDirectory.getPath());
             } else {
-                throw new BuildException("Failed to make a coverage report!", e);
+                throw new MavenReportException(
+                        "Failed to create the Cakupan coverage report", e);
             }
+        } catch (IOException e) {
+            throw new MavenReportException(
+                    "Failed to move coverage report to correct location", e);
         }
         getLog().info("End Cakupan report mojo");
+    }
+
+    @Override
+    public void setReportOutputDirectory(File reportOutputDirectory) {
+        // the output directory is set differently by Maven, depending if the
+        // mojo is executed directly via cakupan:cakupan or as part of the site
+        // generation
+        if ((reportOutputDirectory != null)
+                && (!reportOutputDirectory.getAbsolutePath()
+                        .endsWith("cakupan"))) {
+            this.outputDirectory = new File(reportOutputDirectory, "cakupan");
+        } else {
+            this.outputDirectory = reportOutputDirectory;
+        }
     }
 
 }
