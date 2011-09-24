@@ -28,11 +28,13 @@ import static org.twdata.maven.mojoexecutor.MojoExecutor.version;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
@@ -125,38 +127,75 @@ public class CakupanTestMojo extends AbstractMojo {
      */
     private File instrumentDestDir;
 
+    /**
+     * Set this to "true" to ignore a failure during testing. Its use is NOT
+     * RECOMMENDED, but quite convenient on occasion.
+     * 
+     * @parameter default-value="false"
+     *            expression="${maven.test.failure.ignore}"
+     */
+    private boolean testFailureIgnore;
+
+    /**
+     * Specify this parameter to run individual tests by file name, overriding
+     * the <code>includes/excludes</code> parameters. Each pattern you specify
+     * here will be used to create an include pattern formatted like
+     * <code>**&#47;${test}.java</code>, so you can just type
+     * "-Dtest=MyXsltTest" to run a single test called "foo/MyXsltTest.java".<br/>
+     * This parameter overrides the <code>includes/excludes</code> parameter.
+     * <p/>
+     * 
+     * @parameter expression="${test}"
+     */
+    private String test;
+
     public void execute() throws MojoExecutionException, MojoFailureException {
         handleDefaults();
         getLog().info("testIncludes: " + testIncludes);
+
+        executeMojo(
+                plugin(groupId("org.apache.maven.plugins"),
+                        artifactId("maven-surefire-plugin"), //
+                        version("2.9")), //
+                goal("test"), //
+                configuration(createConfigurationElements()),
+                executionEnvironment(project, session, pluginManager));
+    }
+
+    private Element createSystemPropertyVarElement(String destDir) {
+        return element(
+                name("systemPropertyVariables"),
+                element(name("javax.xml.transform.TransformerFactory"),
+                        "com.cakupan.xslt.transform.SaxonCakupanTransformerInstrumentFactoryImpl"),
+                element(name("cakupan.dir"), destDir));
+    }
+
+    private Element[] createConfigurationElements() throws MojoFailureException {
+        List<String> classpathElements = Arrays
+                .asList(getAdditionalClasspathElements());
+        getLog().info(
+                "Augmenting test classpath with cakupan and its dependencies: "
+                        + classpathElements);
+        List<Element> config = new ArrayList<Element>(6);
+        config.add(createElementWithChildren("includes", "include",
+                testIncludes));
+        config.add(createElementWithChildren("excludes", "exclude",
+                testExcludes));
+        config.add(createElementWithChildren("additionalClasspathElements",
+                "additionalClasspathElement", classpathElements));
         String destDir = null;
         try {
             destDir = instrumentDestDir.getCanonicalPath();
         } catch (IOException e) {
             throw new MojoFailureException("dest dir not found");
         }
-
-        List<String> classpathElements = Arrays
-                .asList(getAdditionalClasspathElements());
-        getLog().info(
-                "Augmenting test classpath with cakupan and it's dependencies: "
-                        + classpathElements);
-        executeMojo(
-                plugin(groupId("org.apache.maven.plugins"),
-                        artifactId("maven-surefire-plugin"), version("2.9")),
-                goal("test"),
-                configuration(
-                        createElementWithChildren("includes", "include",
-                                testIncludes),
-                        createElementWithChildren("excludes", "exclude",
-                                testExcludes),
-                        createElementWithChildren(
-                                "additionalClasspathElements",
-                                "additionalClasspathElement", classpathElements),
-                        element(name("systemPropertyVariables"),
-                                element(name("javax.xml.transform.TransformerFactory"),
-                                        "com.cakupan.xslt.transform.SaxonCakupanTransformerInstrumentFactoryImpl"),
-                                element(name("cakupan.dir"), destDir))),
-                executionEnvironment(project, session, pluginManager));
+        config.add(createSystemPropertyVarElement(destDir));
+        config.add(new Element("testFailureIgnore", String
+                .valueOf(testFailureIgnore)));
+        if (StringUtils.isNotBlank(test)) {
+            config.add(new Element("test", test));
+        }
+        return config.toArray(new Element[config.size()]);
     }
 
     private String[] getAdditionalClasspathElements() {
