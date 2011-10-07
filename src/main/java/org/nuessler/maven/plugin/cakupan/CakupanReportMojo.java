@@ -134,7 +134,7 @@ public class CakupanReportMojo extends AbstractMavenReport {
 
         try {
             FileUtils.copyFileToDirectory(new File(instrumentDestDir,
-                    "coverage.xml"), outputDirectory);
+                    AbstractCakupanMojo.COVERAGE_FILE_NAME), outputDirectory);
         } catch (IOException e) {
             throw new MavenReportException(e.getMessage());
         }

@@ -21,7 +21,6 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.plexus.util.DirectoryScanner;
@@ -39,18 +38,12 @@ import com.cakupan.xslt.util.XSLTCakupanUtil;
  * @phase process-test-classes
  * @requiresDependencyResolution test
  */
-public class CakupanInstrumentMojo extends AbstractMojo {
+public class CakupanInstrumentMojo extends AbstractCakupanMojo {
 
     /**
      * @parameter default-value="${project.build.outputDirectory}"
      */
     private File buildOutputDirectory;
-
-    /**
-     * @parameter expression="${xslt.instrument.destdir}"
-     *            default-value="${project.build.directory}/cakupan-instrument"
-     */
-    private File instrumentDestDir;
 
     /**
      * A list of &lt;include> elements specifying the XSLT files (by pattern)
@@ -79,6 +72,7 @@ public class CakupanInstrumentMojo extends AbstractMojo {
     private List<String> xsltExcludes;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
+        File instrumentDestDir = getInstrumentDestDir();
         getLog().info("instrumentDestDir: " + instrumentDestDir);
         getLog().info("buildOutputDirectory: " + buildOutputDirectory);
         if (xsltIncludes == null) {

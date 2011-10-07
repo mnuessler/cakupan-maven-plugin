@@ -26,7 +26,6 @@ import static org.twdata.maven.mojoexecutor.MojoExecutor.name;
 import static org.twdata.maven.mojoexecutor.MojoExecutor.plugin;
 import static org.twdata.maven.mojoexecutor.MojoExecutor.version;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,11 +36,9 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.execution.MavenSession;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.PluginManager;
-import org.apache.maven.project.MavenProject;
 import org.twdata.maven.mojoexecutor.MojoExecutor.Element;
 
 import com.google.common.base.Function;
@@ -57,15 +54,7 @@ import com.google.common.collect.Collections2;
  * @execute phase="test" lifecycle="cakupan"
  * @requiresDependencyResolution test
  */
-public class CakupanTestMojo extends AbstractMojo {
-    /**
-     * The Maven Project Object
-     * 
-     * @parameter expression="${project}"
-     * @required
-     * @readonly
-     */
-    private MavenProject project;
+public class CakupanTestMojo extends AbstractCakupanMojo {
 
     /**
      * The Maven Session Object
@@ -122,12 +111,6 @@ public class CakupanTestMojo extends AbstractMojo {
     private List<String> testExcludes;
 
     /**
-     * @parameter expression="${xslt.instrument.destdir}"
-     *            default-value="${project.build.directory}/cakupan-instrument"
-     */
-    private File instrumentDestDir;
-
-    /**
      * Set this to "true" to ignore a failure during testing. Its use is NOT
      * RECOMMENDED, but quite convenient on occasion.
      * 
@@ -159,7 +142,7 @@ public class CakupanTestMojo extends AbstractMojo {
                         version("2.9")), //
                 goal("test"), //
                 configuration(createConfigurationElements()),
-                executionEnvironment(project, session, pluginManager));
+                executionEnvironment(getProject(), session, pluginManager));
     }
 
     private Element createSystemPropertyVarElement(String destDir) {
@@ -185,7 +168,7 @@ public class CakupanTestMojo extends AbstractMojo {
                 "additionalClasspathElement", classpathElements));
         String destDir = null;
         try {
-            destDir = instrumentDestDir.getCanonicalPath();
+            destDir = getInstrumentDestDir().getCanonicalPath();
         } catch (IOException e) {
             throw new MojoFailureException("dest dir not found");
         }
