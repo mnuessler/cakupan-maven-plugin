@@ -69,14 +69,17 @@ public class CakupanReportMojo extends AbstractMavenReport {
      */
     private File instrumentDestDir;
 
+    @Override
     public String getOutputName() {
         return "cakupan/index";
     }
 
+    @Override
     public String getName(Locale locale) {
         return getBundle(locale).getString("report.cakupan.name");
     }
 
+    @Override
     public String getDescription(Locale locale) {
         return getBundle(locale).getString("report.cakupan.description");
     }

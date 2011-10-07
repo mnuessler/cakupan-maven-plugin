@@ -16,7 +16,8 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nuessler.maven.plugins</groupId>
 	<artifactId>cakupan-maven-plugin</artifactId>
@@ -39,7 +40,7 @@
 			<name>Matthias Nuessler</name>
 			<email>http://www.google.com/recaptcha/mailhide/d?k=01H8VsyNbhqMEaU7iXWIIdEA==&amp;c=JEm3kAEcwiO6qt1kfxgVOxuZ3U0JZXhxD81yB-C6b7k=</email>
 			<roles>
-				<role>author</role>
+				<role>project owner</role>
 				<role>developer</role>
 			</roles>
 			<timezone>+2</timezone>
@@ -72,7 +73,7 @@
 	</mailingLists>
 
 	<properties>
-		<jdk.version>1.5</jdk.version>
+		<jdk.version>1.6</jdk.version>
 		<maven.version>2.2.1</maven.version> <!-- MNG-3062 -->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
