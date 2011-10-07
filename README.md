@@ -15,25 +15,3 @@
     limitations under the License.
 
 -->
-
-Cakupan Maven Plugin
---------------------
-
-This plugin integrates the [Cakupan XSLT coverage tool][ckpn] into the Maven
-environment.
-
-### Goals Overview
-
-* [cakupan:instrument](instrument-mojo.html)
-* [cakupan:test](test-mojo.html)
-* [cakupan:cakupan](cakupan-mojo.html)
-
-### Usage
-
-### Examples
-
-The following examples show how to use the Cakupan Plugin in more advaned usecases:
-* ...
-
-
-[ckpn]: http://code.google.com/p/cakupan/ "Cakupan project page"
