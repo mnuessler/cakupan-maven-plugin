@@ -15,11 +15,3 @@
     limitations under the License.
 
 -->
-
-Previous versions
------------------
-
-Here you can find previous versions of this site:
-
-* [0.1](0.1/ "Maven site for version 0.1")
-* [0.2](0.2/ "Maven site for version 0.2")

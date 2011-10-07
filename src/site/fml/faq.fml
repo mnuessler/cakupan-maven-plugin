@@ -27,5 +27,26 @@
 				</p>
 			</answer>
 		</faq>
+		<faq id="Testing frameworks">
+			<question>Which testing frameworks can be used in combination with the plugin?</question>
+			<answer>
+				<p>
+					At present, the plugin can only run JUnit tests. If you need support for other
+					frameworks such as TestNG, feel free to <a href="issue-tracking.html">open a ticket</a>
+					or request it on the <a href="mail-lists.html">mailing list</a>.
+				</p>
+			</answer>
+		</faq>
+		<!--
+		<faq id="Transformation tests">
+			<question>How do I test XSL transformations?</question>
+			<answer>
+				<p>
+					There are probably many ways to do it. You may want to check out this
+					<a href="how-to-write-xslt-tests.html">XSLT test example with JUnit</a>.
+				</p>
+			</answer>
+		</faq>
+		-->
 	</part>
 </faqs>
