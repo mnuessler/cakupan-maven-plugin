@@ -55,17 +55,17 @@
 		<menu name="Overview">
 			<item name="Introduction" href="index.html" />
 			<item name="Goals" href="plugin-info.html" />
-			<!--
 			<item name="Usage" href="usage.html" />
-			-->
 			<item name="Previous Versions" href="previous-versions.html" />
 			<item name="FAQ" href="faq.html" />
 		</menu>
-		<!--
 		<menu name="Examples">
-			<item name="Using it in combination with Apache Camel" href="/examples/apache-camel.html" />
-		</menu>
+			<item name="Inclusions and Exclusions of Tests" href="inclusion-exclusion-tests.html" />
+			<item name="Inclusions and Exclusions of XSLT files" href="inclusion-exclusion-xslt.html" />
+		<!--
+			<item name="Use with Apache Camel" href="/examples/apache-camel.html" />
 		-->
+		</menu>
 		<menu ref="reports" />
 	</body>
 </project>

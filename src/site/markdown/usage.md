@@ -1,0 +1,63 @@
+<!--
+
+    Copyright 2011 Matthias Nuessler <m.nuessler@web.de>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+## Usage
+
+Best practice is to define the version of the Cakupan plugin that you want to use in either
+your `pom.xml` or a parent `pom.xml`
+
+	<project>
+	  [...]
+	  <build>
+	    <pluginManagement>
+	      <plugins>
+	        <plugin>
+	         <groupId>org.nuessler.maven.plugins</groupId>
+		     <artifactId>cakupan-maven-plugin</artifactId>
+		     <version>0.2</version>
+	        </plugin>
+	      </plugins>
+	    </pluginManagement>
+	  </build>
+	  [...]
+	</project>
+
+### Invoking the plugin
+
+The plugin can be invoked by calling
+
+	mvn org.nuessler.maven.plugins:cakupan-maven-plugin:0.2:cakupan
+
+The long command line is required because Maven is by default only
+searching the standard plugin groups when given only the plugin prefix.
+Please refer to the [Maven documentation](http://maven.apache.org/guides/introduction/introduction-to-plugin-prefix-mapping.html)
+for details.
+
+It is possible to shorten the commandline by adding the group ID of the Cakupan plugin to the list of groupIds searched by default.
+To do this, you need to add the following to your `${user.home}/.m2/settings.xml` file:
+
+	<pluginGroups>
+	  <pluginGroup>org.nuessler.maven.plugins</pluginGroup>
+	</pluginGroups>
+
+Then it is possible to invoke the Cakupan plugin by calling
+
+	mvn cakupan:cakupan
+
+By default, the plugin will instrument all XSLT files matching the wildcard pattern `**/*.xsl` and run
+all JUnit tests matching the wildcard patterns `**/*TransformationTest.java` and `**/*XsltTest.java`.
