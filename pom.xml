@@ -44,7 +44,7 @@
 				<role>project owner</role>
 				<role>developer</role>
 			</roles>
-			<timezone>+2</timezone>
+			<timezone>Europe/Berlin</timezone>
 		</developer>
 	</developers>
 	<contributors>
