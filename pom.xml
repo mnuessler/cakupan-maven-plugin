@@ -34,6 +34,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+
 	<developers>
 		<developer>
 			<id>mnuessler</id>
@@ -46,6 +47,11 @@
 			<timezone>+2</timezone>
 		</developer>
 	</developers>
+	<contributors>
+		<contributor>
+			<name>John Tippabattuni</name>
+		</contributor>
+	</contributors>
 
 	<prerequisites>
 		<maven>${maven.version}</maven>
