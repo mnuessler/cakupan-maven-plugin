@@ -112,7 +112,7 @@
 		<snapshotRepository>
 			<id>cakupan-maven-snapshots-sf</id>
 			<name>Cakupan Snapshots on Sourceforge</name>
-			<url>scp://shell.sourceforge.net/home/project-web/cakupan-maven/htdocs/mvn-repo/snaphots</url>
+			<url>scp://shell.sourceforge.net/home/project-web/cakupan-maven/htdocs/mvn-repo/snapshots</url>
 		</snapshotRepository>
 		<site>
 			<id>cakupan-maven.sf.net</id>
@@ -497,7 +497,7 @@
 		<dependency>
 			<groupId>com.cakupan</groupId>
 			<artifactId>cakupan-xslt</artifactId>
-			<version>1.0</version>
+			<version>1.5</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.saxon</groupId>
