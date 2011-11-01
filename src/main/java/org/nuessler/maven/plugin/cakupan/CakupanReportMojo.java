@@ -17,6 +17,7 @@ package org.nuessler.maven.plugin.cakupan;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -130,8 +131,11 @@ public class CakupanReportMojo extends AbstractMavenReport {
         getLog().info("report output dir: " + getOutputDirectory());
 
         try {
-            FileUtils.copyFileToDirectory(new File(instrumentDestDir,
-                    "coverage.xml"), outputDirectory);
+            Collection<File> coverageFiles = FileUtils.listFiles(
+                    instrumentDestDir, new String[] { "xml", "dat" }, false);
+            for (File file : coverageFiles) {
+                FileUtils.copyFileToDirectory(file, outputDirectory);
+            }
         } catch (IOException e) {
             throw new MavenReportException(e.getMessage());
         }
