@@ -36,9 +36,9 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.execution.MavenSession;
+import org.apache.maven.plugin.BuildPluginManager;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugin.PluginManager;
 import org.twdata.maven.mojoexecutor.MojoExecutor.Element;
 
 import com.google.common.base.Function;
@@ -71,7 +71,7 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
      * @component
      * @required
      */
-    private PluginManager pluginManager;
+    private BuildPluginManager pluginManager;
 
     /**
      * <i>Maven Internal</i>: List of artifacts for the plugin.
