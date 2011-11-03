@@ -16,7 +16,8 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nuessler.maven.plugins</groupId>
 	<artifactId>cakupan-maven-plugin</artifactId>
@@ -63,7 +64,7 @@
 	</scm>
 
 	<issueManagement>
-		<system>SourceForge Tickets</system>
+		<system>SourceForge</system>
 		<url>https://sourceforge.net/p/cakupan-maven/tickets/</url>
 	</issueManagement>
 
@@ -94,6 +95,7 @@
 		<findbugs-maven-plugin.threshold>Low</findbugs-maven-plugin.threshold>
 		<cobertura-maven-plugin.version>2.5.1</cobertura-maven-plugin.version>
 		<maven-wagon-ssh.version>2.0</maven-wagon-ssh.version>
+		<maven-changes-plugin.version>2.6</maven-changes-plugin.version>
 	</properties>
 
 	<distributionManagement>
@@ -243,6 +245,36 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-gpg-plugin</artifactId>
 					<version>1.4</version>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-changes-plugin</artifactId>
+										<versionRange>[2.6,)</versionRange>
+										<goals>
+											<goal>announcement-generate</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-changes-plugin</artifactId>
+					<version>${maven-changes-plugin.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -394,6 +426,48 @@
 					<!-- recommended on https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven -->
 					<mavenExecutorId>forked-path</mavenExecutorId>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changes-plugin</artifactId>
+				<configuration>
+					<toAddresses>
+						<toAddress>cakupan-maven-users@lists.sourceforge.net</toAddress>
+					</toAddresses>
+					<mailSender>
+						<name>Matthias Nuessler</name>
+						<email>m.nuessler@web.de</email>
+					</mailSender>
+					<smtpHost>smtp.web.de</smtpHost>
+					<username>m.nuessler</username>
+					<password>Lee3vie4</password>
+					<issueLinkTemplatePerSystem>
+						<SourceForge>%URL%/%ISSUE%</SourceForge>
+					</issueLinkTemplatePerSystem>
+				</configuration>
+				<executions>
+					<execution>
+						<id>include-announcement-file</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>announcement-generate</goal>
+						</goals>
+						<configuration>
+							<announcementFile>CHANGES.txt</announcementFile>
+							<outputDirectory>${project.build.outputDirectory}/META-INF</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>validate-changes</id>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>changes-validate</goal>
+						</goals>
+						<configuration>
+							<failOnError>true</failOnError>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -639,18 +713,11 @@
 				<artifactId>cobertura-maven-plugin</artifactId>
 				<version>${cobertura-maven-plugin.version}</version>
 			</plugin>
-			<!-- 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-changelog-plugin</artifactId>
-				<version>2.2</version>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-changes-plugin</artifactId>
-				<version>2.6</version>
+				<version>${maven-changes-plugin.version}</version>
 			</plugin>
-			-->
 		</plugins>
 	</reporting>
 
