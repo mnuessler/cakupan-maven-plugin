@@ -368,7 +368,7 @@
 						<email>${email.author}</email>
 					</properties>
 					<excludes>
-						<exclude>LICENSE.txt</exclude>
+						<exclude>LICENSE</exclude>
 						<exclude>.gitignore</exclude>
 					</excludes>
 					<mapping>
