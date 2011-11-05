@@ -20,7 +20,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.plexus.util.DirectoryScanner;
@@ -75,20 +76,18 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
         File instrumentDestDir = getInstrumentDestDir();
         getLog().info("instrumentDestDir: " + instrumentDestDir);
         getLog().info("buildOutputDirectory: " + buildOutputDirectory);
-        if (xsltIncludes == null) {
-            getLog().info("includes is null");
-        } else {
-            for (String s : xsltIncludes) {
-                getLog().info("include: " + s);
-            }
-        }
 
         if (!instrumentDestDir.exists()) {
             instrumentDestDir.mkdirs();
         }
 
         if (CollectionUtils.isEmpty(xsltIncludes)) {
+            getLog().debug("No xslt-includes give, using defaults");
             xsltIncludes = Collections.singletonList("**/*.xsl");
+        } else {
+            getLog().debug(
+                    "XSLT includes: "
+                            + StringUtils.join(xsltIncludes.iterator(), ", "));
         }
 
         InstrumentXSLT instrumentXslt = new InstrumentXSLT();
@@ -135,5 +134,4 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
             XSLTCakupanUtil.cleanCoverageStats();
         }
     }
-
 }
