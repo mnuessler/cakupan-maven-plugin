@@ -276,6 +276,10 @@
 					<artifactId>maven-changes-plugin</artifactId>
 					<version>${maven-changes-plugin.version}</version>
 				</plugin>
+				<plugin>
+					<artifactId>maven-invoker-plugin</artifactId>
+					<version>1.5</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 
@@ -402,6 +406,7 @@
 					<excludes>
 						<exclude>LICENSE</exclude>
 						<exclude>.gitignore</exclude>
+						<exclude>README.md</exclude>
 					</excludes>
 					<mapping>
 						<md>XML_STYLE</md>
@@ -440,7 +445,6 @@
 					</mailSender>
 					<smtpHost>smtp.web.de</smtpHost>
 					<username>m.nuessler</username>
-					<password>Lee3vie4</password>
 					<issueLinkTemplatePerSystem>
 						<SourceForge>%URL%/%ISSUE%</SourceForge>
 					</issueLinkTemplatePerSystem>

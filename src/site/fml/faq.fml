@@ -20,10 +20,19 @@
 	title="Frequently Asked Questions">
 	<part id="General">
 		<faq id="Maven compatibility">
-			<question>Does the plugin support Maven 3?</question>
+			<question>Which Maven versions are supported by the plugin?</question>
 			<answer>
 				<p>
-					Support for Maven 3 is planned, but at the time only Maven 2.2.1 is supported.
+					The Cakupan Maven Plugin supports (only) Maven 3 since release 0.4.
+					Previous versions only support Maven 2.
+				</p>
+			</answer>
+		</faq>
+		<faq id="Maven central repository">
+			<question>Is the Cakupan Maven Plugin available at the Maven central repository?</question>
+			<answer>
+				<p>
+					The plugin is not available at the Maven central repository yet, but it will be soon.
 				</p>
 			</answer>
 		</faq>

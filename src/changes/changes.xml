@@ -21,23 +21,23 @@
 		<title>Cakupan Maven Plugin</title>
 	</properties>
 	<body>
-	
-		<release version="0.5" date="" description="Release 0.5">
+
+		<release version="0.5" date="" description="Release 0.5.">
 		</release>
-	
-		<release version="0.4" date="2011-11-01" description="Release 0.4">
+
+		<release version="0.4" date="2011-11-01" description="Release 0.4.">
 			<action dev="mnuessler" type="add" issue="3">
 				Maven 3 compatibility.
 			</action>
 		</release>
 
-		<release version="0.3" date="2011-11-01" description="Release 0.3">
+		<release version="0.3" date="2011-11-01" description="Release 0.3.">
 			<action dev="mnuessler" type="add" issue="4">
 				Upgrade to Cakupan 1.5.
 			</action>
 		</release>
 		
-		<release version="0.2" date="2011-09-24" description="Release 0.2">
+		<release version="0.2" date="2011-09-24" description="Release 0.2.">
 			<action dev="mnuessler" type="fix" issue="2">
 				Link from site navigation to report broken.
 			</action>
@@ -49,7 +49,7 @@
 			</action>
 		</release>
 
-		<release version="0.1" date="2011-09-18" description="First release" />
+		<release version="0.1" date="2011-09-18" description="Initial release." />
 		
 	</body>
 </document>
