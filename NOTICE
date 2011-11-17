@@ -1,0 +1,93 @@
+====
+    Copyright 2011 Matthias Nuessler <m.nuessler@web.de>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+====
+
+This project includes:
+- "Aether :: API" under The Apache Software License, Version 2.0
+- "Aether :: Implementation" under The Apache Software License, Version 2.0
+- "Aether :: SPI" under The Apache Software License, Version 2.0
+- "Aether :: Utilities" under The Apache Software License, Version 2.0
+- "ant" under The Apache Software License, Version 2.0
+- "ant-junit" under Apache License, Version 2.0
+- "ant-launcher" under Apache License, Version 2.0
+- "ant-testutil" under Apache License, Version 2.0
+- "Apache Velocity" under The Apache Software License, Version 2.0
+- "Cakupan" under GNU GPL v2
+- "Cakupan Maven Plugin" under Apache License Version 2.0
+- "classworlds" under BSD Style License
+- "Code Generation Library" under ASF 2.0
+- "Collections" under The Apache Software License, Version 2.0
+- "Commons IO" under The Apache Software License, Version 2.0
+- "Commons Lang" under The Apache Software License, Version 2.0
+- "commons-beanutils" under Apache License, Version 2.0
+- "commons-digester" under Apache License, Version 2.0
+- "Default Plexus Container" under Apache License, Version 2.0
+- "Doxia :: APT Module" under The Apache Software License, Version 2.0
+- "Doxia :: Core" under The Apache Software License, Version 2.0
+- "Doxia :: FML Module" under The Apache Software License, Version 2.0
+- "Doxia :: Sink API" under The Apache Software License, Version 2.0
+- "Doxia :: XDoc Module" under The Apache Software License, Version 2.0
+- "Doxia :: XHTML Module" under The Apache Software License, Version 2.0
+- "Doxia Sitetools :: Decoration Model" under The Apache Software License, Version 2.0
+- "Doxia Sitetools :: Site Renderer Component" under The Apache Software License, Version 2.0
+- "EasyMock" under Apache 2
+- "FindBugs-jsr305" under The Apache Software License, Version 2.0
+- "Guava: Google Core Libraries for Java" under The Apache Software License, Version 2.0
+- "Hamcrest Core" under New BSD License
+- "Hamcrest library" under New BSD License
+- "JUnit" under Common Public License Version 1.0
+- "Lang" under The Apache Software License, Version 2.0
+- "Logging" under The Apache Software License, Version 2.0
+- "Maven Aether Provider" under The Apache Software License, Version 2.0
+- "Maven Artifact" under The Apache Software License, Version 2.0
+- "Maven Artifact Manager" under The Apache Software License, Version 2.0
+- "Maven Core" under The Apache Software License, Version 2.0
+- "Maven Doxia Integration Tools" under The Apache Software License, Version 2.0
+- "Maven Model" under The Apache Software License, Version 2.0
+- "Maven Model Builder" under The Apache Software License, Version 2.0
+- "Maven Plugin API" under The Apache Software License, Version 2.0
+- "Maven Plugin Registry Model" under The Apache Software License, Version 2.0
+- "Maven Profile Model" under The Apache Software License, Version 2.0
+- "Maven Project Builder" under The Apache Software License, Version 2.0
+- "Maven Reporting API" under The Apache Software License, Version 2.0
+- "Maven Reporting Implementation" under The Apache Software License, Version 2.0
+- "Maven Repository Metadata Model" under The Apache Software License, Version 2.0
+- "Maven Settings" under The Apache Software License, Version 2.0
+- "Maven Settings Builder" under The Apache Software License, Version 2.0
+- "Maven Toolchains" under The Apache Software License, Version 2.0
+- "Maven Wagon API" under The Apache Software License, Version 2.0
+- "Mojo Executor" under Apache License, Version 2.0
+- "MXP1: Xml Pull Parser 3rd Edition (XPP3)" under Indiana University Extreme! Lab Software License, vesion 1.1.1 or Public Domain or Apache Software License, version 1.1
+- "Objenesis" under Apache 2
+- "org.apache.tools.ant" under Apache License, Version 2.0
+- "oro" under Apache License, Version 2.0
+- "Plexus :: Component Annotations" under The Apache Software License, Version 2.0
+- "Plexus Cipher: encryption/decryption Component" under Apache Public License 2.0
+- "Plexus Classworlds" under The Apache Software License, Version 2.0
+- "Plexus Common Utilities" under Apache Public License 2.0
+- "Plexus I18N Component" under Apache License, Version 2.0
+- "Plexus Interpolation API" under The Apache Software License, Version 2.0
+- "Plexus Security Dispatcher Component" under Apache Public License 2.0
+- "Plexus Velocity Component" under Apache License, Version 2.0
+- "SaxonB" under Mozilla Public License Version 1.0
+- "Sisu - Guice" under The Apache Software License, Version 2.0
+- "Sisu - Inject (JSR330 bean support)" under The Apache Software License, Version 2.0
+- "Sisu - Inject (Plexus bean support)" under The Apache Software License, Version 2.0
+- "Validator" under The Apache Software License, Version 2.0
+- "xalan" under Apache License, Version 2.0
+- "XML Commons External Components XML APIs" under The Apache Software License, Version 2.0
+- "xpp3_min" under Indiana University Extreme! Lab Software License, Version 1.1.1
+- "XStream Core" under BSD style
+
