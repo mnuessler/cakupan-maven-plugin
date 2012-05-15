@@ -135,7 +135,7 @@ public class CakupanReportMojo extends AbstractMavenReport {
 
         try {
             Collection<File> coverageFiles = FileUtils.listFiles(
-                    instrumentDestDir, new String[] { "xml", "dat" }, false);
+                    instrumentDestDir, new String[] { "xml" }, false);
             for (File file : coverageFiles) {
                 FileUtils.copyFileToDirectory(file, outputDirectory);
             }
