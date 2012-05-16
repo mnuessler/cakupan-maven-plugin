@@ -131,6 +131,7 @@
 
 	<pluginRepositories>
 		<pluginRepository>
+			<!-- Maven license plugin -->
 			<id>mc-release</id>
 			<name>Local Maven repository of releases</name>
 			<url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
@@ -334,14 +335,14 @@
 						<version>${maven-wagon-ssh.version}</version>
 					</dependency>
 					<dependency>
-						<groupId>net.ju-n.maven.doxia</groupId>
+						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.0.0</version>
+						<version>1.3</version>
 					</dependency>
 					<dependency>
 						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-module-confluence</artifactId>
-						<version>1.2</version>
+						<version>1.3</version>
 					</dependency>
 				</dependencies>
 				<configuration>
@@ -435,9 +436,9 @@
 					</mailSender>
 					<smtpHost>smtp.web.de</smtpHost>
 					<username>m.nuessler</username>
-					<password>Lee3vie4</password>
+					<password></password>
 					<issueLinkTemplatePerSystem>
-						<SourceForge>%URL%/%ISSUE%</SourceForge>
+						<SourceForge>%URL%/%ISSUE%/</SourceForge>
 					</issueLinkTemplatePerSystem>
 				</configuration>
 				<executions>
@@ -618,22 +619,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<artifactId>maven-changes-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<onlyCurrentVersion>true</onlyCurrentVersion>
-					<columnNames>Type,Key,Summary,Status,Resolution,Assignee</columnNames>
-					<sortColumnNames>Type,Key</sortColumnNames>
-				</configuration>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>jira-report</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-			<plugin>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 				<version>2.4</version>
 				<reportSets>
@@ -712,6 +697,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-changes-plugin</artifactId>
 				<version>${maven-changes-plugin.version}</version>
+				<configuration>
+					<issueLinkTemplatePerSystem>
+						<SourceForge>%URL%/%ISSUE%/</SourceForge>
+					</issueLinkTemplatePerSystem>
+				</configuration>
 			</plugin>
 		</plugins>
 	</reporting>
