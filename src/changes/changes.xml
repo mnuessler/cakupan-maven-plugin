@@ -22,6 +22,9 @@
 	</properties>
 	<body>
 	
+		<release version="0.7" date="" description="">
+		</action>
+
 		<release version="0.6" date="2012-05-17" description="Bugfix release">
 			<action dev="mnuessler" type="fix" issue="14">
 				Site upload fails because of files with zero size. Previous fix
