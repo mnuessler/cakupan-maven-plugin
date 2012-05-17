@@ -152,6 +152,11 @@ public class CakupanReportMojo extends AbstractMavenReport {
             }
             FileUtils.moveFile(new File(outputDirectory, "xslt_summary.html"),
                     destFile);
+	    Collection<File> datFiles = FileUtils.listFiles(
+                    outputDirectory, new String[] { "dat" }, false);
+	    for (File file : datFiles) {
+                file.delete();
+            }
         } catch (XSLTCoverageException e) {
             if (e.getRefId() == XSLTCoverageException.NO_COVERAGE_FILE) {
                 getLog().error(
