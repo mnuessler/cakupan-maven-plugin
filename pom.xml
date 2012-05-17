@@ -21,7 +21,7 @@
 	<groupId>org.nuessler.maven.plugins</groupId>
 	<artifactId>cakupan-maven-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
-	<version>0.6-SNAPSHOT</version>
+	<version>0.6</version>
 	<name>Cakupan Maven Plugin</name>
 	<url>http://cakupan-maven.sourceforge.net</url>
 	<inceptionYear>2011</inceptionYear>
@@ -60,7 +60,8 @@
 		<connection>scm:git:git://git.code.sf.net/p/cakupan-maven/code</connection>
 		<developerConnection>scm:git:ssh://git.code.sf.net/p/cakupan-maven/code</developerConnection>
 		<url>http://sourceforge.net/p/cakupan-maven/code/commit_browser</url>
-	</scm>
+	  <tag>v0.6</tag>
+  </scm>
 
 	<issueManagement>
 		<system>SourceForge</system>
@@ -436,7 +437,7 @@
 					</mailSender>
 					<smtpHost>smtp.web.de</smtpHost>
 					<username>m.nuessler</username>
-					<password></password>
+					<password />
 					<issueLinkTemplatePerSystem>
 						<SourceForge>%URL%/%ISSUE%/</SourceForge>
 					</issueLinkTemplatePerSystem>
