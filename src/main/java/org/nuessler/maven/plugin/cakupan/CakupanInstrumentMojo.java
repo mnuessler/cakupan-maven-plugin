@@ -85,9 +85,7 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
             getLog().debug("No xslt-includes give, using defaults");
             xsltIncludes = Collections.singletonList("**/*.xsl");
         } else {
-            getLog().debug(
-                    "XSLT includes: "
-                            + StringUtils.join(xsltIncludes.iterator(), ", "));
+            getLog().debug("XSLT includes: " + StringUtils.join(xsltIncludes.iterator(), ", "));
         }
 
         InstrumentXSLT instrumentXslt = new InstrumentXSLT();
@@ -99,12 +97,10 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
         scanner.setCaseSensitive(true);
         scanner.addDefaultExcludes();
         if (CollectionUtils.isNotEmpty(xsltIncludes)) {
-            scanner.setIncludes(xsltIncludes.toArray(new String[xsltIncludes
-                    .size()]));
+            scanner.setIncludes(xsltIncludes.toArray(new String[xsltIncludes.size()]));
         }
         if (CollectionUtils.isNotEmpty(xsltExcludes)) {
-            scanner.setExcludes(xsltExcludes.toArray(new String[xsltExcludes
-                    .size()]));
+            scanner.setExcludes(xsltExcludes.toArray(new String[xsltExcludes.size()]));
         }
         scanner.scan();
         String[] includedFiles = scanner.getIncludedFiles();
@@ -117,12 +113,10 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
         for (String includedFile : includedFiles) {
             try {
                 getLog().info("Instrumenting XSLT file " + includedFile);
-                instrumentXslt.initCoverageMap(new File(buildOutputDirectory,
-                        includedFile).getCanonicalPath());
+                instrumentXslt.initCoverageMap(new File(buildOutputDirectory, includedFile).getCanonicalPath());
             } catch (Exception e) {
                 getLog().error(e);
-                throw new MojoExecutionException("Instrumenting file ["
-                        + includedFile + "] failed!");
+                throw new MojoExecutionException("Instrumenting file [" + includedFile + "] failed!");
             }
         }
 
