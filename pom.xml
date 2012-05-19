@@ -16,13 +16,12 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nuessler.maven.plugins</groupId>
 	<artifactId>cakupan-maven-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
-	<version>0.5-SNAPSHOT</version>
+	<version>0.7-SNAPSHOT</version>
 	<name>Cakupan Maven Plugin</name>
 	<url>http://cakupan-maven.sourceforge.net</url>
 	<inceptionYear>2011</inceptionYear>
@@ -61,7 +60,8 @@
 		<connection>scm:git:git://git.code.sf.net/p/cakupan-maven/code</connection>
 		<developerConnection>scm:git:ssh://git.code.sf.net/p/cakupan-maven/code</developerConnection>
 		<url>http://sourceforge.net/p/cakupan-maven/code/commit_browser</url>
-	</scm>
+	  <tag>HEAD</tag>
+  </scm>
 
 	<issueManagement>
 		<system>SourceForge</system>
@@ -86,16 +86,16 @@
 		<email.author>m.nuessler@web.de</email.author>
 
 		<maven-plugin-plugin.version>2.9</maven-plugin-plugin.version>
-		<maven-checkstyle-plugin.version>2.7</maven-checkstyle-plugin.version>
-		<maven-pmd-plugin.version>2.5</maven-pmd-plugin.version>
-		<versions-maven-plugin.version>1.2</versions-maven-plugin.version>
-		<maven-javadoc-plugin.version>2.8</maven-javadoc-plugin.version>
-		<findbugs-maven-plugin.version>2.3.2</findbugs-maven-plugin.version>
+		<maven-checkstyle-plugin.version>2.9.1</maven-checkstyle-plugin.version>
+		<maven-pmd-plugin.version>2.7.1</maven-pmd-plugin.version>
+		<versions-maven-plugin.version>1.3.1</versions-maven-plugin.version>
+		<maven-javadoc-plugin.version>2.8.1</maven-javadoc-plugin.version>
+		<findbugs-maven-plugin.version>2.4.0</findbugs-maven-plugin.version>
 		<findbugs-maven-plugin.effort>Max</findbugs-maven-plugin.effort>
 		<findbugs-maven-plugin.threshold>Low</findbugs-maven-plugin.threshold>
 		<cobertura-maven-plugin.version>2.5.1</cobertura-maven-plugin.version>
 		<maven-wagon-ssh.version>2.0</maven-wagon-ssh.version>
-		<maven-changes-plugin.version>2.6</maven-changes-plugin.version>
+		<maven-changes-plugin.version>2.7.1</maven-changes-plugin.version>
 		<hamcrest.version>1.3.RC2</hamcrest.version>
 	</properties>
 
@@ -133,6 +133,7 @@
 
 	<pluginRepositories>
 		<pluginRepository>
+			<!-- Maven license plugin -->
 			<id>mc-release</id>
 			<name>Local Maven repository of releases</name>
 			<url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
@@ -176,7 +177,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.0</version>
+					<version>3.1</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-checkstyle-plugin</artifactId>
@@ -202,7 +203,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.9</version>
+					<version>2.12</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
@@ -210,19 +211,19 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.6</version>
+					<version>2.7</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-release-plugin</artifactId>
-					<version>2.2.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-dependency-plugin</artifactId>
 					<version>2.3</version>
 				</plugin>
 				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
 					<artifactId>maven-assembly-plugin</artifactId>
-					<version>2.2.1</version>
+					<version>2.3</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -236,7 +237,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.3.2</version>
+					<version>2.4</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -261,7 +262,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -338,14 +339,14 @@
 						<version>${maven-wagon-ssh.version}</version>
 					</dependency>
 					<dependency>
-						<groupId>net.ju-n.maven.doxia</groupId>
+						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.0.0</version>
+						<version>1.3</version>
 					</dependency>
 					<dependency>
 						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-module-confluence</artifactId>
-						<version>1.2</version>
+						<version>1.3</version>
 					</dependency>
 				</dependencies>
 				<configuration>
@@ -441,8 +442,9 @@
 					</mailSender>
 					<smtpHost>smtp.web.de</smtpHost>
 					<username>m.nuessler</username>
+					<password />
 					<issueLinkTemplatePerSystem>
-						<SourceForge>%URL%/%ISSUE%</SourceForge>
+						<SourceForge>%URL%/%ISSUE%/</SourceForge>
 					</issueLinkTemplatePerSystem>
 				</configuration>
 				<executions>
@@ -600,22 +602,22 @@
 		<dependency>
 			<groupId>org.easymock</groupId>
 			<artifactId>easymock</artifactId>
-			<version>3.0</version>
+			<version>3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>10.0.1</version>
+			<version>12.0</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.1</version>
+			<version>2.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.0.1</version>
+			<version>3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.twdata.maven</groupId>
@@ -668,22 +670,6 @@
 						<jdk>${jdk.version}</jdk>
 					</requirements>
 				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-changes-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<onlyCurrentVersion>true</onlyCurrentVersion>
-					<columnNames>Type,Key,Summary,Status,Resolution,Assignee</columnNames>
-					<sortColumnNames>Type,Key</sortColumnNames>
-				</configuration>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>jira-report</report>
-						</reports>
-					</reportSet>
-				</reportSets>
 			</plugin>
 			<plugin>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
@@ -767,7 +753,7 @@
 				<version>${maven-changes-plugin.version}</version>
 				<configuration>
 					<issueLinkTemplatePerSystem>
-						<SourceForge>%URL%/%ISSUE%</SourceForge>
+						<SourceForge>%URL%/%ISSUE%/</SourceForge>
 					</issueLinkTemplatePerSystem>
 				</configuration>
 			</plugin>
