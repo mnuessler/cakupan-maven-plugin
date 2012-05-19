@@ -1,0 +1,8 @@
+Transformation Tests and generated documentation
+
+@ClassRule for transformation?
+http://blog.mycila.com/2009/11/writing-your-own-junit-extensions-using.html
+
+How to get the source field (or source Xpath)?
+* From an annotation?
+* Instrument XSLTs?

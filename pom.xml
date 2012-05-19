@@ -403,6 +403,7 @@
 						<exclude>NOTICE</exclude>
 						<exclude>.gitignore</exclude>
 						<exclude>README.md</exclude>
+						<exclude>**/xhtml-basic.xsd</exclude>
 					</excludes>
 					<mapping>
 						<md>XML_STYLE</md>

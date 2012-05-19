@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Copyright 2011 Matthias Nuessler <m.nuessler@web.de>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<rss version="2.0">
+	<channel>
+		<title>Recent changes to 3: Maven 3 compatibility</title>
+		<link>https://sourceforge.net/p/cakupan-maven/tickets/3/</link>
+		<description>Recent changes to 3: Maven 3 compatibility</description>
+		<language>en</language>
+		<lastBuildDate>Thu, 03 Nov 2011 22:26:58 -0000</lastBuildDate>
+
+		<item>
+			<title>Ticket 3 has been modified: Maven 3 compatibility
+				Edited By: Matthias Nuessler (mnuessler)
+				_milestone updated: u'none' =&gt; u'0.4'</title>
+			<link>https://sourceforge.net/p/cakupan-maven/tickets/3/</link>
+			<description>Ticket 3 has been modified: Maven 3 compatibility
+				Edited By: Matthias Nuessler (mnuessler)
+				_milestone updated: u'none' =&gt; u'0.4'</description>
+			<dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matthias Nuessler</dc:creator>
+			<pubDate>Thu, 03 Nov 2011 22:26:58 -0000</pubDate>
+			<guid>57250a0dace1ceedfc4ccba887acf785bf8bd990</guid>
+		</item>
+
+		<item>
+			<title>Ticket 3 has been modified: Maven 3 compatibility
+				Edited By: Matthias Nuessler (mnuessler)
+				Status updated: u'in-progress' =&gt; u'closed'
+				_resolution updated: u'to-fix' =&gt; u'fixed'
+				_milestone updated: u'0.4' =&gt; u'none'</title>
+			<link>https://sourceforge.net/p/cakupan-maven/tickets/3/</link>
+			<description>Ticket 3 has been modified: Maven 3 compatibility
+				Edited By: Matthias Nuessler (mnuessler)
+				Status updated: u'in-progress' =&gt; u'closed'
+				_resolution updated: u'to-fix' =&gt; u'fixed'
+				_milestone updated: u'0.4' =&gt; u'none'</description>
+			<dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matthias Nuessler</dc:creator>
+			<pubDate>Thu, 03 Nov 2011 09:24:25 -0000</pubDate>
+			<guid>b18c999a177dd9aaa61caa60d0fc24426f150bde</guid>
+		</item>
+
+		<item>
+			<title>Ticket 3 has been modified: Maven 3 compatibility
+				Edited By: Matthias Nuessler (mnuessler)
+				_milestone updated: u'0.3' =&gt; u'0.4'</title>
+			<link>https://sourceforge.net/p/cakupan-maven/tickets/3/</link>
+			<description>Ticket 3 has been modified: Maven 3 compatibility
+				Edited By: Matthias Nuessler (mnuessler)
+				_milestone updated: u'0.3' =&gt; u'0.4'</description>
+			<dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matthias Nuessler</dc:creator>
+			<pubDate>Tue, 01 Nov 2011 22:00:27 -0000</pubDate>
+			<guid>6ca779cff6219e3ec8076f9d081fea99e53ac353</guid>
+		</item>
+
+		<item>
+			<title>Ticket 3 has been modified: Maven 3 compatibility
+				Edited By: Matthias Nuessler (mnuessler)
+				Status updated: u'open' =&gt; u'in-progress'
+				_resolution updated: '' =&gt; u'to-fix'
+				_milestone updated: u'v0.3' =&gt; u'0.3'</title>
+			<link>https://sourceforge.net/p/cakupan-maven/tickets/3/</link>
+			<description>Ticket 3 has been modified: Maven 3 compatibility
+				Edited By: Matthias Nuessler (mnuessler)
+				Status updated: u'open' =&gt; u'in-progress'
+				_resolution updated: '' =&gt; u'to-fix'
+				_milestone updated: u'v0.3' =&gt; u'0.3'</description>
+			<dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matthias Nuessler</dc:creator>
+			<pubDate>Sun, 30 Oct 2011 18:38:02 -0000</pubDate>
+			<guid>f1dafe73d05bd566a9cd7b8b30cdb1a28a20331f</guid>
+		</item>
+
+		<item>
+			<title>Ticket 3 has been modified: Maven 3 compatibility
+				Edited By: Matthias Nuessler (mnuessler)
+				Owner updated: u'mnuessler' =&gt; None</title>
+			<link>https://sourceforge.net/p/cakupan-maven/tickets/3/</link>
+			<description>Ticket 3 has been modified: Maven 3 compatibility
+				Edited By: Matthias Nuessler (mnuessler)
+				Owner updated: u'mnuessler' =&gt; None</description>
+			<dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matthias Nuessler</dc:creator>
+			<pubDate>Fri, 23 Sep 2011 20:07:55 -0000</pubDate>
+			<guid>66e753b52695ab4ab70932a0b41e22952937472d</guid>
+		</item>
+
+		<item>
+			<title>Ticket 3 has been modified: Maven 3 compatibility
+				Edited By: Matthias Nuessler (mnuessler)
+				Summary updated: u'Compatibility with Maven 3' =&gt; u'Maven 3 compatibility'</title>
+			<link>https://sourceforge.net/p/cakupan-maven/tickets/3/</link>
+			<description>Ticket 3 has been modified: Maven 3 compatibility
+				Edited By: Matthias Nuessler (mnuessler)
+				Summary updated: u'Compatibility with Maven 3' =&gt; u'Maven 3 compatibility'</description>
+			<dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matthias Nuessler</dc:creator>
+			<pubDate>Thu, 22 Sep 2011 21:43:58 -0000</pubDate>
+			<guid>43f6d7f2a714704077e756951a99ac75d9aafb40</guid>
+		</item>
+
+		<item>
+			<title>Ticket 3 has been modified: Compatibility with Maven 3
+				Edited By: Matthias Nuessler (mnuessler)
+				_priority updated: '' =&gt; u'Major'</title>
+			<link>https://sourceforge.net/p/cakupan-maven/tickets/3/</link>
+			<description>Ticket 3 has been modified: Compatibility with Maven 3
+				Edited By: Matthias Nuessler (mnuessler)
+				_priority updated: '' =&gt; u'Major'</description>
+			<dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matthias Nuessler</dc:creator>
+			<pubDate>Thu, 22 Sep 2011 21:41:38 -0000</pubDate>
+			<guid>b1bd980bc9aa79a94b5dae2379b568e0244d63da</guid>
+		</item>
+
+		<item>
+			<title>Ticket 3 has been modified: Compatibility with Maven 3
+				Edited By: Matthias Nuessler (mnuessler)
+				_type updated: '' =&gt; u'Feature'
+				_milestone updated: u'0.3' =&gt; u'v0.3'</title>
+			<link>https://sourceforge.net/p/cakupan-maven/tickets/3/</link>
+			<description>Ticket 3 has been modified: Compatibility with Maven 3
+				Edited By: Matthias Nuessler (mnuessler)
+				_type updated: '' =&gt; u'Feature'
+				_milestone updated: u'0.3' =&gt; u'v0.3'</description>
+			<dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matthias Nuessler</dc:creator>
+			<pubDate>Thu, 22 Sep 2011 18:15:19 -0000</pubDate>
+			<guid>20539f8917063adeac0d534dbde7419e018d8b5d</guid>
+		</item>
+
+	</channel>
+</rss>
