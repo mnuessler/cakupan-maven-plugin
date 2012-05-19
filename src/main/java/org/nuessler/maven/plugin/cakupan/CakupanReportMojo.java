@@ -135,7 +135,7 @@ public class CakupanReportMojo extends AbstractMavenReport {
 
         try {
             Collection<File> coverageFiles = FileUtils.listFiles(
-                    instrumentDestDir, new String[] { "xml", "dat" }, false);
+                    instrumentDestDir, new String[] { "xml" }, false);
             for (File file : coverageFiles) {
                 FileUtils.copyFileToDirectory(file, outputDirectory);
             }
@@ -152,6 +152,11 @@ public class CakupanReportMojo extends AbstractMavenReport {
             }
             FileUtils.moveFile(new File(outputDirectory, "xslt_summary.html"),
                     destFile);
+	    Collection<File> datFiles = FileUtils.listFiles(
+                    outputDirectory, new String[] { "dat" }, false);
+	    for (File file : datFiles) {
+                file.delete();
+            }
         } catch (XSLTCoverageException e) {
             if (e.getRefId() == XSLTCoverageException.NO_COVERAGE_FILE) {
                 getLog().error(
