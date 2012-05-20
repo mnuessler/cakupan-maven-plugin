@@ -29,7 +29,6 @@ import java.net.URL;
 
 import javax.xml.namespace.NamespaceContext;
 
-import org.junit.Assert;
 import org.w3c.dom.Document;
 
 public class TransformationTest extends XslTransformationTestCase {
@@ -53,7 +52,7 @@ public class TransformationTest extends XslTransformationTestCase {
     private File resourceNameToFile(String resource) {
         URL resourceUrl = getClass().getResource(resource);
         String reason = String.format("resource with name '%s' not found", resource);
-        Assert.assertThat(reason, resourceUrl, notNullValue());
+        assertThat(reason, resourceUrl, notNullValue());
         return new File(resourceUrl.getFile());
     }
 
