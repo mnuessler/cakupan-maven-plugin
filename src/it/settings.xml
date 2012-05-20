@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
 
     Copyright 2011 Matthias Nuessler <m.nuessler@web.de>
@@ -21,6 +22,7 @@
 		<pluginGroup>org.nuessler.maven.plugins</pluginGroup>
 	</pluginGroups>
 
+	<!-- Use the local repository as a remote repository to avoid re-download of dependencies from Maven central -->
 	<profiles>
 		<profile>
 			<id>it-repo</id>

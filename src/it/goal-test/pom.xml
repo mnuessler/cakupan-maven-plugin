@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nuessler.maven.plugins</groupId>
 	<artifactId>cakupan-maven-plugin-it-test</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>@project.version@</version>
 	<packaging>jar</packaging>
 
 	<dependencies>
