@@ -17,7 +17,17 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 def instrumentFile = new File(basedir, 'target/cakupan-instrument/coverage.xml');
+def reportDir = new File(basedir, 'target/site/cakupan/');
 
 assert !instrumentFile.exists();
+
+assert reportDir.exists();
+assert reportDir.isDirectory();
+
+def File[] reportFiles = reportDir.listFiles();
+assert reportFiles.length > 0
+reportFiles.each {
+    assert it.length() > 0;
+}
 
 return true;
