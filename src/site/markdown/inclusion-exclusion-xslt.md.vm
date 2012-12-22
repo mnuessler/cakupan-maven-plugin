@@ -30,9 +30,9 @@ If your XSL files do not follow this naming convention, then configure the plugi
 	  <build>
 	    <plugins>
 	      <plugin>
-	        <groupId>org.nuessler.maven.plugins</groupId>
-	        <artifactId>cakupan-maven-plugin</artifactId>
-	        <version>0.2</version>
+	        <groupId>${projectGroupId}</groupId>
+	        <artifactId>${projectArtifactId}</artifactId>
+	        <version>${projectVersion}</version>
 	        <configuration>
 	          <xsltIncludes>
 	            <include>sample-transformation.xsl</include>
@@ -54,9 +54,9 @@ In certain cases it may be necessary to exclude XSLT files. To achieve this, the
 	  <build>
 	    <plugins>
 	      <plugin>
-	        <groupId>org.nuessler.maven.plugins</groupId>
-	        <artifactId>cakupan-maven-plugin</artifactId>
-	        <version>0.2</version>
+            <groupId>${projectGroupId}</groupId>
+            <artifactId>${projectArtifactId}</artifactId>
+            <version>${projectVersion}</version>
 	        <configuration>
 	          <xsltExcludes>
 	            <exclude>sample-transformation.xsl</exclude>

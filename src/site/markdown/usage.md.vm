@@ -27,9 +27,9 @@ your `pom.xml` or a parent `pom.xml`
 	    <pluginManagement>
 	      <plugins>
 	        <plugin>
-	         <groupId>org.nuessler.maven.plugins</groupId>
-		     <artifactId>cakupan-maven-plugin</artifactId>
-		     <version>0.2</version>
+	         <groupId>${projectGroupId}</groupId>
+		     <artifactId>${projectArtifactId}</artifactId>
+		     <version>${projectVersion}</version>
 	        </plugin>
 	      </plugins>
 	    </pluginManagement>
@@ -41,7 +41,7 @@ your `pom.xml` or a parent `pom.xml`
 
 The plugin can be invoked by calling
 
-	mvn org.nuessler.maven.plugins:cakupan-maven-plugin:0.2:cakupan
+	mvn ${projectGroupId}:${projectArtifactId}:${projectVersion}:cakupan
 
 The long command line is required because Maven is by default only
 searching the standard plugin groups when given only the plugin prefix.
@@ -52,7 +52,7 @@ It is possible to shorten the commandline by adding the group ID of the Cakupan 
 To do this, you need to add the following to your `${user.home}/.m2/settings.xml` file:
 
 	<pluginGroups>
-	  <pluginGroup>org.nuessler.maven.plugins</pluginGroup>
+	  <pluginGroup>${projectGroupId}</pluginGroup>
 	</pluginGroups>
 
 Then it is possible to invoke the Cakupan plugin by calling

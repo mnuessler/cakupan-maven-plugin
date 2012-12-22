@@ -31,12 +31,12 @@ If your test classes do not follow this naming convention, then configure the pl
 	  <build>
 	    <plugins>
 	      <plugin>
-	        <groupId>org.nuessler.maven.plugins</groupId>
-	        <artifactId>cakupan-maven-plugin</artifactId>
-	        <version>0.2</version>
+	        <groupId>${projectGroupId}</groupId>
+	        <artifactId>${projectArtifactId}</artifactId>
+	        <version>${projectVersion}</version>
 	        <configuration>
 	          <testIncludes>
-	            <include>Sample.java</include>
+	            <include>SampleXsltTest.java</include>
 	          </testIncludes>
 	        </configuration>
 	      </plugin>
@@ -55,12 +55,12 @@ In certain cases it may be necessary to exclude tests. To achieve this, the plug
 	  <build>
 	    <plugins>
 	      <plugin>
-	        <groupId>org.nuessler.maven.plugins</groupId>
-	        <artifactId>cakupan-maven-plugin</artifactId>
-	        <version>0.2</version>
+	        <groupId>${projectGroupId}</groupId>
+	        <artifactId>${projectArtifactId}</artifactId>
+	        <version>${projectVersion}</version>
 	        <configuration>
 	          <testExcludes>
-	            <exclude>Sample.java</exclude>
+	            <exclude>SampleXsltTest.java</exclude>
 	          </testExcludes>
 	        </configuration>
 	      </plugin>
