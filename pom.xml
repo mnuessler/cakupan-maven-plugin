@@ -40,7 +40,7 @@
 			<name>Matthias Nuessler</name>
 			<email>http://www.google.com/recaptcha/mailhide/d?k=01H8VsyNbhqMEaU7iXWIIdEA==&amp;c=JEm3kAEcwiO6qt1kfxgVOxuZ3U0JZXhxD81yB-C6b7k=</email>
 			<roles>
-				<role>project owner</role>
+				<role>project initiator</role>
 				<role>developer</role>
 			</roles>
 			<timezone>Europe/Berlin</timezone>
@@ -403,6 +403,7 @@
 					</properties>
 					<excludes>
 						<exclude>LICENSE</exclude>
+						<exclude>README.md</exclude>
 						<exclude>.gitignore</exclude>
 					</excludes>
 					<mapping>
