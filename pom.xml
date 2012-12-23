@@ -96,7 +96,8 @@
 		<cobertura-maven-plugin.version>2.5.2</cobertura-maven-plugin.version>
 		<maven-wagon-ssh.version>2.2</maven-wagon-ssh.version>
 		<maven-changes-plugin.version>2.8</maven-changes-plugin.version>
-		
+		<hamcrest.version>1.3</hamcrest.version>
+
 		<!-- Properties for filtering in site (no dots allowed) -->
 		<projectGroupId>${project.groupId}</projectGroupId>
 		<projectArtifactId>${project.artifactId}</projectArtifactId>
@@ -278,6 +279,15 @@
 					<artifactId>maven-changes-plugin</artifactId>
 					<version>${maven-changes-plugin.version}</version>
 				</plugin>
+				<plugin>
+					<artifactId>maven-invoker-plugin</artifactId>
+					<version>1.5</version>
+				</plugin>
+				<plugin>
+					<groupId>org.jasig.maven</groupId>
+					<artifactId>maven-notice-plugin</artifactId>
+					<version>1.0.4</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 
@@ -302,13 +312,6 @@
 						</goals>
 					</execution>
 				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.plugin-tools</groupId>
-						<artifactId>maven-plugin-tools-ant</artifactId>
-						<version>2.8</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
@@ -403,8 +406,10 @@
 					</properties>
 					<excludes>
 						<exclude>LICENSE</exclude>
-						<exclude>README.md</exclude>
+						<exclude>NOTICE</exclude>
 						<exclude>.gitignore</exclude>
+						<exclude>README.md</exclude>
+						<exclude>**/xhtml-basic.xsd</exclude>
 					</excludes>
 					<mapping>
                         <vm>XML_STYLE</vm>
@@ -473,6 +478,17 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.jasig.maven</groupId>
+				<artifactId>maven-notice-plugin</artifactId>
+				<configuration>
+					<noticeTemplate>src/etc/NOTICE-template.txt</noticeTemplate>
+					<licenseMapping>
+						<param>src/etc/license-mappings.xml</param>
+					</licenseMapping>
+					<noticeMessage>- "{0}" under {1}</noticeMessage>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -496,6 +512,42 @@
 								<phase>verify</phase>
 								<goals>
 									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>itest</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-invoker-plugin</artifactId>
+						<configuration>
+							<debug>true</debug>
+							<projectsDirectory>src/it</projectsDirectory>
+							<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+							<pomIncludes>
+								<pomInclude>*/pom.xml</pomInclude>
+							</pomIncludes>
+							<preBuildHookScript>setup</preBuildHookScript>
+							<postBuildHookScript>verify</postBuildHookScript>
+							<localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
+							<settingsFile>src/it/settings.xml</settingsFile>
+							<addTestClassPath>true</addTestClassPath>
+							<goals>
+								<goal>clean</goal>
+								<goal>site</goal>
+							</goals>
+						</configuration>
+						<executions>
+							<execution>
+								<id>integration-test</id>
+								<goals>
+									<goal>install</goal>
+									<goal>run</goal>
 								</goals>
 							</execution>
 						</executions>
@@ -540,14 +592,19 @@
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<artifactId>junit-dep</artifactId>
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>${hamcrest.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-library</artifactId>
-			<version>1.3</version>
+			<version>${hamcrest.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.easymock</groupId>
@@ -606,11 +663,6 @@
 			<artifactId>xpp3</artifactId>
 			<version>1.1.4c</version>
 		</dependency>
-		<dependency>
-			<groupId>ant</groupId>
-			<artifactId>ant-junit</artifactId>
-			<version>1.6.5</version>
-		</dependency>
 	</dependencies>
 
 	<reporting>
@@ -634,6 +686,7 @@
 						<reports>
 							<report>summary</report>
 							<report>index</report>
+							<report>changes</report>
 							<report>project-team</report>
 							<report>scm</report>
 							<report>issue-tracking</report>

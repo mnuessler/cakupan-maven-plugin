@@ -20,7 +20,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.plexus.util.DirectoryScanner;
@@ -76,20 +77,16 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
         File instrumentDestDir = getInstrumentDestDir();
         getLog().info("instrumentDestDir: " + instrumentDestDir);
         getLog().info("buildOutputDirectory: " + buildOutputDirectory);
-        if (xsltIncludes == null) {
-            getLog().info("includes is null");
-        } else {
-            for (String s : xsltIncludes) {
-                getLog().info("include: " + s);
-            }
-        }
 
         if (!instrumentDestDir.exists()) {
             instrumentDestDir.mkdirs();
         }
 
         if (CollectionUtils.isEmpty(xsltIncludes)) {
+            getLog().debug("No xslt-includes give, using defaults");
             xsltIncludes = Collections.singletonList("**/*.xsl");
+        } else {
+            getLog().debug("XSLT includes: " + StringUtils.join(xsltIncludes.iterator(), ", "));
         }
 
         InstrumentXSLT instrumentXslt = new InstrumentXSLT();
@@ -101,12 +98,10 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
         scanner.setCaseSensitive(true);
         scanner.addDefaultExcludes();
         if (CollectionUtils.isNotEmpty(xsltIncludes)) {
-            scanner.setIncludes(xsltIncludes.toArray(new String[xsltIncludes
-                    .size()]));
+            scanner.setIncludes(xsltIncludes.toArray(new String[xsltIncludes.size()]));
         }
         if (CollectionUtils.isNotEmpty(xsltExcludes)) {
-            scanner.setExcludes(xsltExcludes.toArray(new String[xsltExcludes
-                    .size()]));
+            scanner.setExcludes(xsltExcludes.toArray(new String[xsltExcludes.size()]));
         }
         scanner.scan();
         String[] includedFiles = scanner.getIncludedFiles();
@@ -119,12 +114,10 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
         for (String includedFile : includedFiles) {
             try {
                 getLog().info("Instrumenting XSLT file " + includedFile);
-                instrumentXslt.initCoverageMap(new File(buildOutputDirectory,
-                        includedFile).getCanonicalPath());
+                instrumentXslt.initCoverageMap(new File(buildOutputDirectory, includedFile).getCanonicalPath());
             } catch (Exception e) {
                 getLog().error(e);
-                throw new MojoExecutionException("Instrumenting file ["
-                        + includedFile + "] failed!");
+                throw new MojoExecutionException("Instrumenting file [" + includedFile + "] failed!");
             }
         }
 
@@ -136,5 +129,4 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
             XSLTCakupanUtil.cleanCoverageStats();
         }
     }
-
 }

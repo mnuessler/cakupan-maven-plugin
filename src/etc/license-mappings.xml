@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+
+    Copyright 2011 Matthias Nuessler <m.nuessler@web.de>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<license-lookup xmlns="https://source.jasig.org/schemas/maven-notice-plugin/license-lookup" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://source.jasig.org/schemas/maven-notice-plugin/license-lookup https://source.jasig.org/schemas/maven-notice-plugin/license-lookup/license-lookup-v1.0.xsd">
+	<artifact>
+		<groupId>ant</groupId>
+		<artifactId>ant-junit</artifactId>
+		<version>1.6.5</version>
+		<license>Apache License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.apache.ant</groupId>
+		<artifactId>ant</artifactId>
+		<version>1.8.0</version>
+		<license>Apache License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>ant</groupId>
+		<artifactId>ant-launcher</artifactId>
+		<version>1.6.5</version>
+		<license>Apache License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.apache.ant</groupId>
+		<artifactId>ant-launcher</artifactId>
+		<version>1.8.0</version>
+		<license>Apache License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.apache.ant</groupId>
+		<artifactId>ant-testutil</artifactId>
+		<version>1.8.0</version>
+		<license>Apache License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>classworlds</groupId>
+		<artifactId>classworlds</artifactId>
+		<version>1.1-alpha-2</version>
+		<license>BSD Style License</license>
+	</artifact>
+	<artifact>
+		<groupId>commons-beanutils</groupId>
+		<artifactId>commons-beanutils</artifactId>
+		<version>1.7.0</version>
+		<license>Apache License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>commons-digester</groupId>
+		<artifactId>commons-digester</artifactId>
+		<version>1.6</version>
+		<license>Apache License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.codehaus.plexus</groupId>
+		<artifactId>plexus-container-default</artifactId>
+		<version>1.0-alpha-9-stable-1</version>
+		<license>Apache License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.codehaus.plexus</groupId>
+		<artifactId>plexus-i18n</artifactId>
+		<version>1.0-beta-7</version>
+		<license>Apache License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.codehaus.plexus</groupId>
+		<artifactId>plexus-velocity</artifactId>
+		<version>1.1.7</version>
+		<license>Apache License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>oro</groupId>
+		<artifactId>oro</artifactId>
+		<version>2.0.8</version>
+		<license>Apache License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>xalan</groupId>
+		<artifactId>xalan</artifactId>
+		<version>2.6.0</version>
+		<license>Apache License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>xpp3</groupId>
+		<artifactId>xpp3_min</artifactId>
+		<version>1.1.3.4.O</version>
+		<license>Indiana University Extreme! Lab Software License, Version 1.1.1</license>
+	</artifact>
+</license-lookup>
