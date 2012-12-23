@@ -132,13 +132,13 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
      */
     private String test;
 
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         handleDefaults();
         getLog().info("testIncludes: " + testIncludes);
 
         executeMojo(
-                plugin(groupId("org.apache.maven.plugins"),
-                        artifactId("maven-surefire-plugin"), //
+                plugin(groupId("org.apache.maven.plugins"), artifactId("maven-surefire-plugin"), //
                         version("2.9")), //
                 goal("test"), //
                 configuration(createConfigurationElements()),
@@ -154,18 +154,13 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
     }
 
     private Element[] createConfigurationElements() throws MojoFailureException {
-        List<String> classpathElements = Arrays
-                .asList(getAdditionalClasspathElements());
-        getLog().info(
-                "Augmenting test classpath with cakupan and its dependencies: "
-                        + classpathElements);
+        List<String> classpathElements = Arrays.asList(getAdditionalClasspathElements());
+        getLog().info("Augmenting test classpath with cakupan and its dependencies: " + classpathElements);
         List<Element> config = new ArrayList<Element>(6);
-        config.add(createElementWithChildren("includes", "include",
-                testIncludes));
-        config.add(createElementWithChildren("excludes", "exclude",
-                testExcludes));
-        config.add(createElementWithChildren("additionalClasspathElements",
-                "additionalClasspathElement", classpathElements));
+        config.add(createElementWithChildren("includes", "include", testIncludes));
+        config.add(createElementWithChildren("excludes", "exclude", testExcludes));
+        config.add(createElementWithChildren("additionalClasspathElements", "additionalClasspathElement",
+                classpathElements));
         String destDir = null;
         try {
             destDir = getInstrumentDestDir().getCanonicalPath();
@@ -173,8 +168,7 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
             throw new MojoFailureException("dest dir not found");
         }
         config.add(createSystemPropertyVarElement(destDir));
-        config.add(new Element("testFailureIgnore", String
-                .valueOf(testFailureIgnore)));
+        config.add(new Element("testFailureIgnore", String.valueOf(testFailureIgnore)));
         if (StringUtils.isNotBlank(test)) {
             config.add(new Element("test", test));
         }
@@ -182,18 +176,17 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
     }
 
     private String[] getAdditionalClasspathElements() {
-        final List<String> cakupanDepArtifactIds = Arrays.asList(
-                "cakupan-xslt", "xstream", "saxon", "xalan", "xpp3");
-        Collection<Artifact> cakupanArtifacts = Collections2.filter(
-                pluginArtifacs, new Predicate<Artifact>() {
-                    public boolean apply(Artifact input) {
-                        return cakupanDepArtifactIds.contains(input
-                                .getArtifactId());
-                    }
-                });
+        final List<String> cakupanDepArtifactIds = Arrays.asList("cakupan-xslt", "xstream", "saxon", "xalan", "xpp3");
+        Collection<Artifact> cakupanArtifacts = Collections2.filter(pluginArtifacs, new Predicate<Artifact>() {
+            @Override
+            public boolean apply(Artifact input) {
+                return cakupanDepArtifactIds.contains(input.getArtifactId());
+            }
+        });
 
-        Collection<String> classpathElements = Collections2.transform(
-                cakupanArtifacts, new Function<Artifact, String>() {
+        Collection<String> classpathElements = Collections2.transform(cakupanArtifacts,
+                new Function<Artifact, String>() {
+                    @Override
                     public String apply(final Artifact input) {
                         try {
                             return input.getFile().getCanonicalPath();
@@ -206,21 +199,20 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
         return classpathElements.toArray(new String[classpathElements.size()]);
     }
 
-    private Element createElementWithChildren(final String parentName,
-            final String childName, final List<String> children) {
-        Element[] includeElements = Collections2.transform(children,
-                new Function<String, Element>() {
-                    public Element apply(String input) {
-                        return new Element(childName, input);
-                    }
-                }).toArray(new Element[children.size()]);
+    private Element createElementWithChildren(final String parentName, final String childName,
+            final List<String> children) {
+        Element[] includeElements = Collections2.transform(children, new Function<String, Element>() {
+            @Override
+            public Element apply(String input) {
+                return new Element(childName, input);
+            }
+        }).toArray(new Element[children.size()]);
         return new Element(parentName, includeElements);
     }
 
     private void handleDefaults() {
         if (CollectionUtils.isEmpty(testIncludes)) {
-            testIncludes = Arrays.asList("**/*TransformationTest.java",
-                    "**/*XsltTest.java");
+            testIncludes = Arrays.asList("**/*TransformationTest.java", "**/*XsltTest.java");
         }
         if (CollectionUtils.isEmpty(testExcludes)) {
             testExcludes = Arrays.asList("**/*$*");

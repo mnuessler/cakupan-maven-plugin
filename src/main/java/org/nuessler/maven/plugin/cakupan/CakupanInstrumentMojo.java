@@ -71,6 +71,7 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
      */
     private List<String> xsltExcludes;
 
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         File instrumentDestDir = getInstrumentDestDir();
         getLog().info("instrumentDestDir: " + instrumentDestDir);
