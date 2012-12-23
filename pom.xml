@@ -576,7 +576,7 @@
 		<!-- Cakupan dependencies -->
 		<dependency>
 			<groupId>com.cakupan</groupId>
-			<artifactId>cakupan-xslt</artifactId>
+			<artifactId>cakupan</artifactId>
 			<version>1.5</version>
 		</dependency>
 		<dependency>
