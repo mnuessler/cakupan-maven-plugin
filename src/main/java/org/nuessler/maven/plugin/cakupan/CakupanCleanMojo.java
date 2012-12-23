@@ -29,6 +29,7 @@ import org.apache.maven.plugin.MojoFailureException;
  */
 public class CakupanCleanMojo extends AbstractCakupanMojo {
 
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         File instrumentFile = new File(getInstrumentDestDir(),
                 COVERAGE_FILE_NAME);

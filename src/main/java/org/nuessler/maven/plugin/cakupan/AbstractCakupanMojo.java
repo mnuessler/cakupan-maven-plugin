@@ -23,7 +23,7 @@ import org.apache.maven.project.MavenProject;
 /**
  * Base class for Cakupan mojos.
  * 
- * @author Matthias Nuesseler
+ * @author Matthias Nuessler
  */
 public abstract class AbstractCakupanMojo extends AbstractMojo {
 
@@ -31,7 +31,7 @@ public abstract class AbstractCakupanMojo extends AbstractMojo {
 
     /**
      * The Maven Project Object
-     * 
+     *
      * @parameter expression="${project}"
      * @required
      * @readonly
