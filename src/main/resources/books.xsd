@@ -16,60 +16,61 @@
     limitations under the License.
 
 -->
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/books" xmlns:tns="http://www.example.org/books"
-	elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/books" xmlns:tns="http://www.example.org/books" elementFormDefault="qualified">
 
-	<!-- definition of simple types -->
-	<simpleType name="isbnType">
-		<restriction base="string">
-			<pattern value="[0-9]{10}" />
-		</restriction>
-	</simpleType>
-	
-	<!-- definition of attributes -->
-	<attribute name="id" type="positiveInteger" />
-	<attribute name="publicationDate" type="date" />
+    <!-- definition of simple types -->
+    <simpleType name="isbnType">
+        <restriction base="string">
+            <pattern value="[0-9]{10}" />
+        </restriction>
+    </simpleType>
 
-	<!-- definition of simple elements -->
-	<element name="title" type="string" />
-	<element name="pages" type="positiveInteger" />
-	<element name="publisher" type="string" />
-	<element name="author" type="string" />
-	<element name="isbn-10" type="tns:isbnType" />
+    <!-- definition of attributes -->
+    <attribute name="id" type="positiveInteger" />
+    <attribute name="publicationDate" type="date" />
 
-	<!-- definition of complex types -->
-	<complexType name="authorsType">
-		<sequence>
-			<element ref="tns:author" maxOccurs="unbounded" />
-		</sequence>
-	</complexType>
-	<complexType name="editionType">
-		<simpleContent>
-			<extension base="string">
-				<attribute ref="tns:publicationDate" />
-			</extension>
-		</simpleContent>
-	</complexType>
-	<complexType name="bookType">
-		<sequence>
-			<element ref="tns:title" />
-			<element ref="tns:authors" />
-			<element ref="tns:pages" minOccurs="0" />
-			<element ref="tns:edition" minOccurs="0" />
-			<element ref="tns:isbn-10" minOccurs="0" />
-		</<sequence>>
-		<attribute name="id" type="positiveInteger" />
-	</complexType>
-	<complexType name="booksType">
-		<sequence>
-			<element ref="tns:book" maxOccurs="unbounded" />
-		</sequence>
-	</complexType>
+    <!-- definition of simple elements -->
+    <element name="title" type="string" />
+    <element name="pages" type="positiveInteger" />
+    <element name="publisher" type="string" />
+    <element name="author" type="string" />
+    <element name="isbn-10" type="tns:isbnType" />
 
-	<!-- definition of complex elements -->
-	<element name="authors" type="tns:authorsType" />
-	<element name="edition" type="tns:editionType" />
-	<element name="book" type="tns:bookType" />
-	<element name="books" type="tns:booksType" />
+    <!-- definition of complex types -->
+    <complexType name="authorsType">
+        <sequence>
+            <element ref="tns:author" maxOccurs="unbounded" />
+        </sequence>
+    </complexType>
+    <complexType name="editionType">
+        <simpleContent>
+            <extension base="string">
+                <attribute ref="tns:publicationDate" />
+            </extension>
+        </simpleContent>
+    </complexType>
+    <complexType name="bookType">
+        <sequence>
+            <element ref="tns:title" />
+            <element ref="tns:authors" />
+            <element ref="tns:pages" minOccurs="0" />
+            <element ref="tns:edition" minOccurs="0" />
+            <element ref="tns:isbn-10" minOccurs="0" />
+            </
+            <sequence>
+                >
+                <attribute name="id" type="positiveInteger" />
+    </complexType>
+    <complexType name="booksType">
+        <sequence>
+            <element ref="tns:book" maxOccurs="unbounded" />
+        </sequence>
+    </complexType>
+
+    <!-- definition of complex elements -->
+    <element name="authors" type="tns:authorsType" />
+    <element name="edition" type="tns:editionType" />
+    <element name="book" type="tns:bookType" />
+    <element name="books" type="tns:booksType" />
 
 </schema>

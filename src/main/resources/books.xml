@@ -17,58 +17,58 @@
 
 -->
 <books xmlns="http://www.example.org/books">
-	<book id="1">
-		<title>Clean Code: A Handbook of Agile Software Craftsmanship</title>
-		<authors>
-			<author>Robert C. Martin</author>
-		</authors>
-		<pages>464</pages>
-		<publisher>Prentice Hall</publisher>
-		<edition publication-date="August 11, 2008">1</edition>
-		<isbn-10>0132350882</isbn-10>
-	</book>
-	<book id="2">
-		<title>Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation</title>
-		<authors>
-			<author>Jez Humble</author>
-			<author>David Farley</author>
-		</authors>
-		<pages>512</pages>
-		<publisher>Addison-Wesley Professional</publisher>
-		<edition publication-date="August 6, 2010">1</edition>
-		<isbn-10>0321601912</isbn-10>
-	</book>
-	<book id="3">
-		<title>Programming Ruby 1.9: The Pragmatic Programmers' Guide</title>
-		<authors>
-			<author>Dave Thomas</author>
-			<author>Chad Fowler</author>
-			<author>Andy Hunt</author>
-		</authors>
-		<pages>1000</pages>
-		<publisher>Pragmatic Bookshelf</publisher>
-		<edition publication-date="April 28, 2009">3</edition>
-		<isbn-10>1934356085</isbn-10>
-	</book>
-	<book id="4">
-		<title>Web Operations: Keeping the Data On Time</title>
-		<authors>
-			<author>John Allspaw</author>
-			<author>Jesse Robbins</author>
-		</authors>
-		<pages>336</pages>
-		<publisher>O'Reilly Media</publisher>
-		<edition publication-date="June 28, 2010">1</edition>
-		<isbn-10>1449377440</isbn-10>
-	</book>
-	<book id="5">
-		<title>Ruby on Rails 3 Tutorial: Learn Rails by Example</title>
-		<authors>
-			<author>Michael Hartl</author>
-		</authors>
-		<pages>576</pages>
-		<publisher>Addison-Wesley Professional</publisher>
-		<edition publication-date="December 26, 2010">1</edition>
-		<isbn-10>0321743121</isbn-10>
-	</book>
+    <book id="1">
+        <title>Clean Code: A Handbook of Agile Software Craftsmanship</title>
+        <authors>
+            <author>Robert C. Martin</author>
+        </authors>
+        <pages>464</pages>
+        <publisher>Prentice Hall</publisher>
+        <edition publication-date="August 11, 2008">1</edition>
+        <isbn-10>0132350882</isbn-10>
+    </book>
+    <book id="2">
+        <title>Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation</title>
+        <authors>
+            <author>Jez Humble</author>
+            <author>David Farley</author>
+        </authors>
+        <pages>512</pages>
+        <publisher>Addison-Wesley Professional</publisher>
+        <edition publication-date="August 6, 2010">1</edition>
+        <isbn-10>0321601912</isbn-10>
+    </book>
+    <book id="3">
+        <title>Programming Ruby 1.9: The Pragmatic Programmers' Guide</title>
+        <authors>
+            <author>Dave Thomas</author>
+            <author>Chad Fowler</author>
+            <author>Andy Hunt</author>
+        </authors>
+        <pages>1000</pages>
+        <publisher>Pragmatic Bookshelf</publisher>
+        <edition publication-date="April 28, 2009">3</edition>
+        <isbn-10>1934356085</isbn-10>
+    </book>
+    <book id="4">
+        <title>Web Operations: Keeping the Data On Time</title>
+        <authors>
+            <author>John Allspaw</author>
+            <author>Jesse Robbins</author>
+        </authors>
+        <pages>336</pages>
+        <publisher>O'Reilly Media</publisher>
+        <edition publication-date="June 28, 2010">1</edition>
+        <isbn-10>1449377440</isbn-10>
+    </book>
+    <book id="5">
+        <title>Ruby on Rails 3 Tutorial: Learn Rails by Example</title>
+        <authors>
+            <author>Michael Hartl</author>
+        </authors>
+        <pages>576</pages>
+        <publisher>Addison-Wesley Professional</publisher>
+        <edition publication-date="December 26, 2010">1</edition>
+        <isbn-10>0321743121</isbn-10>
+    </book>
 </books>

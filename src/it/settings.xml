@@ -18,42 +18,42 @@
 -->
 <settings>
 
-	<pluginGroups>
-		<pluginGroup>org.nuessler.maven.plugins</pluginGroup>
-	</pluginGroups>
+    <pluginGroups>
+        <pluginGroup>org.nuessler.maven.plugins</pluginGroup>
+    </pluginGroups>
 
-	<!-- Use the local repository as a remote repository to avoid re-download of dependencies from Maven central -->
-	<profiles>
-		<profile>
-			<id>it-repo</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<repositories>
-				<repository>
-					<id>local.central</id>
-					<url>@localRepositoryUrl@</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</repository>
-			</repositories>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>local.central</id>
-					<url>@localRepositoryUrl@</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
-		</profile>
-	</profiles>
+    <!-- Use the local repository as a remote repository to avoid re-download of dependencies from Maven central -->
+    <profiles>
+        <profile>
+            <id>it-repo</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>local.central</id>
+                    <url>@localRepositoryUrl@</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>local.central</id>
+                    <url>@localRepositoryUrl@</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
 
 </settings>
