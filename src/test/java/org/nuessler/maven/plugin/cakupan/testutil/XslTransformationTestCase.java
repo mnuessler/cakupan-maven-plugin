@@ -25,6 +25,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 import org.w3c.dom.Document;
+import org.xml.sax.EntityResolver;
 
 public abstract class XslTransformationTestCase {
 
@@ -41,7 +42,7 @@ public abstract class XslTransformationTestCase {
         if (schema != null) {
             String xml = DomUtil.documentToString(transformedXml);
             try {
-                new XsdValidator(schema).validate(xml);
+                new XsdValidator(getEntityResolver(), schema).validate(xml);
             } catch (ValidationException e) {
                 errorCollector.addError(e);
             }
@@ -63,5 +64,18 @@ public abstract class XslTransformationTestCase {
     protected abstract File getTargetSchemaFile();
 
     protected abstract void checkResult(Document doc);
+
+    /**
+     * Return the {@link EntityResolver} to be used by the validator. May be
+     * overridden to provide a custom {@link EntityResolver}. May return
+     * <code>null</code> if the default implematation should be used.
+     *
+     * @return the {@link EntityResolver} to be used by the {@link XsdValidator}
+     *         or <code>null</code> if the default implementation should be
+     *         used.
+     */
+    protected EntityResolver getEntityResolver() {
+        return null;
+    }
 
 }

@@ -17,18 +17,14 @@ package org.nuessler.maven.plugin.cakupan.testutil;
 
 import java.io.File;
 import java.io.StringReader;
-import java.util.List;
 
 import javax.xml.bind.ValidationException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-
-import com.google.common.collect.Lists;
 
 public class XsdValidator {
     private static final String JAXP_SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
@@ -37,8 +33,14 @@ public class XsdValidator {
 
     private final File[] schemas;
     private ErrorHandler errorHandler;
+    private final EntityResolver entityResolver;
 
     public XsdValidator(File... schema) {
+        this(null, schema);
+    }
+
+    public XsdValidator(EntityResolver entityResolver, File... schema) {
+        this.entityResolver = entityResolver;
         this.schemas = schema;
     }
 
@@ -50,38 +52,16 @@ public class XsdValidator {
         try {
             factory.setAttribute(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
             factory.setAttribute(JAXP_SCHEMA_SOURCE, schemas);
-            DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-            documentBuilder.setErrorHandler(errorHandler);
-            documentBuilder.parse(new InputSource(new StringReader(xml)));
+            //factory.sets
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            builder.setErrorHandler(errorHandler);
+            builder.setEntityResolver(entityResolver);
+            InputSource input = new InputSource(new StringReader(xml));
+            builder.parse(input);
         } catch (IllegalArgumentException e) {
             throw new ValidationException("XML parser does not seem to support JAXP 1.2");
         } catch (Exception e) {
             throw new ValidationException(e);
-        }
-    }
-
-    private static class CollectingErrorHandler implements ErrorHandler {
-        private final List<SAXParseException> errors = Lists.newArrayList();
-        private final List<SAXParseException> fatalErrors = Lists.newArrayList();
-        private final List<SAXParseException> warnings = Lists.newArrayList();
-
-        @Override
-        public void error(SAXParseException e) throws SAXException {
-            errors.add(e);
-        }
-
-        @Override
-        public void fatalError(SAXParseException e) throws SAXException {
-            fatalErrors.add(e);
-        }
-
-        @Override
-        public void warning(SAXParseException e) throws SAXException {
-            warnings.add(e);
-        }
-
-        public boolean hasErrors() {
-            return !(errors.isEmpty() && fatalErrors.isEmpty());
         }
     }
 

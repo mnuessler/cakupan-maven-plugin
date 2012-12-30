@@ -19,7 +19,6 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -29,7 +28,8 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 /**
- * Provides utility methods to convert a DOM document into a string and vice versa.
+ * Provides utility methods to convert a DOM document into a string and vice
+ * versa.
  *
  * @author Matthias Nuessler
  */
@@ -39,6 +39,16 @@ public final class DomUtil {
         // prevent instantiation
     }
 
+    /**
+     * Converts an XML string into a DOM {@link Document}.
+     *
+     * @param xml
+     *            the XML string to convert
+     * @return the equivalent XML DOM document
+     * @throws Exception
+     *             if the given string does not contain valid XML or conversion
+     *             fails for other reasons
+     */
     public static Document stringToDocument(String xml) throws Exception {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
@@ -46,13 +56,21 @@ public final class DomUtil {
         return factory.newDocumentBuilder().parse(input);
     }
 
+    /**
+     * Converts a DOM {@link Document} into a string.
+     *
+     * @param doc
+     *            the DOM document to convert
+     * @return the XML document as a string
+     * @throws TransformerException
+     *             if conversion fails
+     */
     public static String documentToString(Document doc) throws TransformerException {
         DOMSource source = new DOMSource(doc);
         StringWriter writer = new StringWriter();
         StreamResult result = new StreamResult(writer);
         TransformerFactory factory = TransformerFactory.newInstance();
-        Transformer transformer = factory.newTransformer();
-        transformer.transform(source, result);
+        factory.newTransformer().transform(source, result);
         return writer.toString();
     }
 
