@@ -17,12 +17,8 @@ package org.nuessler.maven.plugin.cakupan.testutil;
 
 import java.io.File;
 import java.io.StringWriter;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Map;
 
 import javax.xml.bind.ValidationException;
-import javax.xml.namespace.NamespaceContext;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -34,8 +30,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 import org.w3c.dom.Document;
-
-import com.google.common.collect.HashBiMap;
 
 public abstract class XslTransformationTestCase {
 
@@ -84,40 +78,5 @@ public abstract class XslTransformationTestCase {
     protected abstract File getTargetSchemaFile();
 
     protected abstract void checkResult(Document doc);
-
-    public static class SimpleNamespaceContext implements NamespaceContext {
-        private HashBiMap<String, String> namespaces = HashBiMap.create();
-
-        public SimpleNamespaceContext() {
-        }
-
-        public SimpleNamespaceContext(String prefix, String namespaceURI) {
-            namespaces.put(prefix, namespaceURI);
-        }
-
-        public SimpleNamespaceContext(Map<String, String> prefixNamespaceMap) {
-            namespaces.putAll(prefixNamespaceMap);
-        }
-
-        public SimpleNamespaceContext put(String prefix, String namespaceURI) {
-            namespaces.put(prefix, namespaceURI);
-            return this;
-        }
-
-        @Override
-        public String getNamespaceURI(String prefix) {
-            return namespaces.get(prefix);
-        }
-
-        @Override
-        public String getPrefix(String namespaceURI) {
-            return namespaces.inverse().get(namespaceURI);
-        }
-
-        @Override
-        public Iterator<String> getPrefixes(String namespaceURI) {
-            return Collections.singletonList(getPrefix(namespaceURI)).iterator();
-        }
-    }
 
 }

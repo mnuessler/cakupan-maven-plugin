@@ -17,7 +17,6 @@ package org.nuessler.maven.plugin.cakupan.testutil;
 
 import java.io.File;
 import java.io.StringReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.ValidationException;
@@ -29,12 +28,14 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import com.google.common.collect.Lists;
+
 public class XsdValidator {
     private static final String JAXP_SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
     private static final String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
     private static final String W3C_XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
 
-    private File[] schemas;
+    private final File[] schemas;
     private ErrorHandler errorHandler;
 
     public XsdValidator(File... schema) {
@@ -60,9 +61,9 @@ public class XsdValidator {
     }
 
     private static class CollectingErrorHandler implements ErrorHandler {
-        private List<SAXParseException> errors = new ArrayList<SAXParseException>();
-        private List<SAXParseException> fatalErrors = new ArrayList<SAXParseException>();
-        private List<SAXParseException> warnings = new ArrayList<SAXParseException>();
+        private final List<SAXParseException> errors = Lists.newArrayList();
+        private final List<SAXParseException> fatalErrors = Lists.newArrayList();
+        private final List<SAXParseException> warnings = Lists.newArrayList();
 
         @Override
         public void error(SAXParseException e) throws SAXException {
@@ -83,4 +84,5 @@ public class XsdValidator {
             return !(errors.isEmpty() && fatalErrors.isEmpty());
         }
     }
+
 }
