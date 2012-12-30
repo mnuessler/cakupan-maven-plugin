@@ -129,4 +129,5 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
             XSLTCakupanUtil.cleanCoverageStats();
         }
     }
+
 }

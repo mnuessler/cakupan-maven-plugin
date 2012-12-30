@@ -29,7 +29,7 @@ import org.junit.Test;
 
 /**
  * Test for {@link CakupanCleanMojo}.
- * 
+ *
  * @author Matthias Nuessler
  */
 public class CakupanCleanMojoTest {
@@ -54,8 +54,7 @@ public class CakupanCleanMojoTest {
     public void shouldDeleteCoverageFileIfExists() throws Exception {
         // Given
         cvrgFile.createNewFile();
-        ReflectionUtils.setVariableValueInObject(mojo, "instrumentDestDir",
-                destDir);
+        ReflectionUtils.setVariableValueInObject(mojo, "instrumentDestDir", destDir);
 
         // When
         mojo.execute();
@@ -67,8 +66,7 @@ public class CakupanCleanMojoTest {
     @Test
     public void shouldDoNothingIfFileDoesNotExist() throws Exception {
         // Given
-        ReflectionUtils.setVariableValueInObject(mojo, "instrumentDestDir",
-                destDir);
+        ReflectionUtils.setVariableValueInObject(mojo, "instrumentDestDir", destDir);
 
         // When
         mojo.execute();

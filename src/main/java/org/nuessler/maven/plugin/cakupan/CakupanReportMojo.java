@@ -33,7 +33,7 @@ import com.cakupan.xslt.util.XSLTCakupanUtil;
 
 /**
  * Generate a test coverage report for XSLT files.
- * 
+ *
  * @author Matthias Nuessler
  * @goal cakupan
  * @execute phase="test" lifecycle="cakupan"
@@ -42,14 +42,14 @@ public class CakupanReportMojo extends AbstractMavenReport {
 
     /**
      * <i>Maven Internal</i>: The Doxia Site Renderer.
-     * 
+     *
      * @component
      */
     private Renderer siteRenderer;
 
     /**
      * <i>Maven Internal</i>: Project to interact with.
-     * 
+     *
      * @parameter default-value="${project}"
      * @required
      * @readonly
@@ -58,7 +58,7 @@ public class CakupanReportMojo extends AbstractMavenReport {
 
     /**
      * The output directory for the report.
-     * 
+     *
      * @parameter default-value="${project.reporting.outputDirectory}/cakupan"
      * @required
      */
@@ -122,8 +122,7 @@ public class CakupanReportMojo extends AbstractMavenReport {
     }
 
     @Override
-    protected void executeReport(final Locale locale)
-            throws MavenReportException {
+    protected void executeReport(final Locale locale) throws MavenReportException {
         if (!canGenerateReport()) {
             return;
         }
@@ -134,8 +133,7 @@ public class CakupanReportMojo extends AbstractMavenReport {
         getLog().info("report output dir: " + getOutputDirectory());
 
         try {
-            Collection<File> coverageFiles = FileUtils.listFiles(
-                    instrumentDestDir, new String[] { "xml" }, false);
+            Collection<File> coverageFiles = FileUtils.listFiles(instrumentDestDir, new String[] { "xml" }, false);
             for (File file : coverageFiles) {
                 FileUtils.copyFileToDirectory(file, outputDirectory);
             }
@@ -150,25 +148,19 @@ public class CakupanReportMojo extends AbstractMavenReport {
             if (destFile.exists()) {
                 destFile.delete();
             }
-            FileUtils.moveFile(new File(outputDirectory, "xslt_summary.html"),
-                    destFile);
-	    Collection<File> datFiles = FileUtils.listFiles(
-                    outputDirectory, new String[] { "dat" }, false);
-	    for (File file : datFiles) {
+            FileUtils.moveFile(new File(outputDirectory, "xslt_summary.html"), destFile);
+            Collection<File> datFiles = FileUtils.listFiles(outputDirectory, new String[] { "dat" }, false);
+            for (File file : datFiles) {
                 file.delete();
             }
         } catch (XSLTCoverageException e) {
             if (e.getRefId() == XSLTCoverageException.NO_COVERAGE_FILE) {
-                getLog().error(
-                        "No coverage files found in "
-                                + outputDirectory.getPath());
+                getLog().error("No coverage files found in " + outputDirectory.getPath());
             } else {
-                throw new MavenReportException(
-                        "Failed to create the Cakupan coverage report", e);
+                throw new MavenReportException("Failed to create the Cakupan coverage report", e);
             }
         } catch (IOException e) {
-            throw new MavenReportException(
-                    "Failed to move coverage report to correct location", e);
+            throw new MavenReportException("Failed to move coverage report to correct location", e);
         }
         getLog().info("End Cakupan report mojo");
     }
@@ -178,9 +170,7 @@ public class CakupanReportMojo extends AbstractMavenReport {
         // the output directory is set differently by Maven, depending if the
         // mojo is executed directly via cakupan:cakupan or as part of the site
         // generation
-        if ((reportOutputDirectory != null)
-                && (!reportOutputDirectory.getAbsolutePath()
-                        .endsWith("cakupan"))) {
+        if ((reportOutputDirectory != null) && (!reportOutputDirectory.getAbsolutePath().endsWith("cakupan"))) {
             this.outputDirectory = new File(reportOutputDirectory, "cakupan");
         } else {
             this.outputDirectory = reportOutputDirectory;

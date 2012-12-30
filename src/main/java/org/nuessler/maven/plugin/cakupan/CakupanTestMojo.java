@@ -218,4 +218,5 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
             testExcludes = Arrays.asList("**/*$*");
         }
     }
+
 }

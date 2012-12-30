@@ -22,7 +22,7 @@ import org.apache.maven.plugin.MojoFailureException;
 
 /**
  * Clean up cakupan-maven-plugin files.
- * 
+ *
  * @author Matthias Nuessler
  * @goal clean
  * @phase clean
@@ -31,8 +31,7 @@ public class CakupanCleanMojo extends AbstractCakupanMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        File instrumentFile = new File(getInstrumentDestDir(),
-                COVERAGE_FILE_NAME);
+        File instrumentFile = new File(getInstrumentDestDir(), COVERAGE_FILE_NAME);
         if (instrumentFile.exists() && instrumentFile.isFile()) {
             boolean success = instrumentFile.delete();
             if (!success) {
@@ -40,4 +39,5 @@ public class CakupanCleanMojo extends AbstractCakupanMojo {
             }
         }
     }
+
 }
