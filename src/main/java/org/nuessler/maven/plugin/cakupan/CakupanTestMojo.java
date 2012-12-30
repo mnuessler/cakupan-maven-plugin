@@ -27,7 +27,6 @@ import static org.twdata.maven.mojoexecutor.MojoExecutor.plugin;
 import static org.twdata.maven.mojoexecutor.MojoExecutor.version;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -44,10 +43,11 @@ import org.twdata.maven.mojoexecutor.MojoExecutor.Element;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 
 /**
  * Run transformation tests using Surefire.
- * 
+ *
  * @author Matthias Nuessler
  * @phase test
  * @goal test
@@ -58,7 +58,7 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
 
     /**
      * The Maven Session Object
-     * 
+     *
      * @parameter expression="${session}"
      * @required
      * @readonly
@@ -67,7 +67,7 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
 
     /**
      * The Maven PluginManager Object
-     * 
+     *
      * @component
      * @required
      */
@@ -75,12 +75,12 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
 
     /**
      * <i>Maven Internal</i>: List of artifacts for the plugin.
-     * 
+     *
      * @parameter default-value="${plugin.artifacts}"
      * @required
      * @readonly
      */
-    protected List<Artifact> pluginArtifacs;
+    protected List<Artifact> pluginArtifacts;
 
     /**
      * A list of &lt;include> elements specifying the tests (by pattern) that
@@ -91,7 +91,7 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
      * &nbsp;&lt;include>**&#47;*XsltTest.java&lt;/include><br/>
      * &lt;/testIncludes><br/>
      * </code>
-     * 
+     *
      * @parameter
      */
     private List<String> testIncludes;
@@ -105,7 +105,7 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
      * &nbsp;&lt;exclude>**&#47;*$*&lt;/exclude><br/>
      * &lt;/testExcludes><br/>
      * </code> (which excludes all inner classes).<br>
-     * 
+     *
      * @parameter
      */
     private List<String> testExcludes;
@@ -113,7 +113,7 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
     /**
      * Set this to "true" to ignore a failure during testing. Its use is NOT
      * RECOMMENDED, but quite convenient on occasion.
-     * 
+     *
      * @parameter default-value="false"
      *            expression="${maven.test.failure.ignore}"
      */
@@ -127,7 +127,7 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
      * "-Dtest=MyXsltTest" to run a single test called "foo/MyXsltTest.java".<br/>
      * This parameter overrides the <code>includes/excludes</code> parameter.
      * <p/>
-     * 
+     *
      * @parameter expression="${test}"
      */
     private String test;
@@ -156,7 +156,7 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
     private Element[] createConfigurationElements() throws MojoFailureException {
         List<String> classpathElements = Arrays.asList(getAdditionalClasspathElements());
         getLog().info("Augmenting test classpath with cakupan and its dependencies: " + classpathElements);
-        List<Element> config = new ArrayList<Element>(6);
+        List<Element> config = Lists.newArrayListWithExpectedSize(6);
         config.add(createElementWithChildren("includes", "include", testIncludes));
         config.add(createElementWithChildren("excludes", "exclude", testExcludes));
         config.add(createElementWithChildren("additionalClasspathElements", "additionalClasspathElement",
@@ -176,8 +176,8 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
     }
 
     private String[] getAdditionalClasspathElements() {
-        final List<String> cakupanDepArtifactIds = Arrays.asList("cakupan-xslt", "xstream", "saxon", "xalan", "xpp3");
-        Collection<Artifact> cakupanArtifacts = Collections2.filter(pluginArtifacs, new Predicate<Artifact>() {
+        final List<String> cakupanDepArtifactIds = Arrays.asList("cakupan", "xstream", "saxon", "xalan", "xpp3");
+        Collection<Artifact> cakupanArtifacts = Collections2.filter(pluginArtifacts, new Predicate<Artifact>() {
             @Override
             public boolean apply(Artifact input) {
                 return cakupanDepArtifactIds.contains(input.getArtifactId());

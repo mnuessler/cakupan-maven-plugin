@@ -33,7 +33,7 @@ import com.cakupan.xslt.util.XSLTCakupanUtil;
 
 /**
  * Instrument XSLT files for test coverage.
- * 
+ *
  * @author Matthias Nuessler
  * @goal instrument
  * @phase process-test-classes
@@ -54,7 +54,7 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
      * &nbsp;&lt;include>**&#47;*.xsl&lt;/include><br/>
      * &lt;/xsltIncludes><br/>
      * </code>
-     * 
+     *
      * @parameter
      */
     private List<String> xsltIncludes;
@@ -67,7 +67,7 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
      * &nbsp;&lt;exclude>**&#47;*.xsl&lt;/exclude><br/>
      * &lt;/xsltExcludes><br/>
      * </code>
-     * 
+     *
      * @parameter
      */
     private List<String> xsltExcludes;
@@ -83,7 +83,7 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
         }
 
         if (CollectionUtils.isEmpty(xsltIncludes)) {
-            getLog().debug("No xslt-includes give, using defaults");
+            getLog().debug("No xslt-includes given, using defaults");
             xsltIncludes = Collections.singletonList("**/*.xsl");
         } else {
             getLog().debug("XSLT includes: " + StringUtils.join(xsltIncludes.iterator(), ", "));
