@@ -408,8 +408,9 @@
                         <exclude>LICENSE</exclude>
                         <exclude>NOTICE</exclude>
                         <exclude>.gitignore</exclude>
+                        <exclude>.travis.yml</exclude>
                         <exclude>README.md</exclude>
-                        <exclude>**/xhtml-basic.xsd</exclude>
+                        <exclude>**/xhtml/*.xsd</exclude>
                     </excludes>
                     <mapping>
                         <vm>XML_STYLE</vm>
