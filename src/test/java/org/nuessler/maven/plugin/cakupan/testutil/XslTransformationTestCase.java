@@ -16,14 +16,9 @@
 package org.nuessler.maven.plugin.cakupan.testutil;
 
 import java.io.File;
-import java.io.StringWriter;
 
 import javax.xml.bind.ValidationException;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.hamcrest.Matcher;
 import org.junit.Rule;
@@ -44,23 +39,13 @@ public abstract class XslTransformationTestCase {
 
         File schema = getTargetSchemaFile();
         if (schema != null) {
-            String xml = documentToString(transformedXml);
+            String xml = DomUtil.documentToString(transformedXml);
             try {
                 new XsdValidator(schema).validate(xml);
             } catch (ValidationException e) {
                 errorCollector.addError(e);
             }
         }
-    }
-
-    private String documentToString(Document doc) throws TransformerException {
-        DOMSource domSource = new DOMSource(doc);
-        StringWriter writer = new StringWriter();
-        StreamResult result = new StreamResult(writer);
-        TransformerFactory tf = TransformerFactory.newInstance();
-        Transformer transformer = tf.newTransformer();
-        transformer.transform(domSource, result);
-        return writer.toString();
     }
 
     protected <T> void assertThat(T value, Matcher<T> matcher) {
