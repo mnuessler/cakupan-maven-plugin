@@ -409,6 +409,7 @@
                         <exclude>.travis.yml</exclude>
                         <exclude>README.md</exclude>
                         <exclude>**/xhtml/*.xsd</exclude>
+                        <exclude>**/invoker.properties</exclude>
                     </excludes>
                     <mapping>
                         <vm>XML_STYLE</vm>
