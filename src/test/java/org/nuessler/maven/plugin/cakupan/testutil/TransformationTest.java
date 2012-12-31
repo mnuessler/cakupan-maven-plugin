@@ -40,16 +40,17 @@ import com.google.common.collect.Maps;
 public class TransformationTest extends XslTransformationTestCase {
     private static final String TRUE = Boolean.TRUE.toString();
     private static final String SCHEMA_PATH = "/schemas/xhtml/";
+    private static final String TESTUTIL_PATH = "/org/nuessler/maven/plugin/cakupan/testutil";
     private static Map<String, String> systemIdToResource = createSystemIdToResourceMap();
 
     @Override
     protected File getTransformationFile() {
-        return resourceNameToFile("/books.xsl");
+        return resourceNameToFile(TESTUTIL_PATH + "/books.xsl");
     }
 
     @Override
     protected File getXmlInputFile() {
-        return resourceNameToFile("/books.xml");
+        return resourceNameToFile(TESTUTIL_PATH + "/books.xml");
     }
 
     @Override
