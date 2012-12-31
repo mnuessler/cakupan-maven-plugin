@@ -1,0 +1,51 @@
+/**
+ * Copyright 2011 Matthias Nuessler <m.nuessler@web.de>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.nuessler.maven.plugin.cakupan.it
+
+import java.io.File
+
+import javax.xml.transform.Source
+import javax.xml.transform.Templates
+import javax.xml.transform.Transformer
+import javax.xml.transform.TransformerFactory
+import javax.xml.transform.stream.StreamResult
+import javax.xml.transform.stream.StreamSource
+
+import org.junit.Assert
+import org.junit.Test
+import org.nuessler.maven.plugin.cakupan.testutil.DomUtil
+import org.nuessler.maven.plugin.cakupan.testutil.XslTransformationTestCase
+import org.w3c.dom.Document
+
+class TransformationTest extends XslTransformationTestCase {
+
+    protected File getTransformationFile() {
+        return new File(getClass().getResource("/sample.xsl").getFile())
+    }
+
+    protected File getXmlInputFile() {
+        return new File(getClass().getResource("/sample.xml").getFile())
+    }
+
+    protected File getTargetSchemaFile() {
+        return null
+    }
+
+    protected void checkResult(Document doc) {
+        println('Check result: ' + DomUtil.documentToString(doc))
+    }
+
+}

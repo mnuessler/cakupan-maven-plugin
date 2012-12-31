@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
     Copyright 2011 Matthias Nuessler <m.nuessler@web.de>
@@ -15,30 +16,29 @@
     limitations under the License.
 
 -->
-<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 
-	<channel>
-		<title>Feed title</title>
-		<link>http://xyz.com/sample-feed.xml</link>
-		<description>A sample feed</description>
-		<language>en-en</language>
-		<copyright>Matthias Nuessler</copyright>
-		<pubDate>Sun, 06 Nov 2011 15:02:00</pubDate>
-		<image>
-			<url>URL einer einzubindenden Grafik</url>
-			<title>Bildtitel</title>
-			<link>URL, mit der das Bild verknüpft ist</link>
-		</image>
+    <channel>
+        <title>Feed title</title>
+        <link>http://xyz.com/sample-feed.xml</link>
+        <description>A sample feed</description>
+        <language>en-en</language>
+        <copyright>Matthias Nuessler</copyright>
+        <pubDate>Sun, 06 Nov 2011 15:02:00</pubDate>
+        <image>
+            <url>URL einer einzubindenden Grafik</url>
+            <title>Bildtitel</title>
+            <link>URL, mit der das Bild verknüpft ist</link>
+        </image>
 
-		<item>
-			<title>Item title</title>
-			<description>A sample item</description>
-			<link></link>
-			<author>Autor des Artikels, E-Mail-Adresse</author>
-			<guid>Eindeutige Identifikation des Eintrages</guid>
-			<pubDate>Datum des Items</pubDate>
-		</item>
-	</channel>
+        <item>
+            <title>Item title</title>
+            <description>A sample item</description>
+            <link></link>
+            <author>Autor des Artikels, E-Mail-Adresse</author>
+            <guid>Eindeutige Identifikation des Eintrages</guid>
+            <pubDate>Datum des Items</pubDate>
+        </item>
+    </channel>
 
 </rss>

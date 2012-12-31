@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
 
     Copyright 2011 Matthias Nuessler <m.nuessler@web.de>
@@ -15,19 +16,18 @@
     limitations under the License.
 
 -->
-<?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	<xsl:template match="/">
-		<html>
-			<xsl:apply-templates />
-		</html>
-	</xsl:template>
-	<xsl:template match="PERIODIC_TABLE">
-		<body>
-			<xsl:apply-templates />
-		</body>
-	</xsl:template>
-	<xsl:template match="ATOM">
-		An Atom
-	</xsl:template>
+    <xsl:template match="/">
+        <html>
+            <xsl:apply-templates />
+        </html>
+    </xsl:template>
+    <xsl:template match="PERIODIC_TABLE">
+        <body>
+            <xsl:apply-templates />
+        </body>
+    </xsl:template>
+    <xsl:template match="ATOM">
+        An Atom
+    </xsl:template>
 </xsl:stylesheet>

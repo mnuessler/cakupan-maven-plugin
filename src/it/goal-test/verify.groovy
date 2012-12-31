@@ -13,11 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertTrue
 
-def instrumentFile = new File(basedir, 'target/cakupan-instrument/coverage.xml');
+def outDir = new File(basedir, 'target/cakupan-instrumentX')
 
-assert instrumentFile.exists();
+def instrumentFile = new File(outDir, 'coverage.xml')
+def traceFile = new File(outDir, 'sample.xsl.xml')
+def datFile = new File(outDir, 'sample.xsl.dat')
 
-return true;
+[instrumentFile, traceFile, datFile].each { file ->
+    println "Checking that file exists: $file"
+    assertTrue("File does not exist: '$file'", file.exists())
+}
+
+return true
