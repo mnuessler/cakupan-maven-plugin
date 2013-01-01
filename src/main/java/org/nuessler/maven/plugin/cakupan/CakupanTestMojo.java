@@ -43,6 +43,7 @@ import org.twdata.maven.mojoexecutor.MojoExecutor.Element;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -199,15 +200,15 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
         return classpathElements.toArray(new String[classpathElements.size()]);
     }
 
-    private Element createElementWithChildren(final String parentName, final String childName,
-            final List<String> children) {
-        Element[] includeElements = Collections2.transform(children, new Function<String, Element>() {
-            @Override
-            public Element apply(String input) {
-                return new Element(childName, input);
-            }
-        }).toArray(new Element[children.size()]);
-        return new Element(parentName, includeElements);
+    private Element createElementWithChildren(String parentName, final String childName, List<String> children) {
+        List<Element> includeElements = Lists.newArrayList(Iterables.transform(children,
+                new Function<String, Element>() {
+                    @Override
+                    public Element apply(String input) {
+                        return new Element(childName, input);
+                    }
+                }));
+        return new Element(parentName, includeElements.toArray(new Element[includeElements.size()]));
     }
 
     private void handleDefaults() {

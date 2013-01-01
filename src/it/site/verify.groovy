@@ -43,7 +43,7 @@ resourceFiles = [
     ].collect { new File(reportDir, it) }
 
 resourceFiles.each { file ->
-    assertTrue("File '$file' does not exits", file.exists())
+    assertTrue("File '$file' does not exist", file.exists())
     assertThat("File '$file' is empty", file.length(), greaterThan(0L))
 }
 

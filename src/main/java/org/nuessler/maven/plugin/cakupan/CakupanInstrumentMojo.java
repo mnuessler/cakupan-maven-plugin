@@ -81,6 +81,9 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
         if (!instrumentDestDir.exists()) {
             instrumentDestDir.mkdirs();
         }
+        if (!buildOutputDirectory.exists()) {
+            buildOutputDirectory.mkdirs();
+        }
 
         if (CollectionUtils.isEmpty(xsltIncludes)) {
             getLog().debug("No xslt-includes given, using defaults");
@@ -107,13 +110,13 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
         String[] includedFiles = scanner.getIncludedFiles();
 
         if (ArrayUtils.isEmpty(includedFiles)) {
-            getLog().info("No XSLT files found");
+            getLog().info("No XSLT files found in build output directory. Did you run 'mvn compile'?");
             return;
         }
 
         for (String includedFile : includedFiles) {
             try {
-                getLog().info("Instrumenting XSLT file " + includedFile);
+                getLog().info("Instrumenting XSLT file: " + includedFile);
                 instrumentXslt.initCoverageMap(new File(buildOutputDirectory, includedFile).getCanonicalPath());
             } catch (Exception e) {
                 getLog().error(e);
