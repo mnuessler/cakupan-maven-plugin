@@ -13,21 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertTrue;
 
 def instrumentFile = new File(basedir, 'target/cakupan-instrument/coverage.xml');
 def reportDir = new File(basedir, 'target/site/cakupan/');
-
-assert !instrumentFile.exists();
+def indexFile = new File(reportDir, 'index.html')
+def sampleXslReport = new File(reportDir, 'sample.xsl.html')
 
 assert reportDir.exists();
 assert reportDir.isDirectory();
 
-def File[] reportFiles = reportDir.listFiles();
-assert reportFiles.length > 0
-reportFiles.each {
-    assert it.length() > 0;
+assert indexFile.exists()
+assert indexFile.length() > 0
+
+assert sampleXslReport.exists()
+assert sampleXslReport.length() > 0
+
+resourceFiles = [
+    'blank.png',
+    'customsorttypes.js',
+    'downsimple.png',
+    'main.css',
+    'sortabletable.css',
+    'sortabletable.js',
+    'source-viewer.css',
+    'upsimple.png'
+    ].collect { new File(reportDir, it) }
+
+resourceFiles.each { file ->
+    assertTrue("File '$file' does not exits", file.exists())
+    assertThat("File '$file' is empty", file.length(), greaterThan(0L))
 }
 
 return true;

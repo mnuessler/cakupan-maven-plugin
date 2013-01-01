@@ -23,6 +23,15 @@
     <packaging>pom</packaging>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.nuessler.maven.plugins</groupId>
+                    <artifactId>cakupan-maven-plugin</artifactId>
+                    <version>@project.version@</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.gmaven</groupId>

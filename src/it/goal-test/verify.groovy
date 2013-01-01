@@ -15,7 +15,7 @@
  */
 import static org.junit.Assert.assertTrue
 
-def outDir = new File(basedir, 'target/cakupan-instrumentX')
+def outDir = new File(basedir, 'target/cakupan-instrument')
 
 def instrumentFile = new File(outDir, 'coverage.xml')
 def traceFile = new File(outDir, 'sample.xsl.xml')

@@ -47,7 +47,8 @@
             <description>Ticket 3 has been modified: Maven 3 compatibility
                 Edited By: Matthias Nuessler (mnuessler)
                 Status updated: u'in-progress' =&gt; u'closed'
-                _resolution updated: u'to-fix' =&gt; u'fixed'
+                _resolution updated: u'to-fix' =&gt;
+                u'fixed'
                 _milestone updated: u'0.4' =&gt; u'none'</description>
             <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matthias Nuessler</dc:creator>
             <pubDate>Thu, 03 Nov 2011 09:24:25 -0000</pubDate>
@@ -104,7 +105,8 @@
             <link>https://sourceforge.net/p/cakupan-maven/tickets/3/</link>
             <description>Ticket 3 has been modified: Maven 3 compatibility
                 Edited By: Matthias Nuessler (mnuessler)
-                Summary updated: u'Compatibility with Maven 3' =&gt; u'Maven 3 compatibility'</description>
+                Summary updated: u'Compatibility with Maven 3' =&gt; u'Maven 3 compatibility'
+            </description>
             <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matthias Nuessler</dc:creator>
             <pubDate>Thu, 22 Sep 2011 21:43:58 -0000</pubDate>
             <guid>43f6d7f2a714704077e756951a99ac75d9aafb40</guid>
@@ -132,7 +134,8 @@
             <description>Ticket 3 has been modified: Compatibility with Maven 3
                 Edited By: Matthias Nuessler (mnuessler)
                 _type updated: '' =&gt; u'Feature'
-                _milestone updated: u'0.3' =&gt; u'v0.3'</description>
+                _milestone updated: u'0.3' =&gt; u'v0.3'
+            </description>
             <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matthias Nuessler</dc:creator>
             <pubDate>Thu, 22 Sep 2011 18:15:19 -0000</pubDate>
             <guid>20539f8917063adeac0d534dbde7419e018d8b5d</guid>
