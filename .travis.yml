@@ -1,4 +1,6 @@
 language: java
+#before_script: "mvn install -DskipTests=true"
+script: "mvn verify -Pitest"
 jdk:
   - openjdk6
   - openjdk7
