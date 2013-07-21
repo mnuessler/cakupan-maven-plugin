@@ -670,6 +670,11 @@
             <artifactId>mojo-executor</artifactId>
             <version>2.0</version>
         </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.10.0</version>
+        </dependency>
         <!-- Cakupan dependencies -->
         <dependency>
             <groupId>com.cakupan</groupId>
@@ -711,7 +716,7 @@
                 <version>${maven-plugin-plugin.version}</version>
                 <configuration>
                     <requirements>
-                        <!-- NOTE: Maven 2.x does not interpolate properties of the form project.*|pom.* so the Maven Plugin Plugin gets garbage 
+                        <!-- NOTE: Maven 2.x does not interpolate properties of the form project.*|pom.* so the Maven Plugin Plugin gets garbage
                             when manually examining the config of the Maven Compiler Plugin. -->
                         <jdk>${jdk.version}</jdk>
                     </requirements>

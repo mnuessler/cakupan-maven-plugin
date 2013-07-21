@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2011 Matthias Nuessler <m.nuessler@web.de>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="html" type="htmlType" />
+    <xs:element name="head" type="headType" />
+    <xs:element name="body" type="bodyType" />
+    <xs:element name="title" type="xs:string" />
+    <xs:element name="table" type="xs:string" />
+    <xs:element name="thead" type="theadType" />
+    <xs:element name="tfoot" type="tfootType" />
+    <xs:element name="tbody" type="tbodyType" />
+    <xs:element name="tr" type="trType" />
+    <xs:element name="th" type="xs:string" />
+    <xs:element name="td" type="xs:string" />
+
+    <xs:complexType name="htmlType">
+        <xs:sequence>
+            <xs:element ref="head" minOccurs="0" />
+            <xs:element ref="body" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="headType">
+        <xs:sequence>
+            <xs:element ref="title" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="bodyType">
+        <xs:choice>
+            <xs:element ref="table" minOccurs="0" maxOccurs="unbounded" />
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="tableType">
+        <xs:choice>
+            <xs:sequence>
+                <xs:element ref="thead" />
+                <xs:element ref="tfoot" />
+                <xs:element ref="tbody" />
+            </xs:sequence>
+            <xs:element ref="tr" maxOccurs="unbounded" />
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="theadType">
+        <xs:sequence>
+            <xs:element ref="tr" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="tfootType">
+        <xs:sequence>
+            <xs:element ref="tr" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="tbodyType">
+        <xs:sequence>
+            <xs:element ref="tr" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="trType">
+        <xs:choice>
+            <xs:element ref="th" maxOccurs="unbounded" />
+            <xs:element ref="td" maxOccurs="unbounded" />
+        </xs:choice>
+    </xs:complexType>
+
+</xs:schema>

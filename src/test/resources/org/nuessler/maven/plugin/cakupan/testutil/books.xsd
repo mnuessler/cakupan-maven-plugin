@@ -50,16 +50,14 @@
         </simpleContent>
     </complexType>
     <complexType name="bookType">
+        <attribute name="id" type="positiveInteger" />
         <sequence>
             <element ref="tns:title" />
             <element ref="tns:authors" />
             <element ref="tns:pages" minOccurs="0" />
             <element ref="tns:edition" minOccurs="0" />
             <element ref="tns:isbn-10" minOccurs="0" />
-            </
-            <sequence>
-                >
-                <attribute name="id" type="positiveInteger" />
+        </sequence>
     </complexType>
     <complexType name="booksType">
         <sequence>

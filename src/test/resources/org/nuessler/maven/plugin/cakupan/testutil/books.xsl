@@ -53,7 +53,6 @@
         <td>
             <xsl:value-of select="." />
         </td>
-        <xsl:apply-templates />
     </xsl:template>
 
     <xsl:template match="b:authors">
@@ -65,21 +64,18 @@
     <xsl:template match="b:author">
         <xsl:value-of select="." />
         <br />
-        <xsl:apply-templates />
     </xsl:template>
 
     <xsl:template match="b:pages">
         <td>
             <xsl:value-of select="." />
         </td>
-        <xsl:apply-templates />
     </xsl:template>
 
     <xsl:template match="b:publisher">
         <td>
             <xsl:value-of select="." />
         </td>
-        <xsl:apply-templates />
     </xsl:template>
 
     <xsl:template match="b:edition">
@@ -102,14 +98,12 @@
             <xsl:text> edition, </xsl:text>
             <xsl:value-of select="@publication-date" />
         </td>
-        <xsl:apply-templates />
     </xsl:template>
 
     <xsl:template match="b:isbn-10">
         <td>
             <xsl:value-of select="." />
         </td>
-        <xsl:apply-templates />
     </xsl:template>
 
     <xsl:template match="b:*">

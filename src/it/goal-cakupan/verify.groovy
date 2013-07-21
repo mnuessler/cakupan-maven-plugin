@@ -21,9 +21,9 @@ def outDir = new File(basedir, 'target/cakupan-instrument')
 
 def instrumentFile = new File(outDir, 'coverage.xml')
 def traceFile = new File(outDir, 'sample.xsl.xml')
-def datFile = new File(outDir, 'sample.xsl.dat')
+def indexFile = new File(outDir, 'sample.xsl.dat')
 
-[instrumentFile, traceFile, datFile].each { file ->
+[instrumentFile, traceFile, indexFile].each { file ->
     println "Checking that file exists: $file"
     assertTrue("File does not exist: '$file'", file.exists())
 }

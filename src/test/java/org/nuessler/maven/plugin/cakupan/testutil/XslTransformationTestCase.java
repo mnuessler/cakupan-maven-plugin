@@ -25,6 +25,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 import org.w3c.dom.Document;
+import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.EntityResolver;
 
 public abstract class XslTransformationTestCase {
@@ -38,11 +39,19 @@ public abstract class XslTransformationTestCase {
         Document transformedXml = transformer.transform(getXmlInputFile());
         checkResult(transformedXml);
 
-        File schema = getTargetSchemaFile();
-        if (schema != null) {
+        XslTransformer transformer2 = new XslTransformer(getTransformationFile());
+        Document transformedXml2 = transformer2.transform(getXmlInputFile());
+        checkResult(transformedXml2);
+
+        XslTransformer transformer3 = new XslTransformer(getTransformationFile());
+        Document transformedXml3 = transformer3.transform(getXmlInputFile());
+        checkResult(transformedXml3);
+
+        File schemaFile = getTargetSchemaFile();
+        if (schemaFile != null) {
             String xml = DomUtil.documentToString(transformedXml);
             try {
-                new XsdValidator(getEntityResolver(), schema).validate(xml);
+                new XsdValidator(schemaFile, getResourceResolver()).validate(xml);
             } catch (ValidationException e) {
                 errorCollector.addError(e);
             }
@@ -76,6 +85,10 @@ public abstract class XslTransformationTestCase {
      */
     protected EntityResolver getEntityResolver() {
         return null;
+    }
+
+    protected LSResourceResolver getResourceResolver() {
+        return new LoggingResourceResolver();
     }
 
 }

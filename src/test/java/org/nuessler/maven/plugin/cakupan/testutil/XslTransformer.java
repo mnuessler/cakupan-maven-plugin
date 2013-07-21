@@ -32,7 +32,7 @@ import org.w3c.dom.Document;
 public class XslTransformer {
     // TODO use log4j or slf4j etc
     private final Logger log = Logger.getLogger(getClass().getName());
-    private static TransformerFactory factory = TransformerFactory.newInstance();
+    private final TransformerFactory factory = TransformerFactory.newInstance();
     private final Templates cachedXslt;
 
     public XslTransformer(File xsltFile) throws TransformerConfigurationException {
@@ -40,6 +40,7 @@ public class XslTransformer {
     }
 
     public Document transform(File xmlInputFile) throws TransformerException {
+        System.out.println("TransformerFactory: " + factory.getClass());
         StringWriter writer = new StringWriter();
 
         Transformer transformer = cachedXslt.newTransformer();

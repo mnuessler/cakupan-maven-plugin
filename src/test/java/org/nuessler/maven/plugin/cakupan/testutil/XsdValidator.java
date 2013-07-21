@@ -18,44 +18,45 @@ package org.nuessler.maven.plugin.cakupan.testutil;
 import java.io.File;
 import java.io.StringReader;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.ValidationException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
-import org.xml.sax.EntityResolver;
+import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 
 public class XsdValidator {
-    private static final String JAXP_SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
-    private static final String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
-    private static final String W3C_XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
-
-    private final File[] schemas;
+    private final File schemaFile;
     private ErrorHandler errorHandler;
-    private final EntityResolver entityResolver;
+    private final LSResourceResolver resourceResolver;
 
-    public XsdValidator(File... schema) {
-        this(null, schema);
+    public XsdValidator(File schemaFile) {
+        this(schemaFile, null);
     }
 
-    public XsdValidator(EntityResolver entityResolver, File... schema) {
-        this.entityResolver = entityResolver;
-        this.schemas = schema;
+    public XsdValidator(File schemaFile, LSResourceResolver resourceResolver) {
+        this.resourceResolver = resourceResolver;
+        this.schemaFile = schemaFile;
     }
 
     public void validate(String xml) throws ValidationException {
         this.errorHandler = new CollectingErrorHandler();
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        factory.setValidating(true);
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        schemaFactory.setResourceResolver(resourceResolver);
+        Source schemaSource = new StreamSource(schemaFile);
         try {
-            factory.setAttribute(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
-            factory.setAttribute(JAXP_SCHEMA_SOURCE, schemas);
-            //factory.sets
+            Schema schema = schemaFactory.newSchema(schemaSource);
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            factory.setSchema(schema);
             DocumentBuilder builder = factory.newDocumentBuilder();
             builder.setErrorHandler(errorHandler);
-            builder.setEntityResolver(entityResolver);
             InputSource input = new InputSource(new StringReader(xml));
             builder.parse(input);
         } catch (IllegalArgumentException e) {
