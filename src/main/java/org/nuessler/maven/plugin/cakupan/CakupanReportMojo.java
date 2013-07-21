@@ -65,7 +65,7 @@ public class CakupanReportMojo extends AbstractMavenReport {
     private File outputDirectory;
 
     /**
-     * @parameter expression="${xslt.instrument.destdir}"
+     * @parameter property="xslt.instrument.destdir"
      *            default-value="${project.build.directory}/cakupan-instrument"
      */
     private File instrumentDestDir;

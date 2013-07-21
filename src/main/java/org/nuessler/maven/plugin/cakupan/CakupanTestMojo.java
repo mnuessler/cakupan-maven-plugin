@@ -60,7 +60,7 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
     /**
      * The Maven Session Object
      *
-     * @parameter expression="${session}"
+     * @parameter property="session"
      * @required
      * @readonly
      */
@@ -116,7 +116,7 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
      * RECOMMENDED, but quite convenient on occasion.
      *
      * @parameter default-value="false"
-     *            expression="${maven.test.failure.ignore}"
+     *            property="maven.test.failure.ignore"
      */
     private boolean testFailureIgnore;
 
@@ -129,7 +129,7 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
      * This parameter overrides the <code>includes/excludes</code> parameter.
      * <p/>
      *
-     * @parameter expression="${test}"
+     * @parameter property="test"
      */
     private String test;
 
