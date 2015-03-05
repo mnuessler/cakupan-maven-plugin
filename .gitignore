@@ -3,3 +3,5 @@
 .settings
 target
 
+/.idea/
+/cakupan-maven-plugin.iml

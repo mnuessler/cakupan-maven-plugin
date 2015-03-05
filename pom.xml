@@ -410,7 +410,7 @@
                     <strictCheck>true</strictCheck>
                     <quiet>false</quiet>
                     <properties>
-                        <year>${project.inceptionYear}</year>
+                        <year>${project.inceptionYear}-2015</year>
                         <email>${email.author}</email>
                     </properties>
                     <excludes>
