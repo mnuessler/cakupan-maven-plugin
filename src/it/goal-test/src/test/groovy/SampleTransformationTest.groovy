@@ -15,17 +15,6 @@
  */
 package org.nuessler.maven.plugin.cakupan.it
 
-import java.io.File
-
-import javax.xml.transform.Source
-import javax.xml.transform.Templates
-import javax.xml.transform.Transformer
-import javax.xml.transform.TransformerFactory
-import javax.xml.transform.stream.StreamResult
-import javax.xml.transform.stream.StreamSource
-
-import org.junit.Assert
-import org.junit.Test
 import org.nuessler.maven.plugin.cakupan.testutil.DomUtil
 import org.nuessler.maven.plugin.cakupan.testutil.XslTransformationTestCase
 import org.w3c.dom.Document
