@@ -1,10 +1,6 @@
 language: java
-#before_script: "mvn install -DskipTests=true"
 script: "mvn verify -Pitest"
-#script: "mvn clean package"
 jdk:
-  - openjdk6
   - openjdk7
   - oraclejdk7
   - oraclejdk8
-
