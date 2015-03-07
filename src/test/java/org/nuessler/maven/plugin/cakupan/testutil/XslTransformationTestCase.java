@@ -77,7 +77,7 @@ public abstract class XslTransformationTestCase {
     /**
      * Return the {@link EntityResolver} to be used by the validator. May be
      * overridden to provide a custom {@link EntityResolver}. May return
-     * <code>null</code> if the default implematation should be used.
+     * <code>null</code> if the default implementation should be used.
      *
      * @return the {@link EntityResolver} to be used by the {@link XsdValidator}
      *         or <code>null</code> if the default implementation should be
