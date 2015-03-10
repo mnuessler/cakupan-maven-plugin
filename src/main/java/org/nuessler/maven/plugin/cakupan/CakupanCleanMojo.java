@@ -19,14 +19,15 @@ import java.io.File;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
 
 /**
  * Clean up cakupan-maven-plugin files.
  *
  * @author Matthias Nuessler
- * @goal clean
- * @phase clean
  */
+@Mojo(name = "clean", defaultPhase = LifecyclePhase.CLEAN)
 public class CakupanCleanMojo extends AbstractCakupanMojo {
 
     @Override

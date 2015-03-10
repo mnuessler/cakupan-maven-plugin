@@ -38,6 +38,7 @@ import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.BuildPluginManager;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.*;
 import org.twdata.maven.mojoexecutor.MojoExecutor.Element;
 
 import com.google.common.base.Function;
@@ -50,37 +51,27 @@ import com.google.common.collect.Lists;
  * Run transformation tests using Surefire.
  *
  * @author Matthias Nuessler
- * @phase test
- * @goal test
- * @execute phase="test" lifecycle="cakupan"
- * @requiresDependencyResolution test
  */
+@Mojo(name = "test", defaultPhase = LifecyclePhase.TEST, requiresDependencyResolution = ResolutionScope.TEST)
+@Execute(phase = LifecyclePhase.TEST, lifecycle = "cakupan")
 public class CakupanTestMojo extends AbstractCakupanMojo {
 
     /**
      * The Maven Session Object
-     *
-     * @parameter property="session"
-     * @required
-     * @readonly
      */
+    @Parameter(property = "session", required = true, readonly = true)
     private MavenSession session;
 
     /**
      * The Maven PluginManager Object
-     *
-     * @component
-     * @required
      */
+    @Component
     private BuildPluginManager pluginManager;
 
     /**
      * <i>Maven Internal</i>: List of artifacts for the plugin.
-     *
-     * @parameter default-value="${plugin.artifacts}"
-     * @required
-     * @readonly
      */
+    @Parameter(defaultValue = "${plugin.artifacts}", required = true, readonly = true)
     protected List<Artifact> pluginArtifacts;
 
     /**
@@ -92,9 +83,8 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
      * &nbsp;&lt;include>**&#47;*XsltTest.java&lt;/include><br/>
      * &lt;/testIncludes><br/>
      * </code>
-     *
-     * @parameter
      */
+    @Parameter
     private List<String> testIncludes;
 
     /**
@@ -106,18 +96,15 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
      * &nbsp;&lt;exclude>**&#47;*$*&lt;/exclude><br/>
      * &lt;/testExcludes><br/>
      * </code> (which excludes all inner classes).<br>
-     *
-     * @parameter
      */
+    @Parameter
     private List<String> testExcludes;
 
     /**
      * Set this to "true" to ignore a failure during testing. Its use is NOT
      * RECOMMENDED, but quite convenient on occasion.
-     *
-     * @parameter default-value="false"
-     *            property="maven.test.failure.ignore"
      */
+    @Parameter(property = "maven.test.failure.ignore", defaultValue = "false")
     private boolean testFailureIgnore;
 
     /**
@@ -128,9 +115,8 @@ public class CakupanTestMojo extends AbstractCakupanMojo {
      * "-Dtest=MyXsltTest" to run a single test called "foo/MyXsltTest.java".<br/>
      * This parameter overrides the <code>includes/excludes</code> parameter.
      * <p/>
-     *
-     * @parameter property="test"
      */
+    @Parameter(property = "test")
     private String test;
 
     @Override

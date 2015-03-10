@@ -18,6 +18,7 @@ package org.nuessler.maven.plugin.cakupan;
 import java.io.File;
 
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
 /**
@@ -31,17 +32,11 @@ public abstract class AbstractCakupanMojo extends AbstractMojo {
 
     /**
      * The Maven Project Object
-     *
-     * @parameter property="project"
-     * @required
-     * @readonly
      */
+    @Parameter(property = "project", required = true, readonly = true)
     private MavenProject project;
 
-    /**
-     * @parameter property="xslt.instrument.destdir"
-     *            default-value="${project.build.directory}/cakupan-instrument"
-     */
+    @Parameter(property = "xslt.instrument.destdir", defaultValue = "${project.build.directory}/cakupan-instrument")
     private File instrumentDestDir;
 
     protected File getInstrumentDestDir() {

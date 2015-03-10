@@ -24,6 +24,10 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.codehaus.plexus.util.DirectoryScanner;
 
 import com.cakupan.xslt.exception.XSLTCoverageException;
@@ -35,15 +39,11 @@ import com.cakupan.xslt.util.XSLTCakupanUtil;
  * Instrument XSLT files for test coverage.
  *
  * @author Matthias Nuessler
- * @goal instrument
- * @phase process-test-classes
- * @requiresDependencyResolution test
  */
+@Mojo(name = "instrument", defaultPhase = LifecyclePhase.PROCESS_TEST_CLASSES, requiresDependencyResolution = ResolutionScope.TEST)
 public class CakupanInstrumentMojo extends AbstractCakupanMojo {
 
-    /**
-     * @parameter default-value="${project.build.outputDirectory}"
-     */
+    @Parameter(defaultValue = "${project.build.outputDirectory}")
     private File buildOutputDirectory;
 
     /**
@@ -54,9 +54,8 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
      * &nbsp;&lt;include>**&#47;*.xsl&lt;/include><br/>
      * &lt;/xsltIncludes><br/>
      * </code>
-     *
-     * @parameter
      */
+    @Parameter
     private List<String> xsltIncludes;
 
     /**
@@ -67,9 +66,8 @@ public class CakupanInstrumentMojo extends AbstractCakupanMojo {
      * &nbsp;&lt;exclude>**&#47;*.xsl&lt;/exclude><br/>
      * &lt;/xsltExcludes><br/>
      * </code>
-     *
-     * @parameter
      */
+    @Parameter
     private List<String> xsltExcludes;
 
     @Override

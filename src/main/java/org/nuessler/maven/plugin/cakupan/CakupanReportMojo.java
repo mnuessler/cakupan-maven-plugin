@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.doxia.siterenderer.Renderer;
+import org.apache.maven.plugins.annotations.*;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.reporting.AbstractMavenReport;
 import org.apache.maven.reporting.MavenReportException;
@@ -35,39 +36,30 @@ import com.cakupan.xslt.util.XSLTCakupanUtil;
  * Generate a test coverage report for XSLT files.
  *
  * @author Matthias Nuessler
- * @goal cakupan
- * @execute phase="test" lifecycle="cakupan"
  */
+@Mojo(name = "cakupan")
+@Execute(phase = LifecyclePhase.TEST, lifecycle = "cakupan")
 public class CakupanReportMojo extends AbstractMavenReport {
 
     /**
      * <i>Maven Internal</i>: The Doxia Site Renderer.
-     *
-     * @component
      */
+    @Component
     private Renderer siteRenderer;
 
     /**
      * <i>Maven Internal</i>: Project to interact with.
-     *
-     * @parameter default-value="${project}"
-     * @required
-     * @readonly
      */
+    @Parameter(defaultValue = "${project}", required = true, readonly = true)
     private MavenProject project;
 
     /**
      * The output directory for the report.
-     *
-     * @parameter default-value="${project.reporting.outputDirectory}/cakupan"
-     * @required
      */
+    @Parameter(defaultValue = "${project.reporting.outputDirectory}/cakupan", required = true)
     private File outputDirectory;
 
-    /**
-     * @parameter property="xslt.instrument.destdir"
-     *            default-value="${project.build.directory}/cakupan-instrument"
-     */
+    @Parameter(property = "xslt.instrument.destdir", defaultValue = "${project.build.directory}/cakupan-instrument")
     private File instrumentDestDir;
 
     @Override
