@@ -1,5 +1,5 @@
 language: java
-script: "mvn verify -Pitest"
+script: "./mvnw verify -Pitest"
 jdk:
   - openjdk7
   - oraclejdk7

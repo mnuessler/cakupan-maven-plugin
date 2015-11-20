@@ -458,6 +458,9 @@
                         <exclude>**/xhtml/*.xsd</exclude>
                         <exclude>**/invoker.properties</exclude>
                         <exclude>**/NOTICE-template.txt</exclude>
+                        <exclude>mvnw</exclude>
+                        <exclude>mvnw.cmd</exclude>
+                        <exclude>**/maven-wrapper.properties</exclude>
                     </excludes>
                     <mapping>
                         <vm>XML_STYLE</vm>
